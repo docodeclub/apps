@@ -267,6 +267,12 @@ body.home-page .lede {
   padding-top: clamp(3rem, 7vw, 5.5rem);
 }
 
+.compact-hero {
+  display: flex;
+  align-items: center;
+  min-height: 58vh;
+}
+
 .home-logo {
   display: block;
   width: min(100%, 34rem);
@@ -501,6 +507,23 @@ body.home-page .button:focus {
   color: var(--muted);
 }
 
+.highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.highlight-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.15rem;
+  background: rgba(16, 39, 29, 0.58);
+}
+
+.highlight-item p {
+  color: var(--muted);
+}
+
 .app-store-panel {
   display: flex;
   align-items: center;
@@ -687,6 +710,10 @@ body.home-page .footer-meta strong {
   .screenshot-card,
   .screenshot-wide {
     grid-column: auto;
+  }
+
+  .highlight-grid {
+    grid-template-columns: 1fr;
   }
 
   .studio-grid {

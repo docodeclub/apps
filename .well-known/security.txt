@@ -1,0 +1,3 @@
+Contact: mailto:support@docode.co.uk
+Preferred-Languages: en
+Canonical: https://docode.app/.well-known/security.txt

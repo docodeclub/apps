@@ -1,0 +1,7 @@
+Docode Apps
+
+Site: https://docode.app
+Company: Docode Limited
+Contact: support@docode.co.uk
+
+Built as a lightweight static website using plain HTML and CSS.
