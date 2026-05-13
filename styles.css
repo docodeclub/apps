@@ -74,6 +74,29 @@ body.home-page a:focus-visible {
   outline-color: #00cc33;
 }
 
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 10;
+  transform: translateY(-150%);
+  border-radius: var(--radius);
+  padding: 0.7rem 1rem;
+  background: var(--gold);
+  color: #10150f;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+body.home-page .skip-link {
+  background: #00cc33;
+  color: #ffffff;
+}
+
 .site {
   display: flex;
   min-height: 100vh;
@@ -282,6 +305,23 @@ body.home-page .lede {
   margin-top: 1rem;
 }
 
+.approach-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  margin-top: 1rem;
+}
+
+.approach-item {
+  border: 1px solid rgba(48, 35, 131, 0.14);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 16px 36px rgba(48, 35, 131, 0.08);
+}
+
+.approach-item p {
+  color: #514c79;
+}
+
 body.home-page .studio-section {
   padding-top: 1rem;
 }
@@ -429,6 +469,47 @@ body.home-page .button:focus {
 
 .panel {
   padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.workflow-step {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  background: rgba(16, 39, 29, 0.62);
+}
+
+.workflow-step span {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 1rem;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--gold);
+  color: #10150f;
+  font-weight: 900;
+}
+
+.workflow-step p {
+  color: var(--muted);
+}
+
+.app-store-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.app-store-panel p:not(.eyebrow) {
+  max-width: 680px;
 }
 
 .screenshot-feature,
@@ -610,6 +691,16 @@ body.home-page .footer-meta strong {
 
   .studio-grid {
     grid-template-columns: 1fr;
+  }
+
+  .workflow-grid,
+  .app-store-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .app-store-panel {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 

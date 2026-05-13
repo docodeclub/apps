@@ -4,10 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="FrameScore is a touch-first snooker scoring and break tracking app for iPad.">
+    <meta name="theme-color" content="#07100d">
+    <meta property="og:title" content="FrameScore — Snooker Scoring &amp; Break Tracker">
+    <meta property="og:description" content="A touch-first snooker scoring app for iPad, built for practice frames and club matches.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docode.app/framescore/">
+    <meta property="og:image" content="https://docode.app/assets/framescore-menu.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://docode.app/framescore/">
+    <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
     <title>FrameScore — Snooker Scoring &amp; Break Tracker</title>
     <link rel="stylesheet" href="../styles.css">
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <div class="site">
       <header class="site-header">
         <div class="wrap nav" aria-label="Site navigation">
@@ -23,7 +33,7 @@
         </div>
       </header>
 
-      <main>
+      <main id="main">
         <section class="hero">
           <div class="wrap hero-grid">
             <div>
@@ -37,7 +47,7 @@
               </div>
             </div>
             <figure class="screenshot-feature">
-              <img src="../assets/framescore-menu.jpg" width="1600" height="1200" alt="FrameScore match menu on iPad with player selection and match controls.">
+              <img src="../assets/framescore-menu.jpg" width="1600" height="1200" decoding="async" fetchpriority="high" alt="FrameScore match menu on iPad with player selection and match controls.">
             </figure>
           </div>
         </section>
@@ -68,6 +78,29 @@
           </div>
         </section>
 
+        <section class="section" aria-labelledby="workflow-heading">
+          <div class="wrap">
+            <h2 id="workflow-heading">Match Flow</h2>
+            <div class="workflow-grid">
+              <article class="workflow-step">
+                <span>1</span>
+                <h3>Set Up Players</h3>
+                <p>Choose players, match length and table settings before the frame starts.</p>
+              </article>
+              <article class="workflow-step">
+                <span>2</span>
+                <h3>Score Quickly</h3>
+                <p>Tap reds, colours, fouls and frame controls from a table-side layout.</p>
+              </article>
+              <article class="workflow-step">
+                <span>3</span>
+                <h3>Review the Match</h3>
+                <p>Use summaries, player stats and history to keep track of performance.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
         <section class="section screenshots-section" aria-labelledby="screenshots-heading">
           <div class="wrap">
             <div class="section-heading">
@@ -78,25 +111,41 @@
 
             <div class="screenshot-grid">
               <figure class="screenshot-card screenshot-wide">
-                <img src="../assets/framescore-table-start.jpg" width="1600" height="1200" loading="lazy" alt="FrameScore live scoring screen at the start of a frame.">
+                <img src="../assets/framescore-table-start.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="FrameScore live scoring screen at the start of a frame.">
                 <figcaption>Live scoring with two-player frame status.</figcaption>
               </figure>
               <figure class="screenshot-card screenshot-wide">
-                <img src="../assets/framescore-table.jpg" width="1600" height="1200" loading="lazy" alt="FrameScore live scoring screen showing points, current break and pot ball controls.">
+                <img src="../assets/framescore-table.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="FrameScore live scoring screen showing points, current break and pot ball controls.">
                 <figcaption>Fast scoring controls with break tracking.</figcaption>
               </figure>
               <figure class="screenshot-card">
-                <img src="../assets/framescore-summary.jpg" width="1600" height="1200" loading="lazy" alt="FrameScore match summary comparing player statistics.">
+                <img src="../assets/framescore-summary.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="FrameScore match summary comparing player statistics.">
                 <figcaption>Frame and match summaries.</figcaption>
               </figure>
               <figure class="screenshot-card">
-                <img src="../assets/framescore-frame-end.jpg" width="1600" height="1200" loading="lazy" alt="FrameScore frame complete screen with winner, frame score and match score.">
+                <img src="../assets/framescore-frame-end.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="FrameScore frame complete screen with winner, frame score and match score.">
                 <figcaption>Frame completion flow.</figcaption>
               </figure>
               <figure class="screenshot-card">
-                <img src="../assets/framescore-concede.jpg" width="1600" height="1200" loading="lazy" alt="FrameScore concede frame confirmation screen.">
+                <img src="../assets/framescore-concede.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="FrameScore concede frame confirmation screen.">
                 <figcaption>Clear confirmation steps.</figcaption>
               </figure>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="app-store-heading">
+          <div class="wrap">
+            <div class="panel app-store-panel">
+              <div>
+                <p class="eyebrow">For iPad</p>
+                <h2 id="app-store-heading">Built for landscape scoring</h2>
+                <p>FrameScore is designed for a scorer sitting near the table, with controls sized for quick touch input and a scoreboard that stays readable during play.</p>
+              </div>
+              <div class="actions">
+                <a class="button" href="support/index.html">Get Support</a>
+                <a class="button secondary" href="privacy/index.html">Read Privacy Policy</a>
+              </div>
             </div>
           </div>
         </section>

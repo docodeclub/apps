@@ -2,6 +2,13 @@
 
 Simple static website for `docode.app`, including FrameScore marketing, support and privacy pages.
 
+Live URLs:
+
+- `https://docode.app`
+- `https://docode.app/framescore`
+- `https://docode.app/framescore/support`
+- `https://docode.app/framescore/privacy`
+
 ## Preview Locally
 
 Open `index.html` in a browser:
