@@ -9,6 +9,12 @@ Live URLs:
 - `https://docode.app/framescore/support`
 - `https://docode.app/framescore/privacy`
 
+App Store Connect URLs:
+
+- Marketing URL: `https://docode.app/framescore/`
+- Support URL: `https://docode.app/framescore/support/`
+- Privacy Policy URL: `https://docode.app/framescore/privacy/`
+
 ## Preview Locally
 
 Open `index.html` in a browser:
