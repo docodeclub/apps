@@ -6,6 +6,8 @@ Live URLs:
 
 - `https://docode.app`
 - `https://docode.app/framescore`
+- `https://docode.app/framescore/help`
+- `https://docode.app/framescore/release-notes`
 - `https://docode.app/framescore/support`
 - `https://docode.app/framescore/privacy`
 

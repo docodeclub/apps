@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Docode is an independent app creation studio building focused apps, tools and digital products.">
+    <meta name="description" content="Docode Limited is an independent app creation studio building focused iPad apps, practical tools and digital products.">
     <meta name="theme-color" content="#ffffff">
     <meta property="og:title" content="Docode Apps">
     <meta property="og:description" content="Docode is an independent app creation studio building focused apps, tools and digital products.">
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://docode.app/">
     <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
     <link rel="manifest" href="site.webmanifest">
-    <title>Docode Apps</title>
+    <title>Docode Apps — Independent App Creation Studio</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body class="home-page">
@@ -24,7 +24,7 @@
         <div class="wrap nav" aria-label="Site navigation">
           <a class="brand" href="index.html">
             <span class="brand-mark" aria-hidden="true">D</span>
-            <span>Docode Apps</span>
+            <span itemprop="name">Docode Apps</span>
           </a>
           <nav class="nav-links" aria-label="Primary">
             <a href="framescore/index.html">FrameScore</a>
@@ -35,13 +35,14 @@
       </header>
 
       <main id="main">
-        <section class="hero home-hero">
+        <section class="hero home-hero" itemscope itemtype="https://schema.org/Organization">
           <div class="wrap">
-            <img class="home-logo" src="assets/docode-logo.png" width="2000" height="500" decoding="async" fetchpriority="high" alt="Docode">
+            <img class="home-logo" src="assets/docode-logo.png" width="2000" height="500" decoding="async" fetchpriority="high" alt="Docode" itemprop="logo">
             <p class="eyebrow">App Creation Studio</p>
-            <h1>Apps, tools and digital products by Docode Limited.</h1>
-            <p class="subtitle">Docode is an independent app creation studio building focused, practical software across science, technology, engineering and maths.</p>
+            <h1 itemprop="name">Apps, tools and digital products by Docode Limited.</h1>
+            <p class="subtitle" itemprop="description">Docode is an independent app creation studio building focused, practical software across science, technology, engineering and maths.</p>
             <p class="lede">We design and develop lightweight products that solve specific problems clearly, with careful attention to usability, reliability and long-term maintainability.</p>
+            <meta itemprop="url" content="https://docode.app/">
           </div>
         </section>
 
@@ -122,6 +123,7 @@
           </div>
           <nav class="footer-links" aria-label="Footer">
             <a href="framescore/index.html">FrameScore</a>
+            <a href="framescore/help/index.html">Help</a>
             <a href="framescore/support/index.html">Support</a>
             <a href="framescore/privacy/index.html">Privacy</a>
           </nav>

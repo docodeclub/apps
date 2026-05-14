@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="FrameScore is a touch-first snooker scoring and break tracking app for iPad, built for amateur players, practice frames and club matches.">
+    <meta name="description" content="FrameScore is a touch-first iPad snooker scoring app and break tracker for amateur players, practice frames, club matches, stats and match history.">
     <meta name="theme-color" content="#07100d">
     <meta property="og:title" content="FrameScore — Snooker Scoring &amp; Break Tracker">
     <meta property="og:description" content="A touch-first snooker scoring app for iPad, built for practice frames and club matches.">
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://docode.app/framescore/">
     <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
     <link rel="manifest" href="../site.webmanifest">
-    <title>FrameScore — Snooker Scoring &amp; Break Tracker</title>
+    <title>FrameScore — iPad Snooker Scoring App &amp; Break Tracker</title>
     <link rel="stylesheet" href="../styles.css">
   </head>
   <body>
@@ -28,6 +28,7 @@
           </a>
           <nav class="nav-links" aria-label="Primary">
             <a href="index.html">FrameScore</a>
+            <a href="help/index.html">Help</a>
             <a href="support/index.html">Support</a>
             <a href="privacy/index.html">Privacy</a>
           </nav>
@@ -35,16 +36,26 @@
       </header>
 
       <main id="main">
-        <section class="hero">
+        <nav class="breadcrumbs wrap" aria-label="Breadcrumb">
+          <a href="../index.html">Docode Apps</a>
+          <span aria-hidden="true">/</span>
+          <span>FrameScore</span>
+        </nav>
+
+        <section class="hero" itemscope itemtype="https://schema.org/SoftwareApplication">
           <div class="wrap hero-grid">
             <div>
               <p class="eyebrow">Developed by Docode Limited</p>
-              <h1>FrameScore</h1>
+              <h1 itemprop="name">FrameScore</h1>
               <p class="subtitle">Snooker Scoring &amp; Break Tracker for iPad.</p>
-              <p class="lede">FrameScore is a clean, touch-first snooker scoring app designed for real play.</p>
+              <p class="lede" itemprop="description">FrameScore is a clean, touch-first iPad snooker scoring app designed for real play, practice frames and club matches.</p>
+              <meta itemprop="applicationCategory" content="SportsApplication">
+              <meta itemprop="operatingSystem" content="iPadOS">
+              <meta itemprop="url" content="https://docode.app/framescore/">
               <div class="actions">
                 <a class="button" href="support/index.html">Support</a>
                 <a class="button secondary" href="privacy/index.html">Privacy Policy</a>
+                <a class="button secondary" href="help/index.html">Help Guide</a>
               </div>
             </div>
             <figure class="screenshot-feature">
@@ -56,7 +67,9 @@
         <section class="section">
           <div class="wrap split">
             <div class="panel">
+              <h2>Snooker scoring made for iPad</h2>
               <p>Built for amateur players, practice frames and club matches, FrameScore gives you a polished iPad scoreboard with fast scoring controls, player stats, match history and smart snooker flow.</p>
+              <p>Use FrameScore to track reds and colours, current breaks, fouls, concessions, frame timers, match timers and player results from a landscape iPad layout.</p>
               <div class="note">
                 FrameScore is made for table-side scoring. It helps keep the match organised while leaving the scorer in control.
               </div>
@@ -140,15 +153,15 @@
             <div class="screenshot-grid">
               <figure class="screenshot-card screenshot-wide">
                 <img src="../assets/framescore-table-start.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="FrameScore live scoring screen at the start of a frame.">
-                <figcaption>Live scoring with two-player frame status.</figcaption>
+                <figcaption>Live iPad snooker scoring with two-player frame status.</figcaption>
               </figure>
               <figure class="screenshot-card screenshot-wide">
                 <img src="../assets/framescore-table.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="FrameScore live scoring screen showing points, current break and pot ball controls.">
-                <figcaption>Fast scoring controls with break tracking.</figcaption>
+                <figcaption>Fast snooker scoring controls with current break tracking.</figcaption>
               </figure>
               <figure class="screenshot-card">
                 <img src="../assets/framescore-summary.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="FrameScore match summary comparing player statistics.">
-                <figcaption>Frame and match summaries.</figcaption>
+                <figcaption>Frame and match summaries with player statistics.</figcaption>
               </figure>
               <figure class="screenshot-card">
                 <img src="../assets/framescore-frame-end.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="FrameScore frame complete screen with winner, frame score and match score.">
@@ -173,6 +186,7 @@
               <div class="actions">
                 <a class="button" href="support/index.html">Get Support</a>
                 <a class="button secondary" href="privacy/index.html">Read Privacy Policy</a>
+                <a class="button secondary" href="release-notes/index.html">Release Notes</a>
               </div>
             </div>
           </div>
@@ -188,6 +202,8 @@
               <p>No. FrameScore helps keep the match organised while leaving scoring decisions in the scorer's control.</p>
               <h3>Does FrameScore need an account?</h3>
               <p>No custom Docode account is required. iCloud sync may be available through the user's Apple account where supported.</p>
+              <h3>Can I use FrameScore for practice?</h3>
+              <p>Yes. FrameScore is suitable for solo practice, casual frames and club matches where players want a clear score record and useful summaries.</p>
             </div>
           </div>
         </section>
@@ -202,6 +218,7 @@
           </div>
           <nav class="footer-links" aria-label="Footer">
             <a href="index.html">FrameScore</a>
+            <a href="help/index.html">Help</a>
             <a href="support/index.html">Support</a>
             <a href="privacy/index.html">Privacy</a>
           </nav>
