@@ -464,6 +464,23 @@ body.home-page .badge {
   margin-top: 1.5rem;
 }
 
+.hero-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.4rem;
+}
+
+.hero-proof span {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  background: rgba(16, 39, 29, 0.65);
+  color: var(--gold-soft);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
 .button {
   display: inline-flex;
   min-height: 2.8rem;
@@ -526,6 +543,60 @@ body.home-page .button:focus {
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin-top: 1rem;
+}
+
+.use-case-grid,
+.tracking-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.use-case-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.use-case-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  background:
+    linear-gradient(180deg, rgba(21, 51, 35, 0.92), rgba(10, 24, 18, 0.88)),
+    var(--panel);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
+}
+
+.use-case-card span {
+  display: inline-block;
+  margin-bottom: 0.85rem;
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.use-case-card p {
+  color: var(--muted);
+}
+
+.tracking-grid {
+  grid-template-columns: repeat(4, 1fr);
+  margin: 1.3rem 0 0;
+}
+
+.tracking-grid div {
+  border-top: 2px solid var(--gold);
+  padding-top: 0.9rem;
+}
+
+.tracking-grid dt {
+  color: var(--text);
+  font-weight: 800;
+}
+
+.tracking-grid dd {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
 }
 
 .workflow-step {
@@ -804,6 +875,8 @@ body.home-page .footer-meta strong {
   }
 
   .workflow-grid,
+  .use-case-grid,
+  .tracking-grid,
   .app-store-panel {
     grid-template-columns: 1fr;
   }
