@@ -5,7 +5,6 @@ Simple static website for `docode.app`, including FrameScore marketing, support 
 Live URLs:
 
 - `https://docode.app`
-- `https://docode.app/ideas`
 - `https://docode.app/framescore`
 - `https://docode.app/framescore/help`
 - `https://docode.app/framescore/release-notes`
