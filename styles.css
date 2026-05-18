@@ -492,7 +492,9 @@ body.home-page .badge {
   background: linear-gradient(180deg, #e0bd62, #b78b35);
   color: #10150f;
   font-weight: 800;
+  font: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 
 body.home-page .button {
@@ -792,6 +794,109 @@ body.home-page .button:focus {
   margin-top: 0;
 }
 
+.support-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.38fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.support-main {
+  max-width: none;
+}
+
+.support-side {
+  position: sticky;
+  top: 1rem;
+}
+
+.support-side h2,
+.support-side h3 {
+  margin-top: 0;
+}
+
+.support-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.2rem 0 0;
+}
+
+.support-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.support-card h3 {
+  font-size: 1.05rem;
+}
+
+.support-card p {
+  color: var(--muted);
+}
+
+.support-card a {
+  color: var(--gold-soft);
+  font-weight: 800;
+}
+
+.feedback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.2rem 0 0;
+}
+
+.support-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.support-form label {
+  display: grid;
+  gap: 0.4rem;
+  color: var(--text);
+  font-weight: 800;
+}
+
+.form-hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.support-form input,
+.support-form select,
+.support-form textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem 0.85rem;
+  background: rgba(5, 12, 9, 0.72);
+  color: var(--text);
+  font: inherit;
+}
+
+.support-form textarea {
+  resize: vertical;
+}
+
+.support-form input:focus,
+.support-form select:focus,
+.support-form textarea:focus {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
 .site-footer {
   border-top: 1px solid var(--border-soft);
   background: #060d0a;
@@ -851,6 +956,16 @@ body.home-page .footer-meta strong {
 
   .split {
     grid-template-columns: 1fr;
+  }
+
+  .support-layout,
+  .support-card-grid,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .support-side {
+    position: static;
   }
 
   .hero-grid {

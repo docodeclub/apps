@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Support information for FrameScore, the snooker scoring and break tracking app for iPad.">
+    <meta name="description" content="Support for FrameScore, the iPad snooker scoring app. Contact Docode Limited, submit feedback, report bugs and find help during App Store review.">
     <meta name="theme-color" content="#07100d">
     <meta property="og:title" content="FrameScore Support">
-    <meta property="og:description" content="Contact Docode Limited for FrameScore support, bug reports, feature requests and privacy questions.">
+    <meta property="og:description" content="Contact Docode Limited for FrameScore support, feedback, bug reports, feature requests and privacy questions.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docode.app/framescore/support/">
     <meta property="og:image" content="https://docode.app/assets/framescore-menu.jpg">
@@ -48,41 +48,145 @@
           <div class="wrap">
             <p class="eyebrow">FrameScore</p>
             <h1>FrameScore Support</h1>
-            <p class="subtitle">Help, bug reports, feature requests and privacy questions.</p>
+            <p class="subtitle">Help, contact, feedback, bug reports, feature requests and privacy questions for the iPad snooker scoring app.</p>
           </div>
         </section>
 
         <section class="section">
           <div class="wrap">
-            <article class="panel content">
-              <div class="support-callout">
-                <p>For support, bug reports, feature requests or privacy questions, contact:</p>
+            <div class="support-layout">
+              <article class="panel content support-main">
+                <div class="support-callout">
+                  <p>FrameScore is currently going through App Store approval. This page is the official support URL for App Store review, early users and general enquiries.</p>
+                  <a class="contact-link" href="mailto:support@docode.co.uk?subject=FrameScore%20Support">support@docode.co.uk</a>
+                </div>
+
+                <nav class="page-toc" aria-label="Support page sections">
+                  <a href="#quick-help">Quick Help</a>
+                  <a href="#feedback">Feedback</a>
+                  <a href="#contact-form">Contact Form</a>
+                  <a href="#troubleshooting">Troubleshooting</a>
+                  <a href="#app-review">App Review</a>
+                </nav>
+
+                <h2 id="quick-help">Quick Help</h2>
+                <p>FrameScore is a touch-first snooker scoring and break tracking app for iPad. It is designed for table-side scoring during practice frames, amateur play and club matches.</p>
+                <div class="support-card-grid">
+                  <article class="support-card">
+                    <h3>Need help using the app?</h3>
+                    <p>Read the FrameScore help guide for scoring flow, fouls, re-racks, concessions, player stats and match history.</p>
+                    <a href="../help/index.html">Open help guide</a>
+                  </article>
+                  <article class="support-card">
+                    <h3>Privacy question?</h3>
+                    <p>Review how FrameScore stores app data locally and uses iCloud sync where available.</p>
+                    <a href="../privacy/index.html">Read privacy policy</a>
+                  </article>
+                  <article class="support-card">
+                    <h3>Product details?</h3>
+                    <p>Visit the FrameScore page for screenshots, feature details and app information.</p>
+                    <a href="../index.html">View FrameScore</a>
+                  </article>
+                </div>
+
+                <h2 id="feedback">Submit Feedback</h2>
+                <p>Feedback helps improve FrameScore before and after App Store release. Choose the option that best matches your message.</p>
+                <div class="feedback-actions" aria-label="Feedback options">
+                  <a class="button" href="mailto:support@docode.co.uk?subject=FrameScore%20Bug%20Report&body=Issue%20summary%3A%0A%0ASteps%20to%20reproduce%3A%0A%0AExpected%20result%3A%0A%0AActual%20result%3A%0A%0AiPad%20model%3A%0AiPadOS%20version%3A%0AFrameScore%20version%3A">Report a Bug</a>
+                  <a class="button secondary" href="mailto:support@docode.co.uk?subject=FrameScore%20Feature%20Request&body=Feature%20idea%3A%0A%0AWhy%20it%20would%20help%3A%0A%0AHow%20you%20would%20expect%20it%20to%20work%3A">Request a Feature</a>
+                  <a class="button secondary" href="mailto:support@docode.co.uk?subject=FrameScore%20General%20Feedback&body=Feedback%3A%0A%0AWhat%20worked%20well%3A%0A%0AWhat%20could%20be%20better%3A">Send Feedback</a>
+                </div>
+
+                <h2 id="contact-form">Contact Form</h2>
+                <p>This static website does not collect or store form submissions. Submitting this form opens your email app with the details you entered so you can send them directly to Docode Limited.</p>
+                <form class="support-form" action="mailto:support@docode.co.uk?subject=FrameScore%20Support%20Request" method="post" enctype="text/plain">
+                  <div class="form-grid">
+                    <label>
+                      Your name
+                      <input name="Name" type="text" autocomplete="name">
+                    </label>
+                    <label>
+                      Email address
+                      <input name="Email" type="email" autocomplete="email">
+                    </label>
+                  </div>
+                  <div class="form-grid">
+                    <label>
+                      iPad model
+                      <span class="form-hint">For example, iPad Pro 12.9-inch.</span>
+                      <input name="iPad model" type="text" autocomplete="off">
+                    </label>
+                    <label>
+                      iPadOS version
+                      <span class="form-hint">For example, iPadOS 18.</span>
+                      <input name="iPadOS version" type="text" autocomplete="off">
+                    </label>
+                  </div>
+                  <label>
+                    What do you need help with?
+                    <select name="Support type">
+                      <option value="General support">General support</option>
+                      <option value="Bug report">Bug report</option>
+                      <option value="Feature request">Feature request</option>
+                      <option value="Privacy question">Privacy question</option>
+                      <option value="App Store review question">App Store review question</option>
+                    </select>
+                  </label>
+                  <label>
+                    Message
+                    <span class="form-hint">Describe the issue, feedback or question. Include steps to reproduce the problem if relevant.</span>
+                    <textarea name="Message" rows="8"></textarea>
+                  </label>
+                  <button class="button" type="submit">Open Email to Submit</button>
+                </form>
+
+                <h2 id="troubleshooting">Before Contacting Support</h2>
+                <ul class="plain-list">
+                  <li>check that iPadOS is up to date</li>
+                  <li>restart FrameScore and try the action again</li>
+                  <li>confirm whether the issue happens in a new match</li>
+                  <li>note whether iCloud sync is enabled, if relevant</li>
+                  <li>include screenshots if they help explain the issue</li>
+                </ul>
+
+                <h2 id="details">Details That Help</h2>
+                <ul class="plain-list">
+                  <li>your iPad model</li>
+                  <li>iPadOS version</li>
+                  <li>FrameScore app version, if visible</li>
+                  <li>a short description of the issue</li>
+                  <li>steps to reproduce the problem, if relevant</li>
+                  <li>whether the issue affects scoring, player profiles, match history, iCloud sync or app settings</li>
+                </ul>
+
+                <h2 id="app-review">App Store Review and Availability</h2>
+                <p>FrameScore is currently in the App Store approval process. If you are reviewing the app for App Store Connect, this page provides the official support contact for Docode Limited.</p>
+                <p>If FrameScore is not yet available in your region or on the App Store, please check back after approval or contact support with any review-related questions.</p>
+
+                <h2>Response Times</h2>
+                <p>We aim to respond as soon as practical. Clear details help us investigate and reproduce issues more quickly.</p>
+
+                <p>FrameScore is developed by Docode Limited.</p>
+
+                <div class="actions">
+                  <a class="button secondary" href="../index.html">Back to FrameScore</a>
+                </div>
+              </article>
+
+              <aside class="panel support-side" aria-labelledby="support-contact-heading">
+                <h2 id="support-contact-heading">Contact</h2>
+                <p>Email Docode Limited for FrameScore support.</p>
                 <a class="contact-link" href="mailto:support@docode.co.uk?subject=FrameScore%20Support">support@docode.co.uk</a>
-              </div>
-              <p>We aim to respond as soon as practical. Clear details help us investigate and reproduce issues more quickly.</p>
-
-              <h2>Please include</h2>
-              <ul class="plain-list">
-                <li>your iPad model</li>
-                <li>iPadOS version</li>
-                <li>a short description of the issue</li>
-                <li>steps to reproduce the problem, if relevant</li>
-              </ul>
-
-              <h2>Before Contacting Support</h2>
-              <ul class="plain-list">
-                <li>check that iPadOS is up to date</li>
-                <li>restart FrameScore and try the action again</li>
-                <li>confirm whether the issue happens in a new match</li>
-                <li>note whether iCloud sync is enabled, if relevant</li>
-              </ul>
-
-              <p>FrameScore is developed by Docode Limited.</p>
-
-              <div class="actions">
-                <a class="button secondary" href="../index.html">Back to FrameScore</a>
-              </div>
-            </article>
+                <h3>Best for</h3>
+                <ul class="plain-list">
+                  <li>bug reports</li>
+                  <li>feature requests</li>
+                  <li>privacy questions</li>
+                  <li>App Store review support</li>
+                  <li>general app enquiries</li>
+                </ul>
+              </aside>
+            </div>
           </div>
         </section>
       </main>
