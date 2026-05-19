@@ -40,4 +40,16 @@
     <loc>https://docode.app/framescore/privacy/</loc>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://docode.app/web-development/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docode.app/web-development/docode/</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://docode.app/web-development/apres-school/</loc>
+    <priority>0.7</priority>
+  </url>
 </urlset>
