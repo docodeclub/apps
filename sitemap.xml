@@ -48,8 +48,16 @@
       <image:title>Docode website screenshot</image:title>
     </image:image>
     <image:image>
+      <image:loc>https://docode.app/assets/web-docode-clubs.jpg</image:loc>
+      <image:title>Docode coding clubs screenshot</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://docode.app/assets/web-apres-school-home.jpg</image:loc>
       <image:title>Après School website screenshot</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://docode.app/assets/web-apres-services.jpg</image:loc>
+      <image:title>Après School services screenshot</image:title>
     </image:image>
   </url>
   <url>
@@ -59,6 +67,18 @@
       <image:loc>https://docode.app/assets/web-docode-home.jpg</image:loc>
       <image:title>Docode website screenshot</image:title>
     </image:image>
+    <image:image>
+      <image:loc>https://docode.app/assets/web-docode-clubs.jpg</image:loc>
+      <image:title>Docode coding clubs screenshot</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://docode.app/assets/web-docode-camps.jpg</image:loc>
+      <image:title>Docode holiday camps screenshot</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://docode.app/assets/web-docode-schools.jpg</image:loc>
+      <image:title>Docode schools provision screenshot</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://docode.app/web-development/apres-school/</loc>
@@ -66,6 +86,18 @@
     <image:image>
       <image:loc>https://docode.app/assets/web-apres-school-home.jpg</image:loc>
       <image:title>Après School website screenshot</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://docode.app/assets/web-apres-services.jpg</image:loc>
+      <image:title>Après School services screenshot</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://docode.app/assets/web-apres-schools.jpg</image:loc>
+      <image:title>Après School school partnerships screenshot</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://docode.app/assets/web-apres-booking.jpg</image:loc>
+      <image:title>Après School booking section screenshot</image:title>
     </image:image>
   </url>
 </urlset>

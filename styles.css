@@ -461,6 +461,50 @@ body.home-page .studio-section {
   font-size: 0.95rem;
 }
 
+.web-gallery,
+.home-screenshot-strip {
+  display: grid;
+  gap: 1rem;
+}
+
+.web-gallery {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.web-gallery-card {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(48, 35, 131, 0.14);
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: 0 16px 42px rgba(48, 35, 131, 0.12);
+}
+
+.web-gallery-card img,
+.home-screenshot-strip img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.web-gallery-card figcaption {
+  border-top: 1px solid rgba(48, 35, 131, 0.12);
+  padding: 0.75rem 0.9rem;
+  color: #514c79;
+  font-size: 0.92rem;
+}
+
+.home-screenshot-strip {
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 1rem;
+}
+
+.home-screenshot-strip img {
+  border: 1px solid rgba(48, 35, 131, 0.14);
+  border-radius: var(--radius);
+  box-shadow: 0 14px 34px rgba(48, 35, 131, 0.1);
+}
+
 .portfolio-mark {
   display: grid;
   width: 3rem;
@@ -1145,6 +1189,8 @@ body.home-page .footer-meta strong {
   .portfolio-grid,
   .project-hero,
   .feature-panel-grid,
+  .web-gallery,
+  .home-screenshot-strip,
   .web-panel,
   .form-grid {
     grid-template-columns: 1fr;
