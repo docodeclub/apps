@@ -43,13 +43,29 @@
   <url>
     <loc>https://docode.app/web-development/</loc>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://docode.app/assets/web-docode-home.jpg</image:loc>
+      <image:title>Docode website screenshot</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://docode.app/assets/web-apres-school-home.jpg</image:loc>
+      <image:title>Après School website screenshot</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://docode.app/web-development/docode/</loc>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://docode.app/assets/web-docode-home.jpg</image:loc>
+      <image:title>Docode website screenshot</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://docode.app/web-development/apres-school/</loc>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://docode.app/assets/web-apres-school-home.jpg</image:loc>
+      <image:title>Après School website screenshot</image:title>
+    </image:image>
   </url>
 </urlset>

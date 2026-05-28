@@ -433,6 +433,34 @@ body.home-page .studio-section {
   margin-bottom: 1rem;
 }
 
+.portfolio-shot,
+.web-screenshot {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(48, 35, 131, 0.14);
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: 0 16px 42px rgba(48, 35, 131, 0.12);
+}
+
+.portfolio-shot {
+  margin-bottom: 1.1rem;
+}
+
+.portfolio-shot img,
+.web-screenshot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.web-screenshot figcaption {
+  border-top: 1px solid rgba(48, 35, 131, 0.12);
+  padding: 0.8rem 1rem;
+  color: #514c79;
+  font-size: 0.95rem;
+}
+
 .portfolio-mark {
   display: grid;
   width: 3rem;
