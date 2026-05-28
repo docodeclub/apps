@@ -404,6 +404,40 @@ body.home-page .studio-section {
   box-shadow: 0 12px 28px rgba(48, 35, 131, 0.08);
 }
 
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.service-card {
+  border: 1px solid rgba(48, 35, 131, 0.14);
+  border-radius: var(--radius);
+  padding: 1.15rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(244, 248, 255, 0.92)),
+    #ffffff;
+  box-shadow: 0 16px 38px rgba(48, 35, 131, 0.1);
+}
+
+.service-card span {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+  color: #00a936;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.service-card h3 {
+  color: #302383;
+}
+
+.service-card p {
+  color: #514c79;
+}
+
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1189,6 +1223,7 @@ body.home-page .footer-meta strong {
   .portfolio-grid,
   .project-hero,
   .feature-panel-grid,
+  .service-grid,
   .web-gallery,
   .home-screenshot-strip,
   .web-panel,
