@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A private World Cup sweepstake generator for entrant setup, animated team draws, scoring and prize calculation.">
+    <meta name="description" content="A private family World Cup sweepstake page for the draw, prize rules, team owners and tournament updates.">
     <meta name="theme-color" content="#ffffff">
     <meta property="og:title" content="World Cup Sweepstake — Docode Apps">
     <meta property="og:description" content="Run a private animated World Cup sweepstake draw and track the champion, runner-up and worst-team refund.">
@@ -46,18 +46,19 @@
         <section class="hero sweepstake-hero">
           <div class="wrap sweepstake-hero-grid">
             <div>
-              <p class="eyebrow">Private Draw</p>
+              <p class="eyebrow">Family Draw</p>
               <h1>World Cup Sweepstake</h1>
-              <p class="subtitle">Enter the family names, run an animated draw, then track the champion, runner-up and worst-team refund.</p>
-              <p class="lede">This local version stores data in this browser. It is ready for a later Supabase storage layer, but it does not need one to run the draw.</p>
+              <p class="subtitle">Follow the family draw, see who has each team, and track who is still in the tournament.</p>
+              <p class="lede">First prize goes to the owner of the World Cup winners. Second prize goes to the owner of the losing finalists. The worst group-stage team gets their owner a refund.</p>
               <div class="hero-proof">
                 <span>£10 entry</span>
                 <span>Animated draw</span>
                 <span>48 teams</span>
-                <span>Prize calculator</span>
+                <span>Prize tracker</span>
+                <span>Team updates</span>
               </div>
               <div class="actions public-mode-actions">
-                <button class="button secondary" type="button" id="public-mode-toggle">Public Mode</button>
+                <button class="button secondary" type="button" id="public-mode-toggle">Share View</button>
               </div>
             </div>
             <aside class="sweepstake-status" aria-label="Sweepstake status">
@@ -81,7 +82,7 @@
           <div class="wrap">
             <div class="results-source-card">
               <strong>Public viewing mode</strong>
-              <span>Setup, draw controls and update tools are hidden. Use this view for sharing the sweepstake table on a screen.</span>
+              <span>Admin tools are hidden. Use this view for sharing the sweepstake on a screen.</span>
             </div>
             <div class="screen-summary-grid" id="screen-summary-grid"></div>
           </div>
@@ -220,8 +221,8 @@
           <div class="wrap">
             <div class="section-heading">
               <p class="eyebrow">Public View</p>
-              <h2 id="table-heading">Draw table and prize status</h2>
-              <p>Family members can see who owns each team and which tournament outcomes matter.</p>
+              <h2 id="table-heading">Who has which teams</h2>
+              <p>Each person’s teams are shown below. We’ll update team status as the tournament moves on.</p>
             </div>
             <div class="allocation-board" id="allocation-board" aria-live="polite"></div>
             <div class="table-wrap">
@@ -270,10 +271,10 @@
             <div class="section-heading">
               <p class="eyebrow">Scoring</p>
               <h2 id="results-heading">Match results</h2>
-              <p>Scores and tournament outcomes load from <code>results.json</code>. Daily updates can be handled by editing that one static file.</p>
+              <p>We’ll update this page as results come in, including which teams are still in the competition.</p>
             </div>
             <div class="results-source-card" id="results-source-card" role="status" aria-live="polite">
-              Loading static results...
+              Loading tournament updates...
             </div>
             <details class="results-admin-guide admin-only">
               <summary>How to update results</summary>
@@ -358,7 +359,7 @@
               <div class="section-heading">
                 <p class="eyebrow">Admin</p>
                 <h2 id="admin-login-heading">Unlock admin mode</h2>
-                <p>Enter the sweepstake admin password to add entrants, run the draw or update local override results.</p>
+                <p>Enter the sweepstake admin password to add entrants, run the draw or post tournament updates.</p>
               </div>
               <form class="sweepstake-form" id="admin-login-form">
                 <label>
@@ -484,6 +485,7 @@
         source: "results.json",
         champion: null,
         runnerUp: null,
+        eliminated: [],
         matches: []
       };
       let staticDraw = {
@@ -623,11 +625,19 @@
         return teamById(id) ? id : null;
       }
 
+      function normaliseTeamList(ids) {
+        return (Array.isArray(ids) ? ids : []).filter(id => teamById(id));
+      }
+
       function currentMatchResults() {
         return [
           ...staticResults.matches,
           ...state.matchResults.map(match => ({ ...match, source: "local" }))
         ];
+      }
+
+      function isEliminated(team) {
+        return staticResults.eliminated.includes(team.id);
       }
 
       function normaliseStaticDraw(data) {
@@ -893,11 +903,14 @@
         const stats = teamStats();
         document.querySelector("#team-grid").innerHTML = state.teams.map(team => {
           const owner = entrantById(team.ownerEntrantId);
+          const eliminated = isEliminated(team);
+          const played = stats[team.id].matchesPlayed > 0;
+          const record = played ? ` · ${stats[team.id].points} pts · ${stats[team.id].goalsFor} goals` : "";
           return `
-            <article class="team-card ${team.id === activeTeamId ? "is-landing" : ""}">
+            <article class="team-card ${team.id === activeTeamId ? "is-landing" : ""} ${eliminated ? "is-eliminated" : ""}">
               <span class="team-flag" aria-hidden="true">${team.flag}</span>
               <span class="team-name">${team.name}</span>
-              <span class="team-group">Group ${team.group} · ${stats[team.id].points} pts · ${stats[team.id].goalsFor} goals</span>
+              <span class="team-group">Group ${team.group} · ${eliminated ? "Eliminated" : "Still in"}${record}</span>
               <span class="team-owner">${owner ? escapeHtml(owner.name) : "Unallocated"}</span>
             </article>
           `;
@@ -921,9 +934,10 @@
             </div>
             <div class="allocation-team-list">
               ${row.ownedTeams.map(team => `
-                <span class="allocation-team">
+                <span class="allocation-team ${isEliminated(team) ? "is-eliminated" : ""}">
                   <span class="allocation-flag" aria-hidden="true">${team.flag}</span>
                   <span>${team.name}</span>
+                  <em>${isEliminated(team) ? "Out" : "In"}</em>
                 </span>
               `).join("")}
             </div>
@@ -936,7 +950,7 @@
             <td><strong>${escapeHtml(row.name)}</strong></td>
             <td>
               <div class="table-team-list">
-                ${row.ownedTeams.map(team => `<span><b aria-hidden="true">${team.flag}</b> ${team.name}</span>`).join("")}
+                ${row.ownedTeams.map(team => `<span class="${isEliminated(team) ? "is-eliminated" : ""}"><b aria-hidden="true">${team.flag}</b> ${team.name}<em>${isEliminated(team) ? "Out" : "In"}</em></span>`).join("")}
               </div>
             </td>
             <td>${prizeStatus(row)}</td>
@@ -973,19 +987,19 @@
         const staticCount = staticResults.matches.length;
         const localCount = state.matchResults.length;
         if (staticResults.error) {
-          card.innerHTML = `<strong>Static results unavailable.</strong><span>${escapeHtml(staticResults.error)}</span>`;
+          card.innerHTML = `<strong>Tournament updates are not available yet.</strong><span>Please check back shortly.</span>`;
           return;
         }
         if (!staticResults.loaded) {
-          card.textContent = "Loading static results...";
+          card.textContent = "Loading tournament updates...";
           return;
         }
         const updated = staticResults.updatedAt
           ? new Date(staticResults.updatedAt).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })
           : "Not yet updated";
         card.innerHTML = `
-          <strong>${staticCount} static ${staticCount === 1 ? "result" : "results"} loaded from ${resultsFile}</strong>
-          <span>Updated: ${escapeHtml(updated)}${localCount ? ` · ${localCount} local ${localCount === 1 ? "override" : "overrides"}` : ""}</span>
+          <strong>${staticCount ? `${staticCount} ${staticCount === 1 ? "match" : "matches"} updated` : "No match results added yet"}</strong>
+          <span>Last updated: ${escapeHtml(updated)}${staticResults.eliminated.length ? ` · ${staticResults.eliminated.length} ${staticResults.eliminated.length === 1 ? "team is" : "teams are"} out` : ""}${localCount ? ` · ${localCount} draft ${localCount === 1 ? "result" : "results"}` : ""}</span>
         `;
       }
 
@@ -1081,7 +1095,7 @@
             <article class="match-result-row">
               <div>
                 <strong>${a.flag} ${a.name} ${match.teamAScore}-${match.teamBScore} ${b.flag} ${b.name}</strong>
-                <span>${match.stage} · ${match.source === "local" ? "Local override" : "Static file"}</span>
+                <span>${match.stage} · ${match.source === "local" ? "Draft update" : "Posted update"}</span>
               </div>
               ${match.source === "local" ? `
                 <div class="actions">
@@ -1181,7 +1195,7 @@
 
       function renderPublicMode() {
         document.body.classList.toggle("is-public-mode", publicMode);
-        document.querySelector("#public-mode-toggle").textContent = publicMode ? "Exit Public Mode" : "Public Mode";
+        document.querySelector("#public-mode-toggle").textContent = publicMode ? "Exit Share View" : "Share View";
         document.querySelector("#public-mode-toggle").setAttribute("aria-pressed", String(publicMode));
         document.querySelector("#public-mode-panel").hidden = !publicMode;
       }
@@ -1316,6 +1330,7 @@
             source: data.source || resultsFile,
             champion: normaliseOutcomeTeam(data.champion),
             runnerUp: normaliseOutcomeTeam(data.runnerUp),
+            eliminated: normaliseTeamList(data.eliminated),
             matches: normaliseMatches(data.matches)
           };
         } catch (error) {
@@ -1326,6 +1341,7 @@
             source: resultsFile,
             champion: null,
             runnerUp: null,
+            eliminated: [],
             matches: []
           };
         }

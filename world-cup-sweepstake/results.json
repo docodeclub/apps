@@ -4,5 +4,6 @@
   "notes": "Update matches with completed group-stage results. Set champion and runnerUp to team IDs after the final. Worst-team refund is decided from group-stage results.",
   "champion": null,
   "runnerUp": null,
+  "eliminated": [],
   "matches": []
 }
