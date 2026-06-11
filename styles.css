@@ -2566,6 +2566,32 @@ body.home-page .footer-meta strong {
   body.is-public-mode .sweepstake-table {
     min-width: 880px;
   }
+
+  .sweepstake-page .hero {
+    padding-top: 2.5rem;
+  }
+
+  .sweepstake-status {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    padding: 0.85rem;
+  }
+
+  .sweepstake-status div,
+  .sweepstake-status div:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .sweepstake-status div {
+    border-left: 1px solid rgba(48, 35, 131, 0.13);
+    padding-left: 0.65rem;
+  }
+
+  .sweepstake-status div:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
 }
 
 @media (max-width: 420px) {
@@ -2575,6 +2601,100 @@ body.home-page .footer-meta strong {
 
   .hero {
     padding-top: 3rem;
+  }
+
+  .sweepstake-page .site-header {
+    position: relative;
+    z-index: 2;
+  }
+
+  .sweepstake-page .nav {
+    gap: 0.7rem;
+    padding: 0.75rem 0;
+  }
+
+  .sweepstake-page .brand-mark {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 1rem;
+  }
+
+  .sweepstake-page .nav-links {
+    gap: 0.45rem 0.7rem;
+    font-size: 0.84rem;
+    line-height: 1.25;
+  }
+
+  .sweepstake-page .breadcrumbs {
+    padding-top: 0.85rem;
+    font-size: 0.82rem;
+  }
+
+  .sweepstake-page .hero {
+    padding: 1.35rem 0 0.75rem;
+  }
+
+  .sweepstake-hero {
+    padding-bottom: 0.75rem;
+  }
+
+  .sweepstake-hero h1 {
+    font-size: clamp(2.3rem, 13.5vw, 3.25rem);
+    line-height: 0.98;
+  }
+
+  .sweepstake-hero .subtitle {
+    margin-top: 0.75rem;
+    font-size: 1.05rem;
+  }
+
+  .sweepstake-hero .lede {
+    margin-top: 0.8rem;
+    font-size: 0.96rem;
+  }
+
+  .sweepstake-hero .actions {
+    margin-top: 1rem;
+  }
+
+  .hero-proof {
+    gap: 0.38rem;
+    margin-top: 0.85rem;
+  }
+
+  .hero-proof span {
+    padding: 0.28rem 0.52rem;
+    font-size: 0.76rem;
+  }
+
+  .sweepstake-status {
+    gap: 0.35rem;
+    padding: 0.7rem;
+  }
+
+  .sweepstake-status div {
+    padding-left: 0.45rem;
+  }
+
+  .stat-number {
+    font-size: 1.35rem;
+  }
+
+  .stat-label {
+    font-size: 0.68rem;
+    line-height: 1.15;
+  }
+
+  body.is-public-mode .section {
+    padding-block: 1.45rem;
+  }
+
+  body.is-public-mode .section-heading {
+    margin-bottom: 0.75rem;
+  }
+
+  body.is-public-mode .section-heading h2 {
+    font-size: clamp(1.65rem, 9vw, 2.15rem);
   }
 
   .actions {
@@ -2602,10 +2722,51 @@ body.home-page .footer-meta strong {
   .allocation-board,
   body.is-public-mode .allocation-board {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
   }
 
   body.is-public-mode .team-grid {
     grid-template-columns: 1fr;
+  }
+
+  .allocation-card,
+  body.is-public-mode .allocation-card {
+    gap: 0.7rem;
+    padding: 0.85rem;
+  }
+
+  .allocation-card strong {
+    font-size: 1.05rem;
+  }
+
+  .allocation-team-list {
+    gap: 0.35rem;
+  }
+
+  .allocation-team,
+  body.is-public-mode .allocation-team {
+    gap: 0.3rem;
+    padding: 0.28rem 0.46rem 0.28rem 0.32rem;
+    font-size: 0.84rem;
+  }
+
+  .flag-badge {
+    width: 2.3rem;
+    height: 1.55rem;
+  }
+
+  .rules-panel {
+    gap: 0.75rem;
+    padding: 0.9rem;
+  }
+
+  .rules-list li {
+    padding: 0.75rem;
+  }
+
+  .table-wrap {
+    display: none;
   }
 }
 
