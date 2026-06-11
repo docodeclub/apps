@@ -87,6 +87,22 @@
           </div>
         </section>
 
+        <section class="section sweepstake-rules-section" aria-labelledby="rules-heading">
+          <div class="wrap">
+            <div class="rules-panel">
+              <div>
+                <p class="eyebrow">Rules</p>
+                <h2 id="rules-heading">How the sweepstake is won</h2>
+              </div>
+              <ol class="rules-list">
+                <li><strong>First prize</strong><span>Owner of the World Cup winning team.</span></li>
+                <li><strong>Second prize</strong><span>Owner of the losing finalist.</span></li>
+                <li><strong>Refund</strong><span>Owner of the worst group-stage team.</span></li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
         <section class="section admin-login-panel" id="admin-login-panel" aria-labelledby="admin-login-heading">
           <div class="wrap">
             <div class="sweepstake-panel admin-login-card">
@@ -227,6 +243,7 @@
               <h2 id="table-heading">Draw table and prize status</h2>
               <p>Family members can see who owns each team and which tournament outcomes matter.</p>
             </div>
+            <div class="allocation-board" id="allocation-board" aria-live="polite"></div>
             <div class="table-wrap">
               <table class="sweepstake-table">
                 <thead>
@@ -889,18 +906,37 @@
 
       function renderDrawTable() {
         const body = document.querySelector("#draw-table-body");
+        const board = document.querySelector("#allocation-board");
         const rows = entrantRows();
         if (!state.generatedAt) {
+          board.innerHTML = `<p class="empty-state">Run the draw to reveal each entrant's teams.</p>`;
           body.innerHTML = `<tr><td colspan="4">No draw generated yet.</td></tr>`;
           return;
         }
+        board.innerHTML = rows.map(row => `
+          <article class="allocation-card ${row.id === activeEntrantId ? "is-landing" : ""}">
+            <div class="allocation-card-head">
+              <span class="allocation-number">Draw ${row.drawOrder}</span>
+              <strong>${escapeHtml(row.name)}</strong>
+            </div>
+            <div class="allocation-team-list">
+              ${row.ownedTeams.map(team => `
+                <span class="allocation-team">
+                  <span class="allocation-flag" aria-hidden="true">${team.flag}</span>
+                  <span>${team.name}</span>
+                </span>
+              `).join("")}
+            </div>
+            <p>${prizeStatus(row)}</p>
+          </article>
+        `).join("");
         body.innerHTML = rows.map(row => `
           <tr class="${row.id === activeEntrantId ? "is-landing" : ""}">
             <td>${row.drawOrder}</td>
             <td><strong>${escapeHtml(row.name)}</strong></td>
             <td>
               <div class="table-team-list">
-                ${row.ownedTeams.map(team => `<span>${team.flag} ${team.name}</span>`).join("")}
+                ${row.ownedTeams.map(team => `<span><b aria-hidden="true">${team.flag}</b> ${team.name}</span>`).join("")}
               </div>
             </td>
             <td>${prizeStatus(row)}</td>
