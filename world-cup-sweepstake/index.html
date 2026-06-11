@@ -443,6 +443,57 @@
         { id: "panama", group: "L", flag: "🇵🇦", name: "Panama" }
       ];
 
+      const teamCodes = {
+        "mexico": "MEX",
+        "south-africa": "RSA",
+        "south-korea": "KOR",
+        "czechia": "CZE",
+        "canada": "CAN",
+        "bosnia-herzegovina": "BIH",
+        "qatar": "QAT",
+        "switzerland": "SUI",
+        "brazil": "BRA",
+        "morocco": "MAR",
+        "haiti": "HAI",
+        "scotland": "SCO",
+        "united-states": "USA",
+        "paraguay": "PAR",
+        "australia": "AUS",
+        "turkiye": "TUR",
+        "germany": "GER",
+        "curacao": "CUW",
+        "ivory-coast": "CIV",
+        "ecuador": "ECU",
+        "netherlands": "NED",
+        "japan": "JPN",
+        "sweden": "SWE",
+        "tunisia": "TUN",
+        "belgium": "BEL",
+        "egypt": "EGY",
+        "iran": "IRN",
+        "new-zealand": "NZL",
+        "spain": "ESP",
+        "cape-verde": "CPV",
+        "saudi-arabia": "KSA",
+        "uruguay": "URU",
+        "france": "FRA",
+        "senegal": "SEN",
+        "iraq": "IRQ",
+        "norway": "NOR",
+        "argentina": "ARG",
+        "algeria": "ALG",
+        "austria": "AUT",
+        "jordan": "JOR",
+        "portugal": "POR",
+        "dr-congo": "COD",
+        "uzbekistan": "UZB",
+        "colombia": "COL",
+        "england": "ENG",
+        "croatia": "CRO",
+        "ghana": "GHA",
+        "panama": "PAN"
+      };
+
       const entryFee = 10;
       const adminPassword = "docode2026";
       const stateKey = "docodeSweepstakeStateV2";
@@ -532,6 +583,16 @@
           '"': "&quot;",
           "'": "&#039;"
         }[character]));
+      }
+
+      function flagBadge(team) {
+        const code = teamCodes[team.id] || team.name.slice(0, 3).toUpperCase();
+        return `
+          <span class="flag-badge" title="${escapeHtml(team.name)}">
+            <span class="flag-emoji" aria-hidden="true">${team.flag}</span>
+            <span class="flag-code">${escapeHtml(code)}</span>
+          </span>
+        `;
       }
 
       function resetDrawState() {
@@ -908,7 +969,7 @@
           const record = played ? ` · ${stats[team.id].points} pts · ${stats[team.id].goalsFor} goals` : "";
           return `
             <article class="team-card ${team.id === activeTeamId ? "is-landing" : ""} ${eliminated ? "is-eliminated" : ""}">
-              <span class="team-flag" aria-hidden="true">${team.flag}</span>
+              <span class="team-flag">${flagBadge(team)}</span>
               <span class="team-name">${team.name}</span>
               <span class="team-group">Group ${team.group} · ${eliminated ? "Eliminated" : "Still in"}${record}</span>
               <span class="team-owner">${owner ? escapeHtml(owner.name) : "Unallocated"}</span>
@@ -935,7 +996,7 @@
             <div class="allocation-team-list">
               ${row.ownedTeams.map(team => `
                 <span class="allocation-team ${isEliminated(team) ? "is-eliminated" : ""}">
-                  <span class="allocation-flag" aria-hidden="true">${team.flag}</span>
+                  ${flagBadge(team)}
                   <span>${team.name}</span>
                   <em>${isEliminated(team) ? "Out" : "In"}</em>
                 </span>
@@ -950,7 +1011,7 @@
             <td><strong>${escapeHtml(row.name)}</strong></td>
             <td>
               <div class="table-team-list">
-                ${row.ownedTeams.map(team => `<span class="${isEliminated(team) ? "is-eliminated" : ""}"><b aria-hidden="true">${team.flag}</b> ${team.name}<em>${isEliminated(team) ? "Out" : "In"}</em></span>`).join("")}
+                ${row.ownedTeams.map(team => `<span class="${isEliminated(team) ? "is-eliminated" : ""}">${flagBadge(team)} ${team.name}<em>${isEliminated(team) ? "Out" : "In"}</em></span>`).join("")}
               </div>
             </td>
             <td>${prizeStatus(row)}</td>
