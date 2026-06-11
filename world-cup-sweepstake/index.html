@@ -588,9 +588,9 @@
       function flagBadge(team) {
         const code = teamCodes[team.id] || team.name.slice(0, 3).toUpperCase();
         return `
-          <span class="flag-badge" title="${escapeHtml(team.name)}">
-            <span class="flag-emoji" aria-hidden="true">${team.flag}</span>
-            <span class="flag-code">${escapeHtml(code)}</span>
+          <span class="flag-badge" title="${escapeHtml(team.name)}" aria-label="${escapeHtml(team.name)} flag">
+            <img class="flag-image" src="../assets/flags/${team.id}.svg" alt="" width="48" height="32" decoding="async">
+            <span class="flag-code" aria-hidden="true">${escapeHtml(code)}</span>
           </span>
         `;
       }
