@@ -1,0 +1,1532 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A private World Cup sweepstake generator for entrant setup, animated team draws, scoring and prize calculation.">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="World Cup Sweepstake — Docode Apps">
+    <meta property="og:description" content="Run a private animated World Cup sweepstake draw and track points, goals and prizes.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docode.app/world-cup-sweepstake/">
+    <meta property="og:site_name" content="Docode Apps">
+    <meta name="twitter:card" content="summary">
+    <link rel="canonical" href="https://docode.app/world-cup-sweepstake/">
+    <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+    <link rel="manifest" href="../site.webmanifest">
+    <title>World Cup Sweepstake — Docode Apps</title>
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body class="home-page sweepstake-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site">
+      <header class="site-header">
+        <div class="wrap nav" aria-label="Site navigation">
+          <a class="brand" href="../index.html">
+            <span class="brand-mark" aria-hidden="true">D</span>
+            <span>Docode Apps</span>
+          </a>
+          <nav class="nav-links" aria-label="Primary">
+            <a href="../index.html">Home</a>
+            <a href="../web-development/index.html">Web Development</a>
+            <a href="../framescore/index.html">FrameScore</a>
+            <a href="../framescore/support/index.html">Support</a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main">
+        <nav class="breadcrumbs wrap" aria-label="Breadcrumb">
+          <a href="../index.html">Docode Apps</a>
+          <span aria-hidden="true">/</span>
+          <span>World Cup Sweepstake</span>
+        </nav>
+
+        <section class="hero sweepstake-hero">
+          <div class="wrap sweepstake-hero-grid">
+            <div>
+              <p class="eyebrow">Private Draw</p>
+              <h1>World Cup Sweepstake</h1>
+              <p class="subtitle">Enter the family names, run an animated draw, then track the leaderboard, prizes and worst-team refund.</p>
+              <p class="lede">This local version stores data in this browser. It is ready for a later Supabase storage layer, but it does not need one to run the draw.</p>
+              <div class="hero-proof">
+                <span>£10 entry</span>
+                <span>Animated draw</span>
+                <span>48 teams</span>
+                <span>Prize calculator</span>
+              </div>
+              <div class="actions public-mode-actions">
+                <button class="button secondary" type="button" id="public-mode-toggle">Public Mode</button>
+              </div>
+            </div>
+            <aside class="sweepstake-status" aria-label="Sweepstake status">
+              <div>
+                <span class="stat-number" id="entry-count">0</span>
+                <span class="stat-label">entrants</span>
+              </div>
+              <div>
+                <span class="stat-number" id="pot-total">£0</span>
+                <span class="stat-label">total pot</span>
+              </div>
+              <div>
+                <span class="stat-number" id="remaining-pot">£0</span>
+                <span class="stat-label">after refunds</span>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="section public-mode-panel" id="public-mode-panel" hidden>
+          <div class="wrap">
+            <div class="results-source-card">
+              <strong>Public viewing mode</strong>
+              <span>Setup, draw controls and update tools are hidden. Use this view for sharing the sweepstake table on a screen.</span>
+            </div>
+            <div class="screen-summary-grid" id="screen-summary-grid"></div>
+          </div>
+        </section>
+
+        <section class="section admin-login-panel" id="admin-login-panel" aria-labelledby="admin-login-heading">
+          <div class="wrap">
+            <div class="sweepstake-panel admin-login-card">
+              <div class="section-heading">
+                <p class="eyebrow">Admin</p>
+                <h2 id="admin-login-heading">Unlock admin mode</h2>
+                <p>Enter the sweepstake admin password to add entrants, run the draw or update local override results.</p>
+              </div>
+              <form class="sweepstake-form" id="admin-login-form">
+                <label>
+                  Password
+                  <input id="admin-password" type="password" autocomplete="current-password" required placeholder="Enter password">
+                </label>
+                <button class="button" type="submit">Unlock Admin</button>
+              </form>
+              <p class="form-message" id="admin-login-message" role="status" aria-live="polite"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section admin-only" aria-labelledby="admin-heading">
+          <div class="wrap sweepstake-layout">
+            <div class="sweepstake-panel draw-setup-control">
+              <div class="section-heading">
+                <p class="eyebrow">Admin</p>
+                <h2 id="admin-heading">Entrant setup</h2>
+                <p>Add names before generating the draw. The number of names determines the table rows.</p>
+              </div>
+              <form class="sweepstake-form" id="entrant-form">
+                <label>
+                  Entrant name
+                  <input id="entrant-name" name="name" type="text" autocomplete="name" required maxlength="80" placeholder="Jane Smith">
+                </label>
+                <button class="button" type="submit">Add Entrant</button>
+              </form>
+              <div class="bulk-entry">
+                <label for="bulk-names">Bulk add names</label>
+                <textarea id="bulk-names" rows="5" placeholder="Paste one name per line"></textarea>
+                <div class="actions sweepstake-actions">
+                  <button class="button secondary" type="button" id="import-names">Import Names</button>
+                  <button class="button secondary" type="button" id="load-demo-names">Load Demo Names</button>
+                  <button class="button danger" type="button" id="clear-entrants">Clear Entrants</button>
+                </div>
+              </div>
+              <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+              <div class="entry-list" id="entrant-list" aria-live="polite"></div>
+            </div>
+
+            <div class="sweepstake-panel draw-setup-control">
+              <div class="section-heading">
+                <p class="eyebrow">Generate</p>
+                <h2>Run the draw</h2>
+                <p>The animation shuffles entrants, places them into rows, shuffles teams, then assigns every team evenly.</p>
+              </div>
+              <label class="sweepstake-toggle">
+                <input id="skip-animation" type="checkbox">
+                Skip animation
+              </label>
+              <div class="actions sweepstake-actions">
+                <button class="button" type="button" id="generate-draw">Generate</button>
+                <button class="button secondary" type="button" id="export-draw-json">Export Draw JSON</button>
+                <button class="button secondary" type="button" id="export-csv">Export CSV</button>
+                <button class="button secondary" type="button" id="export-json">Export JSON</button>
+                <button class="button danger" type="button" id="reset-sweepstake">Reset</button>
+              </div>
+              <p class="form-message" id="draw-lock-message" role="status" aria-live="polite"></p>
+              <p class="form-message" id="static-draw-status" role="status" aria-live="polite"></p>
+              <div class="final-draw-checklist" aria-labelledby="final-draw-checklist-heading">
+                <h3 id="final-draw-checklist-heading">Final draw checklist</h3>
+                <ol id="final-draw-checklist"></ol>
+                <div class="actions sweepstake-actions checklist-actions">
+                  <button class="button secondary" type="button" id="copy-deploy-instructions">Copy Deployment Instructions</button>
+                </div>
+                <p class="form-message" id="deploy-copy-status" role="status" aria-live="polite"></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section draw-animation-section admin-only" aria-labelledby="animation-heading">
+          <div class="wrap">
+            <div class="section-heading">
+              <p class="eyebrow">Animation</p>
+              <h2 id="animation-heading">Draw theatre</h2>
+              <p id="animation-status">Add entrants, then press Generate.</p>
+            </div>
+            <ol class="draw-steps" aria-label="Draw progress">
+              <li class="draw-step" data-step="entrants-shuffle">Shuffle entrants</li>
+              <li class="draw-step" data-step="entrants-place">Place entrants</li>
+              <li class="draw-step" data-step="teams-shuffle">Shuffle teams</li>
+              <li class="draw-step" data-step="teams-assign">Assign teams</li>
+              <li class="draw-step" data-step="complete">Complete</li>
+            </ol>
+            <div class="animation-stage">
+              <div class="shuffle-box">
+                <span class="shuffle-label">Entrant shuffle</span>
+                <strong id="entrant-shuffle">Waiting</strong>
+              </div>
+              <div class="shuffle-box">
+                <span class="shuffle-label">Team shuffle</span>
+                <strong id="team-shuffle">Waiting</strong>
+              </div>
+            </div>
+            <div class="draw-complete-banner" id="draw-complete-banner" hidden>
+              <span>Draw complete</span>
+              <strong>All 48 teams have been allocated.</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="section draw-summary-section admin-only" id="draw-summary-section" aria-labelledby="summary-heading" hidden>
+          <div class="wrap">
+            <div class="section-heading">
+              <p class="eyebrow">Share</p>
+              <h2 id="summary-heading">Draw complete summary</h2>
+              <p>A quick check of the pot, allocation and copy-ready wording for the group chat.</p>
+            </div>
+            <div class="summary-grid" id="summary-grid"></div>
+            <div class="share-copy-card">
+              <div>
+                <h3>Public message</h3>
+                <p>Use this after the draw so everyone gets the same clear summary.</p>
+              </div>
+              <textarea id="share-message" rows="8" readonly></textarea>
+              <div class="actions sweepstake-actions">
+                <button class="button secondary" type="button" id="copy-share-message">Copy Message</button>
+              </div>
+              <p class="form-message" id="copy-message-status" role="status" aria-live="polite"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="table-heading">
+          <div class="wrap">
+            <div class="section-heading">
+              <p class="eyebrow">Public View</p>
+              <h2 id="table-heading">Draw table and leaderboard</h2>
+              <p>Family members can read this table without touching the admin controls.</p>
+            </div>
+            <div class="table-wrap">
+              <table class="sweepstake-table">
+                <thead>
+                  <tr>
+                    <th>Pos</th>
+                    <th>Entrant</th>
+                    <th>Teams</th>
+                    <th>Points</th>
+                    <th>Goals</th>
+                    <th>Standing</th>
+                    <th>Prize status</th>
+                  </tr>
+                </thead>
+                <tbody id="draw-table-body">
+                  <tr>
+                    <td colspan="7">No draw generated yet.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="prizes-heading">
+          <div class="wrap prize-grid">
+            <div class="sweepstake-panel">
+              <div class="section-heading">
+                <p class="eyebrow">Prizes</p>
+                <h2 id="prizes-heading">Prize calculation</h2>
+                <p>Refunds are taken first. The remaining pot is split 70% for first place and 30% for second place.</p>
+              </div>
+              <dl class="prize-list" id="prize-list"></dl>
+            </div>
+            <div class="sweepstake-panel">
+              <div class="section-heading">
+                <p class="eyebrow">Worst Team</p>
+                <h2>Refund status</h2>
+                <p>Worst-performing team is based on lowest points, then lowest goals scored.</p>
+              </div>
+              <div id="worst-team-panel" class="worst-team-panel"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="results-heading">
+          <div class="wrap">
+            <div class="section-heading">
+              <p class="eyebrow">Scoring</p>
+              <h2 id="results-heading">Match results</h2>
+              <p>Scores load from <code>results.json</code>. Daily updates can be handled by editing that one static file.</p>
+            </div>
+            <div class="results-source-card" id="results-source-card" role="status" aria-live="polite">
+              Loading static results...
+            </div>
+            <details class="results-admin-guide admin-only">
+              <summary>How to update results</summary>
+              <p>Edit <code>world-cup-sweepstake/results.json</code>. Add each completed match to the <code>matches</code> array, then refresh this page.</p>
+              <pre><code>{
+  "id": "mexico-south-africa",
+  "teamA": "mexico",
+  "teamB": "south-africa",
+  "teamAScore": 2,
+  "teamBScore": 1,
+  "stage": "Group A",
+  "playedAt": "2026-06-11"
+}</code></pre>
+              <p>Use the team IDs shown below exactly.</p>
+              <div class="team-id-list" id="team-id-list"></div>
+            </details>
+            <div class="quick-result-panel admin-only" aria-label="Quick result controls">
+              <label>
+                Filter by group
+                <select id="group-filter"></select>
+              </label>
+              <div>
+                <span class="quick-result-label">Common scores</span>
+                <div class="score-presets" id="score-presets">
+                  <button type="button" data-score="1-0">1-0</button>
+                  <button type="button" data-score="2-0">2-0</button>
+                  <button type="button" data-score="2-1">2-1</button>
+                  <button type="button" data-score="0-0">0-0</button>
+                  <button type="button" data-score="1-1">1-1</button>
+                  <button type="button" data-score="2-2">2-2</button>
+                </div>
+              </div>
+              <button class="button secondary" type="button" id="next-fixture">Next Unplayed Pair</button>
+            </div>
+            <form class="match-form admin-only" id="match-form">
+              <label>
+                Team A
+                <select id="team-a" required></select>
+              </label>
+              <label>
+                Score
+                <input id="team-a-score" type="number" min="0" max="99" required value="0">
+              </label>
+              <label>
+                Team B
+                <select id="team-b" required></select>
+              </label>
+              <label>
+                Score
+                <input id="team-b-score" type="number" min="0" max="99" required value="0">
+              </label>
+              <label>
+                Stage
+                <input id="match-stage" type="text" maxlength="40" value="Group stage">
+              </label>
+              <button class="button" type="submit">Save Result</button>
+            </form>
+            <div class="match-results" id="match-results"></div>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="teams-heading">
+          <div class="wrap">
+            <div class="section-heading">
+              <p class="eyebrow">Teams</p>
+              <h2 id="teams-heading">All 48 teams</h2>
+              <p>The sweepstake uses the full 2026 World Cup group-stage line-up.</p>
+            </div>
+            <div class="team-grid" id="team-grid"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="wrap footer-inner">
+          <div class="footer-meta">
+            <strong>Docode Limited</strong>
+            <a href="mailto:support@docode.co.uk">support@docode.co.uk</a>
+            <span>&copy; Docode Limited</span>
+          </div>
+          <nav class="footer-links" aria-label="Footer">
+            <a href="../index.html">Home</a>
+            <a href="../web-development/index.html">Web Development</a>
+            <a href="../framescore/index.html">FrameScore</a>
+            <a href="../framescore/privacy/index.html">Privacy</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const teams = [
+        { id: "mexico", group: "A", flag: "🇲🇽", name: "Mexico" },
+        { id: "south-africa", group: "A", flag: "🇿🇦", name: "South Africa" },
+        { id: "south-korea", group: "A", flag: "🇰🇷", name: "South Korea" },
+        { id: "czechia", group: "A", flag: "🇨🇿", name: "Czechia" },
+        { id: "canada", group: "B", flag: "🇨🇦", name: "Canada" },
+        { id: "bosnia-herzegovina", group: "B", flag: "🇧🇦", name: "Bosnia and Herzegovina" },
+        { id: "qatar", group: "B", flag: "🇶🇦", name: "Qatar" },
+        { id: "switzerland", group: "B", flag: "🇨🇭", name: "Switzerland" },
+        { id: "brazil", group: "C", flag: "🇧🇷", name: "Brazil" },
+        { id: "morocco", group: "C", flag: "🇲🇦", name: "Morocco" },
+        { id: "haiti", group: "C", flag: "🇭🇹", name: "Haiti" },
+        { id: "scotland", group: "C", flag: "\u{1F3F4}\u{E0067}\u{E0062}\u{E0073}\u{E0063}\u{E0074}\u{E007F}", name: "Scotland" },
+        { id: "united-states", group: "D", flag: "🇺🇸", name: "United States" },
+        { id: "paraguay", group: "D", flag: "🇵🇾", name: "Paraguay" },
+        { id: "australia", group: "D", flag: "🇦🇺", name: "Australia" },
+        { id: "turkiye", group: "D", flag: "🇹🇷", name: "Türkiye" },
+        { id: "germany", group: "E", flag: "🇩🇪", name: "Germany" },
+        { id: "curacao", group: "E", flag: "🇨🇼", name: "Curaçao" },
+        { id: "ivory-coast", group: "E", flag: "🇨🇮", name: "Ivory Coast" },
+        { id: "ecuador", group: "E", flag: "🇪🇨", name: "Ecuador" },
+        { id: "netherlands", group: "F", flag: "🇳🇱", name: "Netherlands" },
+        { id: "japan", group: "F", flag: "🇯🇵", name: "Japan" },
+        { id: "sweden", group: "F", flag: "🇸🇪", name: "Sweden" },
+        { id: "tunisia", group: "F", flag: "🇹🇳", name: "Tunisia" },
+        { id: "belgium", group: "G", flag: "🇧🇪", name: "Belgium" },
+        { id: "egypt", group: "G", flag: "🇪🇬", name: "Egypt" },
+        { id: "iran", group: "G", flag: "🇮🇷", name: "Iran" },
+        { id: "new-zealand", group: "G", flag: "🇳🇿", name: "New Zealand" },
+        { id: "spain", group: "H", flag: "🇪🇸", name: "Spain" },
+        { id: "cape-verde", group: "H", flag: "🇨🇻", name: "Cape Verde" },
+        { id: "saudi-arabia", group: "H", flag: "🇸🇦", name: "Saudi Arabia" },
+        { id: "uruguay", group: "H", flag: "🇺🇾", name: "Uruguay" },
+        { id: "france", group: "I", flag: "🇫🇷", name: "France" },
+        { id: "senegal", group: "I", flag: "🇸🇳", name: "Senegal" },
+        { id: "iraq", group: "I", flag: "🇮🇶", name: "Iraq" },
+        { id: "norway", group: "I", flag: "🇳🇴", name: "Norway" },
+        { id: "argentina", group: "J", flag: "🇦🇷", name: "Argentina" },
+        { id: "algeria", group: "J", flag: "🇩🇿", name: "Algeria" },
+        { id: "austria", group: "J", flag: "🇦🇹", name: "Austria" },
+        { id: "jordan", group: "J", flag: "🇯🇴", name: "Jordan" },
+        { id: "portugal", group: "K", flag: "🇵🇹", name: "Portugal" },
+        { id: "dr-congo", group: "K", flag: "🇨🇩", name: "DR Congo" },
+        { id: "uzbekistan", group: "K", flag: "🇺🇿", name: "Uzbekistan" },
+        { id: "colombia", group: "K", flag: "🇨🇴", name: "Colombia" },
+        { id: "england", group: "L", flag: "\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}", name: "England" },
+        { id: "croatia", group: "L", flag: "🇭🇷", name: "Croatia" },
+        { id: "ghana", group: "L", flag: "🇬🇭", name: "Ghana" },
+        { id: "panama", group: "L", flag: "🇵🇦", name: "Panama" }
+      ];
+
+      const entryFee = 10;
+      const adminPassword = "docode2026";
+      const stateKey = "docodeSweepstakeStateV2";
+      const publicModeKey = "docodeSweepstakePublicMode";
+      const adminUnlockedKey = "docodeSweepstakeAdminUnlocked";
+      const drawFile = "draw.json";
+      const resultsFile = "results.json";
+      const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+      const demoNames = [
+        "Alex", "Beth", "Charlie", "Dani", "Elliot", "Farah", "George", "Hannah",
+        "Imran", "Jess", "Kieran", "Lucy"
+      ];
+      const queryParams = new URLSearchParams(window.location.search);
+
+      if (queryParams.get("reset") === "1") {
+        localStorage.removeItem(stateKey);
+        window.history.replaceState({}, "", window.location.pathname);
+      }
+
+      const defaultState = () => ({
+        title: "World Cup Sweepstake",
+        generatedAt: null,
+        entrants: [],
+        teams: teams.map(team => ({ ...team, ownerEntrantId: null })),
+        matchResults: []
+      });
+
+      let state = loadState();
+      let editingMatchId = null;
+      let activeStep = null;
+      let activeEntrantId = null;
+      let activeTeamId = null;
+      let activeGroup = "all";
+      let publicMode = queryParams.get("public") === "1" || localStorage.getItem(publicModeKey) === "1";
+      let adminUnlocked = sessionStorage.getItem(adminUnlockedKey) === "1";
+      let staticResults = {
+        loaded: false,
+        error: null,
+        updatedAt: null,
+        source: "results.json",
+        matches: []
+      };
+      let staticDraw = {
+        loaded: false,
+        error: null,
+        updatedAt: null,
+        generatedAt: null,
+        hasDraw: false
+      };
+
+      function loadState() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(stateKey));
+          if (!saved) return defaultState();
+          return {
+            ...defaultState(),
+            ...saved,
+            matchResults: saved.localMatchResults || [],
+            teams: teams.map(team => ({ ...team, ...(saved.teams || []).find(savedTeam => savedTeam.id === team.id) }))
+          };
+        } catch {
+          return defaultState();
+        }
+      }
+
+      function saveState() {
+        const savedState = {
+          ...state,
+          localMatchResults: state.matchResults,
+          matchResults: []
+        };
+        localStorage.setItem(stateKey, JSON.stringify(savedState));
+      }
+
+      function uid(prefix) {
+        return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+      }
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, character => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;"
+        }[character]));
+      }
+
+      function resetDrawState() {
+        state.generatedAt = null;
+        state.teams = teams.map(team => ({ ...team, ownerEntrantId: null }));
+        state.matchResults = [];
+        activeStep = null;
+        activeEntrantId = null;
+        activeTeamId = null;
+        document.querySelector("#draw-complete-banner").hidden = true;
+        document.querySelector("#entrant-shuffle").textContent = "Waiting";
+        document.querySelector("#team-shuffle").textContent = "Waiting";
+        setAnimationStatus("Add entrants, then press Generate.");
+      }
+
+      function addEntrantNames(names) {
+        if (staticDraw.hasDraw) {
+          document.querySelector("#form-message").textContent = "Shared draw is loaded. Entrants are locked.";
+          return 0;
+        }
+        const existing = new Set(state.entrants.map(entrant => entrant.name.toLowerCase()));
+        const cleanNames = names
+          .map(name => name.trim())
+          .filter(Boolean)
+          .filter(name => {
+            const key = name.toLowerCase();
+            if (existing.has(key)) return false;
+            existing.add(key);
+            return true;
+          });
+
+        cleanNames.forEach(name => {
+          state.entrants.push({ id: uid("entrant"), name, drawOrder: state.entrants.length + 1 });
+        });
+
+        if (cleanNames.length) resetDrawState();
+        saveState();
+        renderAll();
+        return cleanNames.length;
+      }
+
+      function randomIndex(max) {
+        const values = new Uint32Array(1);
+        crypto.getRandomValues(values);
+        return values[0] % max;
+      }
+
+      function shuffle(items) {
+        const copy = [...items];
+        for (let i = copy.length - 1; i > 0; i -= 1) {
+          const j = randomIndex(i + 1);
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+      }
+
+      function teamById(id) {
+        return state.teams.find(team => team.id === id);
+      }
+
+      function groupTeams() {
+        return activeGroup === "all"
+          ? state.teams
+          : state.teams.filter(team => team.group === activeGroup);
+      }
+
+      function matchKey(teamA, teamB) {
+        return [teamA, teamB].sort().join("--");
+      }
+
+      function normaliseMatches(matches) {
+        return (Array.isArray(matches) ? matches : []).map((match, index) => ({
+          id: match.id || `static-match-${index + 1}`,
+          teamA: match.teamA,
+          teamB: match.teamB,
+          teamAScore: Number(match.teamAScore),
+          teamBScore: Number(match.teamBScore),
+          stage: match.stage || "Group stage",
+          playedAt: match.playedAt || null,
+          source: match.source || "static"
+        })).filter(match =>
+          teamById(match.teamA) &&
+          teamById(match.teamB) &&
+          match.teamA !== match.teamB &&
+          Number.isFinite(match.teamAScore) &&
+          Number.isFinite(match.teamBScore)
+        );
+      }
+
+      function currentMatchResults() {
+        return [
+          ...staticResults.matches,
+          ...state.matchResults.map(match => ({ ...match, source: "local" }))
+        ];
+      }
+
+      function normaliseStaticDraw(data) {
+        const entrants = Array.isArray(data.entrants) ? data.entrants : [];
+        const staticTeams = Array.isArray(data.teams) ? data.teams : [];
+        const cleanEntrants = entrants.map((entrant, index) => ({
+          id: String(entrant.id || `entrant-${index + 1}`),
+          name: String(entrant.name || "").trim(),
+          drawOrder: Number(entrant.drawOrder) || index + 1
+        })).filter(entrant => entrant.name);
+        const entrantIds = new Set(cleanEntrants.map(entrant => entrant.id));
+        const teamOwners = new Map(staticTeams
+          .filter(team => teamById(team.id) && entrantIds.has(team.ownerEntrantId))
+          .map(team => [team.id, team.ownerEntrantId]));
+
+        if (!data.generatedAt || !cleanEntrants.length || teamOwners.size !== teams.length) return null;
+
+        return {
+          generatedAt: data.generatedAt,
+          entrants: cleanEntrants,
+          teams: teams.map(team => ({ ...team, ownerEntrantId: teamOwners.get(team.id) || null }))
+        };
+      }
+
+      function exportDrawPayload() {
+        return {
+          updatedAt: new Date().toISOString(),
+          generatedAt: state.generatedAt,
+          source: "Manual static update",
+          entrants: state.entrants.map(entrant => ({
+            id: entrant.id,
+            name: entrant.name,
+            drawOrder: entrant.drawOrder
+          })),
+          teams: state.teams.map(team => ({
+            id: team.id,
+            ownerEntrantId: team.ownerEntrantId
+          }))
+        };
+      }
+
+      function deploymentInstructionsText() {
+        return [
+          "World Cup Sweepstake final draw deployment",
+          "",
+          "1. Click Export Draw JSON.",
+          "2. Open world-cup-sweepstake/draw.json.",
+          "3. Replace the full contents of draw.json with the exported JSON.",
+          "4. Save the file.",
+          "5. Commit and push the static site.",
+          "6. Refresh https://docode.app/world-cup-sweepstake/?public=1 and confirm the shared draw is loaded.",
+          "",
+          "After draw.json is updated, the draw is locked for everyone for the tournament."
+        ].join("\n");
+      }
+
+      function entrantById(id) {
+        return state.entrants.find(entrant => entrant.id === id);
+      }
+
+      function teamStats() {
+        const stats = Object.fromEntries(state.teams.map(team => [team.id, {
+          points: 0,
+          goalsFor: 0,
+          matchesPlayed: 0
+        }]));
+
+        currentMatchResults().forEach(match => {
+          const a = stats[match.teamA];
+          const b = stats[match.teamB];
+          if (!a || !b) return;
+          a.goalsFor += match.teamAScore;
+          b.goalsFor += match.teamBScore;
+          a.matchesPlayed += 1;
+          b.matchesPlayed += 1;
+          if (match.teamAScore > match.teamBScore) {
+            a.points += 3;
+          } else if (match.teamAScore < match.teamBScore) {
+            b.points += 3;
+          } else {
+            a.points += 1;
+            b.points += 1;
+          }
+        });
+
+        return stats;
+      }
+
+      function standings() {
+        const stats = teamStats();
+        const rows = state.entrants.map(entrant => {
+          const ownedTeams = state.teams.filter(team => team.ownerEntrantId === entrant.id);
+          const totalPoints = ownedTeams.reduce((sum, team) => sum + stats[team.id].points, 0);
+          const totalGoals = ownedTeams.reduce((sum, team) => sum + stats[team.id].goalsFor, 0);
+          return { ...entrant, ownedTeams, totalPoints, totalGoals, rank: null };
+        }).sort((a, b) => b.totalPoints - a.totalPoints || b.totalGoals - a.totalGoals || a.drawOrder - b.drawOrder);
+
+        rows.forEach((row, index) => {
+          const previous = rows[index - 1];
+          row.rank = previous && previous.totalPoints === row.totalPoints && previous.totalGoals === row.totalGoals
+            ? previous.rank
+            : index + 1;
+        });
+        return rows;
+      }
+
+      function worstTeams() {
+        if (!state.generatedAt) return [];
+        const stats = teamStats();
+        const eligibleTeams = state.teams.filter(team => stats[team.id].matchesPlayed > 0);
+        if (!eligibleTeams.length) return [];
+        const sorted = [...eligibleTeams].sort((a, b) =>
+          stats[a.id].points - stats[b.id].points ||
+          stats[a.id].goalsFor - stats[b.id].goalsFor ||
+          a.name.localeCompare(b.name)
+        );
+        const worst = sorted[0];
+        if (!worst) return [];
+        return sorted.filter(team =>
+          stats[team.id].points === stats[worst.id].points &&
+          stats[team.id].goalsFor === stats[worst.id].goalsFor
+        );
+      }
+
+      function prizeSummary() {
+        const totalPot = state.entrants.length * entryFee;
+        const refundTeams = worstTeams();
+        const refundTotal = refundTeams.length * entryFee;
+        const remainingPot = Math.max(0, totalPot - refundTotal);
+        return {
+          totalPot,
+          refundTeams,
+          refundTotal,
+          remainingPot,
+          winnerPrize: remainingPot * 0.7,
+          secondPrize: remainingPot * 0.3
+        };
+      }
+
+      function prizeStatus(row) {
+        if (!state.generatedAt) return "Pending draw";
+        if (!currentMatchResults().length) return "Pending results";
+        const summary = prizeSummary();
+        const refunds = summary.refundTeams.filter(team => team.ownerEntrantId === row.id);
+        const prizes = [];
+        if (row.rank === 1) prizes.push(`Currently 1st: £${summary.winnerPrize.toFixed(2)}`);
+        if (row.rank === 2) prizes.push(`Currently 2nd: £${summary.secondPrize.toFixed(2)}`);
+        if (refunds.length) prizes.push(`Refund: £${(refunds.length * entryFee).toFixed(2)}`);
+        return prizes.length ? prizes.join(" · ") : "No prize currently";
+      }
+
+      function teamRangeText(rows) {
+        const counts = rows.map(row => row.ownedTeams.length);
+        const min = Math.min(...counts);
+        const max = Math.max(...counts);
+        return min === max ? `${min} each` : `${min}-${max} each`;
+      }
+
+      function drawSummaryMessage(rows, summary) {
+        if (!state.generatedAt) return "";
+        const lines = [
+          "World Cup Sweepstake draw complete",
+          "",
+          `Entrants: ${state.entrants.length}`,
+          `Teams allocated: ${state.teams.length}`,
+          `Entry fee: £${entryFee.toFixed(2)}`,
+          `Prize pot before refunds: £${summary.totalPot.toFixed(2)}`,
+          `Current prize pot after refunds: £${summary.remainingPot.toFixed(2)}`,
+          `Winner: £${summary.winnerPrize.toFixed(2)}`,
+          `Second place: £${summary.secondPrize.toFixed(2)}`,
+          "",
+          "Draw:"
+        ];
+
+        rows.forEach(row => {
+          lines.push(`${row.drawOrder}. ${row.name}: ${row.ownedTeams.map(team => `${team.flag} ${team.name}`).join(", ")}`);
+        });
+
+        lines.push("");
+        lines.push("Worst-team refunds are applied after match results are entered.");
+        return lines.join("\n");
+      }
+
+      function renderDrawSummary() {
+        const section = document.querySelector("#draw-summary-section");
+        const grid = document.querySelector("#summary-grid");
+        const message = document.querySelector("#share-message");
+        if (!state.generatedAt) {
+          section.hidden = true;
+          message.value = "";
+          return;
+        }
+
+        const rows = standings().sort((a, b) => a.drawOrder - b.drawOrder);
+        const summary = prizeSummary();
+        section.hidden = false;
+        grid.innerHTML = `
+          <article class="summary-card">
+            <span>Entrants</span>
+            <strong>${state.entrants.length}</strong>
+            <p>${teamRangeText(rows)} across ${state.teams.length} teams</p>
+          </article>
+          <article class="summary-card">
+            <span>Total Pot</span>
+            <strong>£${summary.totalPot.toFixed(0)}</strong>
+            <p>£${entryFee.toFixed(0)} per entrant</p>
+          </article>
+          <article class="summary-card">
+            <span>Current Top Prize</span>
+            <strong>£${summary.winnerPrize.toFixed(2)}</strong>
+            <p>70% after any worst-team refunds</p>
+          </article>
+          <article class="summary-card">
+            <span>Second Place</span>
+            <strong>£${summary.secondPrize.toFixed(2)}</strong>
+            <p>30% after any worst-team refunds</p>
+          </article>
+        `;
+        message.value = drawSummaryMessage(rows, summary);
+      }
+
+      function renderEntrants() {
+        const list = document.querySelector("#entrant-list");
+        if (!state.entrants.length) {
+          list.innerHTML = `<p class="empty-state">No entrants yet.</p>`;
+          return;
+        }
+        list.innerHTML = state.entrants.map((entrant, index) => `
+          <article class="entry-row">
+            <div>
+              <strong>${escapeHtml(entrant.name)}</strong>
+              <span>Row ${index + 1}</span>
+            </div>
+            <button type="button" class="remove-entry" data-id="${entrant.id}">Remove</button>
+          </article>
+        `).join("");
+      }
+
+      function renderTeams() {
+        const stats = teamStats();
+        document.querySelector("#team-grid").innerHTML = state.teams.map(team => {
+          const owner = entrantById(team.ownerEntrantId);
+          return `
+            <article class="team-card ${team.id === activeTeamId ? "is-landing" : ""}">
+              <span class="team-flag" aria-hidden="true">${team.flag}</span>
+              <span class="team-name">${team.name}</span>
+              <span class="team-group">Group ${team.group} · ${stats[team.id].points} pts · ${stats[team.id].goalsFor} goals</span>
+              <span class="team-owner">${owner ? escapeHtml(owner.name) : "Unallocated"}</span>
+            </article>
+          `;
+        }).join("");
+      }
+
+      function renderDrawTable() {
+        const body = document.querySelector("#draw-table-body");
+        const rows = standings();
+        if (!state.generatedAt) {
+          body.innerHTML = `<tr><td colspan="7">No draw generated yet.</td></tr>`;
+          return;
+        }
+        body.innerHTML = rows.map(row => `
+          <tr class="${row.id === activeEntrantId ? "is-landing" : ""}">
+            <td>${row.drawOrder}</td>
+            <td><strong>${escapeHtml(row.name)}</strong></td>
+            <td>
+              <div class="table-team-list">
+                ${row.ownedTeams.map(team => `<span>${team.flag} ${team.name}</span>`).join("")}
+              </div>
+            </td>
+            <td>${row.totalPoints}</td>
+            <td>${row.totalGoals}</td>
+            <td>${row.rank === 1 ? "1st" : row.rank === 2 ? "2nd" : `=${row.rank}`}</td>
+            <td>${prizeStatus(row)}</td>
+          </tr>
+        `).join("");
+      }
+
+      function renderPrizePanels() {
+        const summary = prizeSummary();
+        document.querySelector("#entry-count").textContent = state.entrants.length;
+        document.querySelector("#pot-total").textContent = `£${summary.totalPot.toFixed(0)}`;
+        document.querySelector("#remaining-pot").textContent = `£${summary.remainingPot.toFixed(0)}`;
+        document.querySelector("#prize-list").innerHTML = `
+          <div><dt>Entry fee</dt><dd>£${entryFee.toFixed(2)}</dd></div>
+          <div><dt>Total pot</dt><dd>£${summary.totalPot.toFixed(2)}</dd></div>
+          <div><dt>Worst-team refunds</dt><dd>£${summary.refundTotal.toFixed(2)}</dd></div>
+          <div><dt>Adjusted prize pot</dt><dd>£${summary.remainingPot.toFixed(2)}</dd></div>
+          <div><dt>Winner prize</dt><dd>£${summary.winnerPrize.toFixed(2)}</dd></div>
+          <div><dt>Second prize</dt><dd>£${summary.secondPrize.toFixed(2)}</dd></div>
+        `;
+
+        const stats = teamStats();
+        const worst = summary.refundTeams;
+        document.querySelector("#worst-team-panel").innerHTML = worst.length ? worst.map(team => {
+          const owner = entrantById(team.ownerEntrantId);
+          return `<article class="worst-team-card"><strong>${team.flag} ${team.name}</strong><span>${stats[team.id].points} pts · ${stats[team.id].goalsFor} goals · ${owner ? escapeHtml(owner.name) : "No owner"} gets £${entryFee.toFixed(2)}</span></article>`;
+        }).join("") : `<p class="empty-state">Worst-team refund appears once match results have been entered.</p>`;
+      }
+
+      function renderResultsSource() {
+        const card = document.querySelector("#results-source-card");
+        const staticCount = staticResults.matches.length;
+        const localCount = state.matchResults.length;
+        if (staticResults.error) {
+          card.innerHTML = `<strong>Static results unavailable.</strong><span>${escapeHtml(staticResults.error)}</span>`;
+          return;
+        }
+        if (!staticResults.loaded) {
+          card.textContent = "Loading static results...";
+          return;
+        }
+        const updated = staticResults.updatedAt
+          ? new Date(staticResults.updatedAt).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })
+          : "Not yet updated";
+        card.innerHTML = `
+          <strong>${staticCount} static ${staticCount === 1 ? "result" : "results"} loaded from ${resultsFile}</strong>
+          <span>Updated: ${escapeHtml(updated)}${localCount ? ` · ${localCount} local ${localCount === 1 ? "override" : "overrides"}` : ""}</span>
+        `;
+      }
+
+      function renderScreenSummary() {
+        const grid = document.querySelector("#screen-summary-grid");
+        if (!publicMode) {
+          grid.innerHTML = "";
+          return;
+        }
+
+        const rows = standings();
+        const summary = prizeSummary();
+        const leader = rows[0];
+        const second = rows.find(row => row.rank === 2);
+        const totalMatches = currentMatchResults().length;
+        grid.innerHTML = `
+          <article class="screen-summary-card screen-summary-card-wide">
+            <span>Current Leader</span>
+            <strong>${leader ? escapeHtml(leader.name) : "Draw pending"}</strong>
+            <p>${leader ? `${leader.totalPoints} pts · ${leader.totalGoals} goals · ${leader.ownedTeams.length} teams` : "Generate the draw to begin."}</p>
+          </article>
+          <article class="screen-summary-card">
+            <span>Winner Prize</span>
+            <strong>£${summary.winnerPrize.toFixed(2)}</strong>
+            <p>70% after refunds</p>
+          </article>
+          <article class="screen-summary-card">
+            <span>Second Place</span>
+            <strong>${second ? escapeHtml(second.name) : "Pending"}</strong>
+            <p>£${summary.secondPrize.toFixed(2)}</p>
+          </article>
+          <article class="screen-summary-card">
+            <span>Results Entered</span>
+            <strong>${totalMatches}</strong>
+            <p>${totalMatches === 1 ? "match" : "matches"} loaded</p>
+          </article>
+        `;
+      }
+
+      function renderTeamIds() {
+        const list = document.querySelector("#team-id-list");
+        list.innerHTML = teams.map(team => `
+          <span><strong>${team.flag} ${team.name}</strong><code>${team.id}</code></span>
+        `).join("");
+      }
+
+      function renderTeamSelects() {
+        const groupOptions = ["all", ...new Set(state.teams.map(team => team.group))]
+          .map(group => `<option value="${group}">${group === "all" ? "All groups" : `Group ${group}`}</option>`)
+          .join("");
+        const groupFilter = document.querySelector("#group-filter");
+        groupFilter.innerHTML = groupOptions;
+        groupFilter.value = activeGroup;
+
+        const filteredTeams = groupTeams();
+        const options = filteredTeams.map(team => `<option value="${team.id}">${team.flag} ${team.name}</option>`).join("");
+        const teamA = document.querySelector("#team-a");
+        const teamB = document.querySelector("#team-b");
+        const previousA = teamA.value;
+        const previousB = teamB.value;
+        teamA.innerHTML = options;
+        teamB.innerHTML = options;
+        if (filteredTeams.some(team => team.id === previousA)) teamA.value = previousA;
+        if (filteredTeams.some(team => team.id === previousB)) teamB.value = previousB;
+        if (teamA.value === teamB.value && filteredTeams.length > 1) teamB.selectedIndex = 1;
+      }
+
+      function nextUnplayedPair() {
+        const filteredTeams = groupTeams();
+        const played = new Set(currentMatchResults().map(match => matchKey(match.teamA, match.teamB)));
+        for (let i = 0; i < filteredTeams.length; i += 1) {
+          for (let j = i + 1; j < filteredTeams.length; j += 1) {
+            if (!played.has(matchKey(filteredTeams[i].id, filteredTeams[j].id))) {
+              return [filteredTeams[i], filteredTeams[j]];
+            }
+          }
+        }
+        return null;
+      }
+
+      function renderMatches() {
+        const panel = document.querySelector("#match-results");
+        const matches = currentMatchResults();
+        if (!matches.length) {
+          panel.innerHTML = `<p class="empty-state">No match results entered yet.</p>`;
+          return;
+        }
+        panel.innerHTML = matches.map(match => {
+          const a = teamById(match.teamA);
+          const b = teamById(match.teamB);
+          return `
+            <article class="match-result-row">
+              <div>
+                <strong>${a.flag} ${a.name} ${match.teamAScore}-${match.teamBScore} ${b.flag} ${b.name}</strong>
+                <span>${match.stage} · ${match.source === "local" ? "Local override" : "Static file"}</span>
+              </div>
+              ${match.source === "local" ? `
+                <div class="actions">
+                  <button class="button secondary edit-match" type="button" data-id="${match.id}">Edit</button>
+                  <button class="button danger delete-match" type="button" data-id="${match.id}">Delete</button>
+                </div>
+              ` : ""}
+            </article>
+          `;
+        }).join("");
+      }
+
+      function renderAll() {
+        renderAdminMode();
+        renderPublicMode();
+        renderScreenSummary();
+        renderDrawSteps();
+        renderEntrants();
+        renderDrawSummary();
+        renderDrawTable();
+        renderPrizePanels();
+        renderResultsSource();
+        renderTeams();
+        renderMatches();
+        renderFinalDrawChecklist();
+      }
+
+      function renderAdminMode() {
+        document.body.classList.toggle("is-admin-locked", !adminUnlocked);
+        document.body.classList.toggle("has-static-draw", staticDraw.hasDraw);
+        document.querySelector("#admin-login-panel").hidden = adminUnlocked || publicMode;
+        const generateButton = document.querySelector("#generate-draw");
+        const lockMessage = document.querySelector("#draw-lock-message");
+        const staticStatus = document.querySelector("#static-draw-status");
+        if (staticDraw.hasDraw) {
+          generateButton.disabled = true;
+          lockMessage.textContent = "Static draw loaded. Teams are locked for everyone.";
+          staticStatus.textContent = `Shared draw loaded from ${drawFile}.`;
+        } else if (state.generatedAt) {
+          generateButton.disabled = true;
+          lockMessage.textContent = "Draw locked. Teams have been assigned for the tournament.";
+          staticStatus.textContent = `Export Draw JSON and paste it into ${drawFile} to make this draw visible to everyone.`;
+        } else {
+          generateButton.disabled = false;
+          lockMessage.textContent = "Once generated, this browser will remember the draw and Generate will lock.";
+          staticStatus.textContent = staticDraw.error
+            ? `No shared draw loaded: ${staticDraw.error}`
+            : `No shared draw in ${drawFile} yet.`;
+        }
+      }
+
+      function renderFinalDrawChecklist() {
+        const checklist = document.querySelector("#final-draw-checklist");
+        const hasEntrants = state.entrants.length > 0;
+        const hasLocalDraw = Boolean(state.generatedAt);
+        const hasAssignedTeams = state.teams.every(team => team.ownerEntrantId);
+        const canExport = hasLocalDraw && hasAssignedTeams;
+        const sharedDrawReady = staticDraw.hasDraw;
+        const steps = [
+          {
+            done: hasEntrants,
+            title: "Add entrants",
+            detail: hasEntrants ? `${state.entrants.length} entrants added.` : "Add everyone before running the draw."
+          },
+          {
+            done: hasLocalDraw,
+            title: "Run the draw once",
+            detail: hasLocalDraw ? "Draw has been generated and locked in this browser." : "Only press Generate when the entrant list is final."
+          },
+          {
+            done: canExport,
+            title: "Export Draw JSON",
+            detail: canExport ? "Export is ready. Use the exported file for draw.json." : "Export becomes available after the draw is generated."
+          },
+          {
+            done: sharedDrawReady,
+            title: "Paste into draw.json",
+            detail: sharedDrawReady ? "Shared static draw is loaded for everyone." : `Replace ${drawFile} with the exported draw JSON.`
+          },
+          {
+            done: sharedDrawReady,
+            title: "Deploy the site",
+            detail: sharedDrawReady ? "The site is ready to publish with the shared draw." : "Commit and deploy after draw.json has been updated."
+          }
+        ];
+
+        checklist.innerHTML = steps.map((step, index) => `
+          <li class="${step.done ? "is-complete" : ""}">
+            <span class="check-number">${step.done ? "✓" : index + 1}</span>
+            <span>
+              <strong>${step.title}</strong>
+              <em>${step.detail}</em>
+            </span>
+          </li>
+        `).join("");
+      }
+
+      function renderPublicMode() {
+        document.body.classList.toggle("is-public-mode", publicMode);
+        document.querySelector("#public-mode-toggle").textContent = publicMode ? "Exit Public Mode" : "Public Mode";
+        document.querySelector("#public-mode-toggle").setAttribute("aria-pressed", String(publicMode));
+        document.querySelector("#public-mode-panel").hidden = !publicMode;
+      }
+
+      function renderDrawSteps() {
+        document.querySelectorAll(".draw-step").forEach(step => {
+          const isActive = step.dataset.step === activeStep;
+          const stepOrder = ["entrants-shuffle", "entrants-place", "teams-shuffle", "teams-assign", "complete"];
+          const isDone = activeStep && stepOrder.indexOf(step.dataset.step) < stepOrder.indexOf(activeStep);
+          step.classList.toggle("is-active", isActive);
+          step.classList.toggle("is-done", isDone);
+        });
+      }
+
+      function setDrawStep(step, message) {
+        activeStep = step;
+        if (message) setAnimationStatus(message);
+        document.querySelector("#draw-complete-banner").hidden = step !== "complete";
+        renderDrawSteps();
+      }
+
+      function setAnimationStatus(text) {
+        document.querySelector("#animation-status").textContent = text;
+      }
+
+      async function cycleShuffle(target, items, rounds = 16) {
+        target.classList.add("is-shuffling");
+        for (let i = 0; i < rounds; i += 1) {
+          const item = items[randomIndex(items.length)];
+          target.textContent = typeof item === "string" ? item : `${item.flag || ""} ${item.name}`.trim();
+          await delay(55);
+        }
+        target.classList.remove("is-shuffling");
+      }
+
+      async function generateDraw() {
+        if (!state.entrants.length) {
+          document.querySelector("#form-message").textContent = "Add at least one entrant before generating.";
+          return;
+        }
+        if (!adminUnlocked) {
+          document.querySelector("#form-message").textContent = "Unlock admin mode before running the draw.";
+          return;
+        }
+        if (state.generatedAt) {
+          document.querySelector("#draw-lock-message").textContent = "Draw already locked. It cannot be generated again.";
+          return;
+        }
+
+        const skip = document.querySelector("#skip-animation").checked;
+        const entrantTarget = document.querySelector("#entrant-shuffle");
+        const teamTarget = document.querySelector("#team-shuffle");
+        const entrantNames = state.entrants.map(entrant => entrant.name);
+        const shuffledEntrants = shuffle(state.entrants).map((entrant, index) => ({ ...entrant, drawOrder: index + 1 }));
+        const shuffledTeams = shuffle(teams);
+
+        state.matchResults = [];
+        state.teams = teams.map(team => ({ ...team, ownerEntrantId: null }));
+        activeEntrantId = null;
+        activeTeamId = null;
+        document.querySelector("#draw-complete-banner").hidden = true;
+        setDrawStep("entrants-shuffle", "Shuffling entrants...");
+        if (!skip) await cycleShuffle(entrantTarget, entrantNames);
+
+        setDrawStep("entrants-place", "Placing entrants into the draw table...");
+        state.entrants = [];
+        for (const entrant of shuffledEntrants) {
+          state.entrants.push(entrant);
+          activeEntrantId = entrant.id;
+          entrantTarget.textContent = entrant.name;
+          renderAll();
+          if (!skip) await delay(220);
+        }
+        activeEntrantId = null;
+
+        setDrawStep("teams-shuffle", "Shuffling World Cup teams...");
+        if (!skip) await cycleShuffle(teamTarget, shuffledTeams, 24);
+
+        setDrawStep("teams-assign", "Assigning teams to entrants...");
+        for (let i = 0; i < shuffledTeams.length; i += 1) {
+          const team = shuffledTeams[i];
+          const entrant = state.entrants[i % state.entrants.length];
+          const storedTeam = state.teams.find(item => item.id === team.id);
+          storedTeam.ownerEntrantId = entrant.id;
+          activeEntrantId = entrant.id;
+          activeTeamId = team.id;
+          teamTarget.textContent = `${team.flag} ${team.name}`;
+          renderAll();
+          if (!skip) await delay(95);
+        }
+        activeEntrantId = null;
+        activeTeamId = null;
+
+        state.generatedAt = new Date().toISOString();
+        saveState();
+        setDrawStep("complete", "Draw complete.");
+        renderAll();
+      }
+
+      function exportRows() {
+        return standings().map(row => ({
+          position: row.drawOrder,
+          name: row.name,
+          teams: row.ownedTeams.map(team => team.name).join("; "),
+          points: row.totalPoints,
+          goals: row.totalGoals,
+          standing: row.rank,
+          prizeStatus: prizeStatus(row)
+        }));
+      }
+
+      function download(filename, content, type) {
+        const blob = new Blob([content], { type });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function csvEscape(value) {
+        return `"${String(value).replaceAll('"', '""')}"`;
+      }
+
+      async function loadStaticResults() {
+        try {
+          const response = await fetch(resultsFile, { cache: "no-store" });
+          if (!response.ok) throw new Error(`Could not load ${resultsFile}`);
+          const data = await response.json();
+          staticResults = {
+            loaded: true,
+            error: null,
+            updatedAt: data.updatedAt || null,
+            source: data.source || resultsFile,
+            matches: normaliseMatches(data.matches)
+          };
+        } catch (error) {
+          staticResults = {
+            loaded: true,
+            error: error.message || `Could not load ${resultsFile}`,
+            updatedAt: null,
+            source: resultsFile,
+            matches: []
+          };
+        }
+        renderAll();
+      }
+
+      async function loadStaticDraw() {
+        try {
+          const response = await fetch(drawFile, { cache: "no-store" });
+          if (!response.ok) throw new Error(`Could not load ${drawFile}`);
+          const data = await response.json();
+          const loadedDraw = normaliseStaticDraw(data);
+          staticDraw = {
+            loaded: true,
+            error: null,
+            updatedAt: data.updatedAt || null,
+            generatedAt: loadedDraw ? loadedDraw.generatedAt : null,
+            hasDraw: Boolean(loadedDraw)
+          };
+          if (loadedDraw) {
+            state = {
+              ...state,
+              generatedAt: loadedDraw.generatedAt,
+              entrants: loadedDraw.entrants,
+              teams: loadedDraw.teams
+            };
+            saveState();
+          }
+        } catch (error) {
+          staticDraw = {
+            loaded: true,
+            error: error.message || `Could not load ${drawFile}`,
+            updatedAt: null,
+            generatedAt: null,
+            hasDraw: false
+          };
+        }
+        renderAll();
+      }
+
+      document.querySelector("#entrant-form").addEventListener("submit", event => {
+        event.preventDefault();
+        const input = document.querySelector("#entrant-name");
+        const name = input.value.trim();
+        if (!name) return;
+        const added = addEntrantNames([name]);
+        input.value = "";
+        input.focus();
+        document.querySelector("#form-message").textContent = added ? `${name} added.` : `${name} is already in the list.`;
+      });
+
+      document.querySelector("#import-names").addEventListener("click", () => {
+        const textarea = document.querySelector("#bulk-names");
+        const names = textarea.value.split(/\n|,/);
+        const added = addEntrantNames(names);
+        textarea.value = "";
+        document.querySelector("#form-message").textContent = added
+          ? `${added} ${added === 1 ? "name" : "names"} imported.`
+          : "No new names found.";
+      });
+
+      document.querySelector("#load-demo-names").addEventListener("click", () => {
+        const added = addEntrantNames(demoNames);
+        document.querySelector("#form-message").textContent = added
+          ? `${added} demo ${added === 1 ? "name" : "names"} added.`
+          : "Demo names are already loaded.";
+      });
+
+      document.querySelector("#clear-entrants").addEventListener("click", () => {
+        if (staticDraw.hasDraw) {
+          document.querySelector("#form-message").textContent = "Shared draw is loaded. Entrants are locked.";
+          return;
+        }
+        if (!state.entrants.length) {
+          document.querySelector("#form-message").textContent = "There are no entrants to clear.";
+          return;
+        }
+        if (!confirm("Clear all entrants and reset the draw?")) return;
+        state.entrants = [];
+        resetDrawState();
+        saveState();
+        renderAll();
+        document.querySelector("#form-message").textContent = "Entrants cleared.";
+      });
+
+      document.querySelector("#entrant-list").addEventListener("click", event => {
+        const button = event.target.closest(".remove-entry");
+        if (!button) return;
+        if (staticDraw.hasDraw) {
+          document.querySelector("#form-message").textContent = "Shared draw is loaded. Entrants are locked.";
+          return;
+        }
+        state.entrants = state.entrants.filter(entrant => entrant.id !== button.dataset.id);
+        state.entrants.forEach((entrant, index) => entrant.drawOrder = index + 1);
+        resetDrawState();
+        saveState();
+        renderAll();
+      });
+
+      document.querySelector("#generate-draw").addEventListener("click", generateDraw);
+
+      document.querySelector("#export-draw-json").addEventListener("click", () => {
+        if (!state.generatedAt) {
+          document.querySelector("#draw-lock-message").textContent = "Run the draw before exporting draw.json.";
+          return;
+        }
+        download("world-cup-sweepstake-draw.json", JSON.stringify(exportDrawPayload(), null, 2), "application/json");
+      });
+
+      document.querySelector("#copy-deploy-instructions").addEventListener("click", async () => {
+        const status = document.querySelector("#deploy-copy-status");
+        const text = deploymentInstructionsText();
+        try {
+          await navigator.clipboard.writeText(text);
+          status.textContent = "Deployment instructions copied.";
+        } catch {
+          status.textContent = "Copy failed. Use the README checklist instead.";
+        }
+      });
+
+      document.querySelector("#admin-login-form").addEventListener("submit", event => {
+        event.preventDefault();
+        const input = document.querySelector("#admin-password");
+        if (input.value === adminPassword) {
+          adminUnlocked = true;
+          sessionStorage.setItem(adminUnlockedKey, "1");
+          input.value = "";
+          document.querySelector("#admin-login-message").textContent = "";
+          renderAll();
+        } else {
+          document.querySelector("#admin-login-message").textContent = "Password incorrect.";
+        }
+      });
+
+      document.querySelector("#public-mode-toggle").addEventListener("click", () => {
+        publicMode = !publicMode;
+        localStorage.setItem(publicModeKey, publicMode ? "1" : "0");
+        renderAll();
+      });
+
+      document.querySelector("#reset-sweepstake").addEventListener("click", () => {
+        if (staticDraw.hasDraw) {
+          document.querySelector("#draw-lock-message").textContent = "Shared draw is loaded from draw.json and cannot be reset here.";
+          return;
+        }
+        if (!confirm("Reset the sweepstake completely?")) return;
+        state = defaultState();
+        editingMatchId = null;
+        saveState();
+        setAnimationStatus("Add entrants, then press Generate.");
+        activeStep = null;
+        activeEntrantId = null;
+        activeTeamId = null;
+        document.querySelector("#draw-complete-banner").hidden = true;
+        document.querySelector("#entrant-shuffle").textContent = "Waiting";
+        document.querySelector("#team-shuffle").textContent = "Waiting";
+        renderAll();
+      });
+
+      document.querySelector("#export-csv").addEventListener("click", () => {
+        const rows = exportRows();
+        const csv = [
+          ["Position", "Entrant", "Teams", "Points", "Goals", "Standing", "Prize status"],
+          ...rows.map(row => [row.position, row.name, row.teams, row.points, row.goals, row.standing, row.prizeStatus])
+        ].map(row => row.map(csvEscape).join(",")).join("\n");
+        download("world-cup-sweepstake.csv", csv, "text/csv;charset=utf-8");
+      });
+
+      document.querySelector("#export-json").addEventListener("click", () => {
+        download("world-cup-sweepstake.json", JSON.stringify(state, null, 2), "application/json");
+      });
+
+      document.querySelector("#copy-share-message").addEventListener("click", async () => {
+        const message = document.querySelector("#share-message").value;
+        const status = document.querySelector("#copy-message-status");
+        if (!message) {
+          status.textContent = "Generate the draw before copying a message.";
+          return;
+        }
+        try {
+          await navigator.clipboard.writeText(message);
+          status.textContent = "Message copied.";
+        } catch {
+          document.querySelector("#share-message").select();
+          status.textContent = "Select the message and copy it manually.";
+        }
+      });
+
+      document.querySelector("#group-filter").addEventListener("change", event => {
+        activeGroup = event.target.value;
+        renderTeamSelects();
+      });
+
+      document.querySelector("#score-presets").addEventListener("click", event => {
+        const button = event.target.closest("button[data-score]");
+        if (!button) return;
+        const [aScore, bScore] = button.dataset.score.split("-");
+        document.querySelector("#team-a-score").value = aScore;
+        document.querySelector("#team-b-score").value = bScore;
+        document.querySelectorAll("#score-presets button").forEach(item => {
+          item.classList.toggle("is-selected", item === button);
+        });
+      });
+
+      document.querySelector("#next-fixture").addEventListener("click", () => {
+        const pair = nextUnplayedPair();
+        if (!pair) {
+          alert(activeGroup === "all" ? "Every possible pair has a result." : `Every Group ${activeGroup} pair has a result.`);
+          return;
+        }
+        document.querySelector("#team-a").value = pair[0].id;
+        document.querySelector("#team-b").value = pair[1].id;
+        document.querySelector("#team-a-score").value = 0;
+        document.querySelector("#team-b-score").value = 0;
+        document.querySelector("#match-stage").value = activeGroup === "all" ? "Group stage" : `Group ${activeGroup}`;
+        document.querySelectorAll("#score-presets button").forEach(item => item.classList.remove("is-selected"));
+      });
+
+      document.querySelector("#match-form").addEventListener("submit", event => {
+        event.preventDefault();
+        const teamA = document.querySelector("#team-a").value;
+        const teamB = document.querySelector("#team-b").value;
+        if (teamA === teamB) {
+          alert("Choose two different teams.");
+          return;
+        }
+        const result = {
+          id: editingMatchId || uid("match"),
+          teamA,
+          teamB,
+          teamAScore: Number(document.querySelector("#team-a-score").value),
+          teamBScore: Number(document.querySelector("#team-b-score").value),
+          stage: document.querySelector("#match-stage").value.trim() || "Group stage",
+          playedAt: new Date().toISOString()
+        };
+        state.matchResults = editingMatchId
+          ? state.matchResults.map(match => match.id === editingMatchId ? result : match)
+          : [...state.matchResults, result];
+        editingMatchId = null;
+        event.target.reset();
+        renderTeamSelects();
+        document.querySelector("#match-stage").value = "Group stage";
+        document.querySelectorAll("#score-presets button").forEach(item => item.classList.remove("is-selected"));
+        saveState();
+        renderAll();
+      });
+
+      document.querySelector("#match-results").addEventListener("click", event => {
+        const edit = event.target.closest(".edit-match");
+        const remove = event.target.closest(".delete-match");
+        if (edit) {
+          const match = state.matchResults.find(item => item.id === edit.dataset.id);
+          if (!match) return;
+          editingMatchId = match.id;
+          document.querySelector("#team-a").value = match.teamA;
+          document.querySelector("#team-b").value = match.teamB;
+          document.querySelector("#team-a-score").value = match.teamAScore;
+          document.querySelector("#team-b-score").value = match.teamBScore;
+          document.querySelector("#match-stage").value = match.stage;
+        }
+        if (remove) {
+          state.matchResults = state.matchResults.filter(match => match.id !== remove.dataset.id);
+          saveState();
+          renderAll();
+        }
+      });
+
+      renderTeamSelects();
+      renderTeamIds();
+      renderAll();
+      loadStaticDraw();
+      loadStaticResults();
+    </script>
+  </body>
+</html>

@@ -64,3 +64,102 @@ Required live URLs:
 - `https://docode.app/framescore`
 - `https://docode.app/framescore/support`
 - `https://docode.app/framescore/privacy`
+
+## World Cup Sweepstake Results
+
+The sweepstake page is intentionally static. Match scores are stored in:
+
+```text
+world-cup-sweepstake/results.json
+```
+
+## World Cup Sweepstake Draw
+
+The live shared draw is stored in:
+
+```text
+world-cup-sweepstake/draw.json
+```
+
+Workflow:
+
+1. Open `/world-cup-sweepstake/`.
+2. Unlock admin mode.
+3. Add entrants.
+4. Run the draw once.
+5. Use **Export Draw JSON**.
+6. Replace the contents of `world-cup-sweepstake/draw.json` with the exported JSON.
+7. Commit and deploy.
+
+Once `draw.json` contains a generated draw, the page loads that draw for everyone and treats it as locked for the tournament. Browser-local entrant edits and resets are blocked while a shared draw is loaded.
+
+Admin mode uses a simple client-side password gate for convenience. Because this is a static site, the password is not secure against someone inspecting the page source. It is suitable for a private sweepstake page, not for sensitive administration.
+
+To update results, add completed matches to the `matches` array:
+
+```json
+{
+  "id": "mexico-south-africa",
+  "teamA": "mexico",
+  "teamB": "south-africa",
+  "teamAScore": 2,
+  "teamBScore": 1,
+  "stage": "Group A",
+  "playedAt": "2026-06-11"
+}
+```
+
+Use a unique `id` for each match. `teamA` and `teamB` must match the team IDs exactly. After editing the file, refresh `/world-cup-sweepstake/`; the page recalculates standings, goals, refunds and prize status.
+
+Team IDs:
+
+```text
+mexico
+south-africa
+south-korea
+czechia
+canada
+bosnia-herzegovina
+qatar
+switzerland
+brazil
+morocco
+haiti
+scotland
+united-states
+paraguay
+australia
+turkiye
+germany
+curacao
+ivory-coast
+ecuador
+netherlands
+japan
+sweden
+tunisia
+belgium
+egypt
+iran
+new-zealand
+spain
+cape-verde
+saudi-arabia
+uruguay
+france
+senegal
+iraq
+norway
+argentina
+algeria
+austria
+jordan
+portugal
+dr-congo
+uzbekistan
+colombia
+england
+croatia
+ghana
+panama
+```
