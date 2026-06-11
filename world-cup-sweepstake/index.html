@@ -6,7 +6,7 @@
     <meta name="description" content="A private World Cup sweepstake generator for entrant setup, animated team draws, scoring and prize calculation.">
     <meta name="theme-color" content="#ffffff">
     <meta property="og:title" content="World Cup Sweepstake — Docode Apps">
-    <meta property="og:description" content="Run a private animated World Cup sweepstake draw and track points, goals and prizes.">
+    <meta property="og:description" content="Run a private animated World Cup sweepstake draw and track the champion, runner-up and worst-team refund.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docode.app/world-cup-sweepstake/">
     <meta property="og:site_name" content="Docode Apps">
@@ -48,7 +48,7 @@
             <div>
               <p class="eyebrow">Private Draw</p>
               <h1>World Cup Sweepstake</h1>
-              <p class="subtitle">Enter the family names, run an animated draw, then track the leaderboard, prizes and worst-team refund.</p>
+              <p class="subtitle">Enter the family names, run an animated draw, then track the champion, runner-up and worst-team refund.</p>
               <p class="lede">This local version stores data in this browser. It is ready for a later Supabase storage layer, but it does not need one to run the draw.</p>
               <div class="hero-proof">
                 <span>£10 entry</span>
@@ -224,25 +224,22 @@
           <div class="wrap">
             <div class="section-heading">
               <p class="eyebrow">Public View</p>
-              <h2 id="table-heading">Draw table and leaderboard</h2>
-              <p>Family members can read this table without touching the admin controls.</p>
+              <h2 id="table-heading">Draw table and prize status</h2>
+              <p>Family members can see who owns each team and which tournament outcomes matter.</p>
             </div>
             <div class="table-wrap">
               <table class="sweepstake-table">
                 <thead>
                   <tr>
-                    <th>Pos</th>
+                    <th>Draw</th>
                     <th>Entrant</th>
                     <th>Teams</th>
-                    <th>Points</th>
-                    <th>Goals</th>
-                    <th>Standing</th>
                     <th>Prize status</th>
                   </tr>
                 </thead>
                 <tbody id="draw-table-body">
                   <tr>
-                    <td colspan="7">No draw generated yet.</td>
+                    <td colspan="4">No draw generated yet.</td>
                   </tr>
                 </tbody>
               </table>
@@ -256,7 +253,7 @@
               <div class="section-heading">
                 <p class="eyebrow">Prizes</p>
                 <h2 id="prizes-heading">Prize calculation</h2>
-                <p>Refunds are taken first. The remaining pot is split 70% for first place and 30% for second place.</p>
+                <p>The champion owner wins first prize. The losing finalist owner wins second prize. Worst group-stage team owner gets their entry fee back.</p>
               </div>
               <dl class="prize-list" id="prize-list"></dl>
             </div>
@@ -264,7 +261,7 @@
               <div class="section-heading">
                 <p class="eyebrow">Worst Team</p>
                 <h2>Refund status</h2>
-                <p>Worst-performing team is based on lowest points, then lowest goals scored.</p>
+                <p>Worst-performing team is decided from group-stage results: lowest points, then lowest goals scored.</p>
               </div>
               <div id="worst-team-panel" class="worst-team-panel"></div>
             </div>
@@ -276,15 +273,19 @@
             <div class="section-heading">
               <p class="eyebrow">Scoring</p>
               <h2 id="results-heading">Match results</h2>
-              <p>Scores load from <code>results.json</code>. Daily updates can be handled by editing that one static file.</p>
+              <p>Scores and tournament outcomes load from <code>results.json</code>. Daily updates can be handled by editing that one static file.</p>
             </div>
             <div class="results-source-card" id="results-source-card" role="status" aria-live="polite">
               Loading static results...
             </div>
             <details class="results-admin-guide admin-only">
               <summary>How to update results</summary>
-              <p>Edit <code>world-cup-sweepstake/results.json</code>. Add each completed match to the <code>matches</code> array, then refresh this page.</p>
+              <p>Edit <code>world-cup-sweepstake/results.json</code>. Add completed group matches to the <code>matches</code> array. Add <code>champion</code> and <code>runnerUp</code> after the final.</p>
               <pre><code>{
+  "champion": null,
+  "runnerUp": null,
+  "matches": [
+    {
   "id": "mexico-south-africa",
   "teamA": "mexico",
   "teamB": "south-africa",
@@ -292,6 +293,8 @@
   "teamBScore": 1,
   "stage": "Group A",
   "playedAt": "2026-06-11"
+    }
+  ]
 }</code></pre>
               <p>Use the team IDs shown below exactly.</p>
               <div class="team-id-list" id="team-id-list"></div>
@@ -462,6 +465,8 @@
         error: null,
         updatedAt: null,
         source: "results.json",
+        champion: null,
+        runnerUp: null,
         matches: []
       };
       let staticDraw = {
@@ -597,6 +602,10 @@
         );
       }
 
+      function normaliseOutcomeTeam(id) {
+        return teamById(id) ? id : null;
+      }
+
       function currentMatchResults() {
         return [
           ...staticResults.matches,
@@ -690,27 +699,45 @@
         return stats;
       }
 
-      function standings() {
-        const stats = teamStats();
-        const rows = state.entrants.map(entrant => {
-          const ownedTeams = state.teams.filter(team => team.ownerEntrantId === entrant.id);
-          const totalPoints = ownedTeams.reduce((sum, team) => sum + stats[team.id].points, 0);
-          const totalGoals = ownedTeams.reduce((sum, team) => sum + stats[team.id].goalsFor, 0);
-          return { ...entrant, ownedTeams, totalPoints, totalGoals, rank: null };
-        }).sort((a, b) => b.totalPoints - a.totalPoints || b.totalGoals - a.totalGoals || a.drawOrder - b.drawOrder);
+      function groupStageResults() {
+        return currentMatchResults().filter(match => match.stage.toLowerCase().includes("group"));
+      }
 
-        rows.forEach((row, index) => {
-          const previous = rows[index - 1];
-          row.rank = previous && previous.totalPoints === row.totalPoints && previous.totalGoals === row.totalGoals
-            ? previous.rank
-            : index + 1;
-        });
-        return rows;
+      function entrantRows() {
+        return state.entrants.map(entrant => {
+          const ownedTeams = state.teams.filter(team => team.ownerEntrantId === entrant.id);
+          return { ...entrant, ownedTeams };
+        }).sort((a, b) => a.drawOrder - b.drawOrder);
       }
 
       function worstTeams() {
         if (!state.generatedAt) return [];
-        const stats = teamStats();
+        const groupResults = groupStageResults();
+        if (!groupResults.length) return [];
+        const stats = Object.fromEntries(state.teams.map(team => [team.id, {
+          points: 0,
+          goalsFor: 0,
+          matchesPlayed: 0
+        }]));
+
+        groupResults.forEach(match => {
+          const a = stats[match.teamA];
+          const b = stats[match.teamB];
+          if (!a || !b) return;
+          a.goalsFor += match.teamAScore;
+          b.goalsFor += match.teamBScore;
+          a.matchesPlayed += 1;
+          b.matchesPlayed += 1;
+          if (match.teamAScore > match.teamBScore) {
+            a.points += 3;
+          } else if (match.teamAScore < match.teamBScore) {
+            b.points += 3;
+          } else {
+            a.points += 1;
+            b.points += 1;
+          }
+        });
+
         const eligibleTeams = state.teams.filter(team => stats[team.id].matchesPlayed > 0);
         if (!eligibleTeams.length) return [];
         const sorted = [...eligibleTeams].sort((a, b) =>
@@ -731,11 +758,15 @@
         const refundTeams = worstTeams();
         const refundTotal = refundTeams.length * entryFee;
         const remainingPot = Math.max(0, totalPot - refundTotal);
+        const championTeam = teamById(staticResults.champion);
+        const runnerUpTeam = teamById(staticResults.runnerUp);
         return {
           totalPot,
           refundTeams,
           refundTotal,
           remainingPot,
+          championTeam,
+          runnerUpTeam,
           winnerPrize: remainingPot * 0.7,
           secondPrize: remainingPot * 0.3
         };
@@ -743,14 +774,13 @@
 
       function prizeStatus(row) {
         if (!state.generatedAt) return "Pending draw";
-        if (!currentMatchResults().length) return "Pending results";
         const summary = prizeSummary();
         const refunds = summary.refundTeams.filter(team => team.ownerEntrantId === row.id);
         const prizes = [];
-        if (row.rank === 1) prizes.push(`Currently 1st: £${summary.winnerPrize.toFixed(2)}`);
-        if (row.rank === 2) prizes.push(`Currently 2nd: £${summary.secondPrize.toFixed(2)}`);
+        if (summary.championTeam?.ownerEntrantId === row.id) prizes.push(`Champion owner: £${summary.winnerPrize.toFixed(2)}`);
+        if (summary.runnerUpTeam?.ownerEntrantId === row.id) prizes.push(`Runner-up owner: £${summary.secondPrize.toFixed(2)}`);
         if (refunds.length) prizes.push(`Refund: £${(refunds.length * entryFee).toFixed(2)}`);
-        return prizes.length ? prizes.join(" · ") : "No prize currently";
+        return prizes.length ? prizes.join(" · ") : "Awaiting tournament outcome";
       }
 
       function teamRangeText(rows) {
@@ -770,8 +800,10 @@
           `Entry fee: £${entryFee.toFixed(2)}`,
           `Prize pot before refunds: £${summary.totalPot.toFixed(2)}`,
           `Current prize pot after refunds: £${summary.remainingPot.toFixed(2)}`,
-          `Winner: £${summary.winnerPrize.toFixed(2)}`,
-          `Second place: £${summary.secondPrize.toFixed(2)}`,
+          `Champion owner prize: £${summary.winnerPrize.toFixed(2)}`,
+          `Runner-up owner prize: £${summary.secondPrize.toFixed(2)}`,
+          `Champion: ${summary.championTeam ? summary.championTeam.name : "Not decided"}`,
+          `Runner-up: ${summary.runnerUpTeam ? summary.runnerUpTeam.name : "Not decided"}`,
           "",
           "Draw:"
         ];
@@ -781,7 +813,7 @@
         });
 
         lines.push("");
-        lines.push("Worst-team refunds are applied after match results are entered.");
+        lines.push("Worst-team refund is decided from group-stage results at the end of the group stage.");
         return lines.join("\n");
       }
 
@@ -795,7 +827,7 @@
           return;
         }
 
-        const rows = standings().sort((a, b) => a.drawOrder - b.drawOrder);
+        const rows = entrantRows();
         const summary = prizeSummary();
         section.hidden = false;
         grid.innerHTML = `
@@ -810,14 +842,14 @@
             <p>£${entryFee.toFixed(0)} per entrant</p>
           </article>
           <article class="summary-card">
-            <span>Current Top Prize</span>
+            <span>Champion Prize</span>
             <strong>£${summary.winnerPrize.toFixed(2)}</strong>
-            <p>70% after any worst-team refunds</p>
+            <p>Owner of ${summary.championTeam ? `${summary.championTeam.flag} ${summary.championTeam.name}` : "the World Cup winner"}</p>
           </article>
           <article class="summary-card">
-            <span>Second Place</span>
+            <span>Runner-up Prize</span>
             <strong>£${summary.secondPrize.toFixed(2)}</strong>
-            <p>30% after any worst-team refunds</p>
+            <p>Owner of ${summary.runnerUpTeam ? `${summary.runnerUpTeam.flag} ${summary.runnerUpTeam.name}` : "the losing finalist"}</p>
           </article>
         `;
         message.value = drawSummaryMessage(rows, summary);
@@ -857,9 +889,9 @@
 
       function renderDrawTable() {
         const body = document.querySelector("#draw-table-body");
-        const rows = standings();
+        const rows = entrantRows();
         if (!state.generatedAt) {
-          body.innerHTML = `<tr><td colspan="7">No draw generated yet.</td></tr>`;
+          body.innerHTML = `<tr><td colspan="4">No draw generated yet.</td></tr>`;
           return;
         }
         body.innerHTML = rows.map(row => `
@@ -871,9 +903,6 @@
                 ${row.ownedTeams.map(team => `<span>${team.flag} ${team.name}</span>`).join("")}
               </div>
             </td>
-            <td>${row.totalPoints}</td>
-            <td>${row.totalGoals}</td>
-            <td>${row.rank === 1 ? "1st" : row.rank === 2 ? "2nd" : `=${row.rank}`}</td>
             <td>${prizeStatus(row)}</td>
           </tr>
         `).join("");
@@ -889,8 +918,10 @@
           <div><dt>Total pot</dt><dd>£${summary.totalPot.toFixed(2)}</dd></div>
           <div><dt>Worst-team refunds</dt><dd>£${summary.refundTotal.toFixed(2)}</dd></div>
           <div><dt>Adjusted prize pot</dt><dd>£${summary.remainingPot.toFixed(2)}</dd></div>
-          <div><dt>Winner prize</dt><dd>£${summary.winnerPrize.toFixed(2)}</dd></div>
-          <div><dt>Second prize</dt><dd>£${summary.secondPrize.toFixed(2)}</dd></div>
+          <div><dt>Champion prize</dt><dd>£${summary.winnerPrize.toFixed(2)}</dd></div>
+          <div><dt>Runner-up prize</dt><dd>£${summary.secondPrize.toFixed(2)}</dd></div>
+          <div><dt>Champion</dt><dd>${summary.championTeam ? `${summary.championTeam.flag} ${summary.championTeam.name}` : "Not decided"}</dd></div>
+          <div><dt>Runner-up</dt><dd>${summary.runnerUpTeam ? `${summary.runnerUpTeam.flag} ${summary.runnerUpTeam.name}` : "Not decided"}</dd></div>
         `;
 
         const stats = teamStats();
@@ -929,31 +960,32 @@
           return;
         }
 
-        const rows = standings();
+        const rows = entrantRows();
         const summary = prizeSummary();
-        const leader = rows[0];
-        const second = rows.find(row => row.rank === 2);
+        const championOwner = entrantById(summary.championTeam?.ownerEntrantId);
+        const runnerUpOwner = entrantById(summary.runnerUpTeam?.ownerEntrantId);
+        const refundOwners = summary.refundTeams.map(team => entrantById(team.ownerEntrantId)).filter(Boolean);
         const totalMatches = currentMatchResults().length;
         grid.innerHTML = `
           <article class="screen-summary-card screen-summary-card-wide">
-            <span>Current Leader</span>
-            <strong>${leader ? escapeHtml(leader.name) : "Draw pending"}</strong>
-            <p>${leader ? `${leader.totalPoints} pts · ${leader.totalGoals} goals · ${leader.ownedTeams.length} teams` : "Generate the draw to begin."}</p>
+            <span>Champion Owner</span>
+            <strong>${championOwner ? escapeHtml(championOwner.name) : "Pending final"}</strong>
+            <p>${summary.championTeam ? `${summary.championTeam.flag} ${summary.championTeam.name}` : "Winner not decided yet."}</p>
           </article>
           <article class="screen-summary-card">
-            <span>Winner Prize</span>
+            <span>Champion Prize</span>
             <strong>£${summary.winnerPrize.toFixed(2)}</strong>
             <p>70% after refunds</p>
           </article>
           <article class="screen-summary-card">
-            <span>Second Place</span>
-            <strong>${second ? escapeHtml(second.name) : "Pending"}</strong>
+            <span>Runner-up Owner</span>
+            <strong>${runnerUpOwner ? escapeHtml(runnerUpOwner.name) : "Pending final"}</strong>
             <p>£${summary.secondPrize.toFixed(2)}</p>
           </article>
           <article class="screen-summary-card">
-            <span>Results Entered</span>
-            <strong>${totalMatches}</strong>
-            <p>${totalMatches === 1 ? "match" : "matches"} loaded</p>
+            <span>Refund Owner</span>
+            <strong>${refundOwners.length ? refundOwners.map(owner => escapeHtml(owner.name)).join(", ") : "Pending groups"}</strong>
+            <p>${totalMatches} ${totalMatches === 1 ? "match" : "matches"} loaded</p>
           </article>
         `;
       }
@@ -1214,13 +1246,10 @@
       }
 
       function exportRows() {
-        return standings().map(row => ({
-          position: row.drawOrder,
+        return entrantRows().map(row => ({
+          draw: row.drawOrder,
           name: row.name,
           teams: row.ownedTeams.map(team => team.name).join("; "),
-          points: row.totalPoints,
-          goals: row.totalGoals,
-          standing: row.rank,
           prizeStatus: prizeStatus(row)
         }));
       }
@@ -1249,6 +1278,8 @@
             error: null,
             updatedAt: data.updatedAt || null,
             source: data.source || resultsFile,
+            champion: normaliseOutcomeTeam(data.champion),
+            runnerUp: normaliseOutcomeTeam(data.runnerUp),
             matches: normaliseMatches(data.matches)
           };
         } catch (error) {
@@ -1257,6 +1288,8 @@
             error: error.message || `Could not load ${resultsFile}`,
             updatedAt: null,
             source: resultsFile,
+            champion: null,
+            runnerUp: null,
             matches: []
           };
         }
@@ -1432,8 +1465,8 @@
       document.querySelector("#export-csv").addEventListener("click", () => {
         const rows = exportRows();
         const csv = [
-          ["Position", "Entrant", "Teams", "Points", "Goals", "Standing", "Prize status"],
-          ...rows.map(row => [row.position, row.name, row.teams, row.points, row.goals, row.standing, row.prizeStatus])
+          ["Draw", "Entrant", "Teams", "Prize status"],
+          ...rows.map(row => [row.draw, row.name, row.teams, row.prizeStatus])
         ].map(row => row.map(csvEscape).join(",")).join("\n");
         download("world-cup-sweepstake.csv", csv, "text/csv;charset=utf-8");
       });

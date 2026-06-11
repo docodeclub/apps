@@ -67,7 +67,7 @@ Required live URLs:
 
 ## World Cup Sweepstake Results
 
-The sweepstake page is intentionally static. Match scores are stored in:
+The sweepstake page is intentionally static. Group-stage scores and final tournament outcomes are stored in:
 
 ```text
 world-cup-sweepstake/results.json
@@ -95,21 +95,27 @@ Once `draw.json` contains a generated draw, the page loads that draw for everyon
 
 Admin mode uses a simple client-side password gate for convenience. Because this is a static site, the password is not secure against someone inspecting the page source. It is suitable for a private sweepstake page, not for sensitive administration.
 
-To update results, add completed matches to the `matches` array:
+To update results, add completed group-stage matches to the `matches` array. After the final, set `champion` and `runnerUp` to the relevant team IDs:
 
 ```json
 {
-  "id": "mexico-south-africa",
-  "teamA": "mexico",
-  "teamB": "south-africa",
-  "teamAScore": 2,
-  "teamBScore": 1,
-  "stage": "Group A",
-  "playedAt": "2026-06-11"
+  "champion": "brazil",
+  "runnerUp": "spain",
+  "matches": [
+    {
+      "id": "mexico-south-africa",
+      "teamA": "mexico",
+      "teamB": "south-africa",
+      "teamAScore": 2,
+      "teamBScore": 1,
+      "stage": "Group A",
+      "playedAt": "2026-06-11"
+    }
+  ]
 }
 ```
 
-Use a unique `id` for each match. `teamA` and `teamB` must match the team IDs exactly. After editing the file, refresh `/world-cup-sweepstake/`; the page recalculates standings, goals, refunds and prize status.
+Use a unique `id` for each match. `teamA`, `teamB`, `champion` and `runnerUp` must match the team IDs exactly. After editing the file, refresh `/world-cup-sweepstake/`; the page recalculates the worst group-stage team refund and shows the champion and runner-up prize owners.
 
 Team IDs:
 
