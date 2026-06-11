@@ -1,8 +1,281 @@
 {
-  "updatedAt": null,
-  "generatedAt": null,
+  "updatedAt": "2026-06-11T12:34:25.793Z",
+  "generatedAt": "2026-06-11T12:29:21.631Z",
   "source": "Manual static update",
-  "notes": "After the real draw is generated, export the draw JSON from the page and paste it here. This makes the same locked draw visible to everyone.",
-  "entrants": [],
-  "teams": []
+  "entrants": [
+    {
+      "id": "entrant-1781180922295-3f49d70796154",
+      "name": "John Cardiff",
+      "drawOrder": 1
+    },
+    {
+      "id": "entrant-1781180922295-395b5d696deaa8",
+      "name": "Carmel Layton",
+      "drawOrder": 2
+    },
+    {
+      "id": "entrant-1781180922295-a9bf7d470ba098",
+      "name": "Chris Foley",
+      "drawOrder": 3
+    },
+    {
+      "id": "entrant-1781180922295-7ec36860b28da",
+      "name": "Big Marcella",
+      "drawOrder": 4
+    },
+    {
+      "id": "entrant-1781180922295-58b477c96cb228",
+      "name": "Laura Currie",
+      "drawOrder": 5
+    },
+    {
+      "id": "entrant-1781180922295-110e0aaae75dc8",
+      "name": "Frida McKeon",
+      "drawOrder": 6
+    },
+    {
+      "id": "entrant-1781180922295-7858a70e41d538",
+      "name": "John Curley",
+      "drawOrder": 7
+    },
+    {
+      "id": "entrant-1781180922295-c38d16ed02cef8",
+      "name": "Maureen McKeon",
+      "drawOrder": 8
+    },
+    {
+      "id": "entrant-1781180922295-2a2d654ccd33d",
+      "name": "Sean McKeon",
+      "drawOrder": 9
+    },
+    {
+      "id": "entrant-1781180922295-83c14bdc018a18",
+      "name": "Tom McKeon",
+      "drawOrder": 10
+    },
+    {
+      "id": "entrant-1781180922295-a821c42f6395d",
+      "name": "Tom Layton",
+      "drawOrder": 11
+    },
+    {
+      "id": "entrant-1781180922295-c7b272cd72775",
+      "name": "Alice Foley",
+      "drawOrder": 12
+    },
+    {
+      "id": "entrant-1781180922295-19678c66e9d728",
+      "name": "Kelly Foley",
+      "drawOrder": 13
+    },
+    {
+      "id": "entrant-1781180922295-7e9cf47e83557",
+      "name": "Anne Cardiff",
+      "drawOrder": 14
+    },
+    {
+      "id": "entrant-1781180922295-bc9e2fe8f5b1b8",
+      "name": "Little Marcella",
+      "drawOrder": 15
+    },
+    {
+      "id": "entrant-1781180922295-76f48644114188",
+      "name": "Luke Currie",
+      "drawOrder": 16
+    }
+  ],
+  "teams": [
+    {
+      "id": "mexico",
+      "ownerEntrantId": "entrant-1781180922295-7e9cf47e83557"
+    },
+    {
+      "id": "south-africa",
+      "ownerEntrantId": "entrant-1781180922295-7858a70e41d538"
+    },
+    {
+      "id": "south-korea",
+      "ownerEntrantId": "entrant-1781180922295-19678c66e9d728"
+    },
+    {
+      "id": "czechia",
+      "ownerEntrantId": "entrant-1781180922295-c7b272cd72775"
+    },
+    {
+      "id": "canada",
+      "ownerEntrantId": "entrant-1781180922295-7ec36860b28da"
+    },
+    {
+      "id": "bosnia-herzegovina",
+      "ownerEntrantId": "entrant-1781180922295-395b5d696deaa8"
+    },
+    {
+      "id": "qatar",
+      "ownerEntrantId": "entrant-1781180922295-7e9cf47e83557"
+    },
+    {
+      "id": "switzerland",
+      "ownerEntrantId": "entrant-1781180922295-3f49d70796154"
+    },
+    {
+      "id": "brazil",
+      "ownerEntrantId": "entrant-1781180922295-7858a70e41d538"
+    },
+    {
+      "id": "morocco",
+      "ownerEntrantId": "entrant-1781180922295-7ec36860b28da"
+    },
+    {
+      "id": "haiti",
+      "ownerEntrantId": "entrant-1781180922295-110e0aaae75dc8"
+    },
+    {
+      "id": "scotland",
+      "ownerEntrantId": "entrant-1781180922295-83c14bdc018a18"
+    },
+    {
+      "id": "united-states",
+      "ownerEntrantId": "entrant-1781180922295-3f49d70796154"
+    },
+    {
+      "id": "paraguay",
+      "ownerEntrantId": "entrant-1781180922295-bc9e2fe8f5b1b8"
+    },
+    {
+      "id": "australia",
+      "ownerEntrantId": "entrant-1781180922295-a9bf7d470ba098"
+    },
+    {
+      "id": "turkiye",
+      "ownerEntrantId": "entrant-1781180922295-83c14bdc018a18"
+    },
+    {
+      "id": "germany",
+      "ownerEntrantId": "entrant-1781180922295-7858a70e41d538"
+    },
+    {
+      "id": "curacao",
+      "ownerEntrantId": "entrant-1781180922295-395b5d696deaa8"
+    },
+    {
+      "id": "ivory-coast",
+      "ownerEntrantId": "entrant-1781180922295-a9bf7d470ba098"
+    },
+    {
+      "id": "ecuador",
+      "ownerEntrantId": "entrant-1781180922295-110e0aaae75dc8"
+    },
+    {
+      "id": "netherlands",
+      "ownerEntrantId": "entrant-1781180922295-bc9e2fe8f5b1b8"
+    },
+    {
+      "id": "japan",
+      "ownerEntrantId": "entrant-1781180922295-c7b272cd72775"
+    },
+    {
+      "id": "sweden",
+      "ownerEntrantId": "entrant-1781180922295-2a2d654ccd33d"
+    },
+    {
+      "id": "tunisia",
+      "ownerEntrantId": "entrant-1781180922295-a821c42f6395d"
+    },
+    {
+      "id": "belgium",
+      "ownerEntrantId": "entrant-1781180922295-58b477c96cb228"
+    },
+    {
+      "id": "egypt",
+      "ownerEntrantId": "entrant-1781180922295-c38d16ed02cef8"
+    },
+    {
+      "id": "iran",
+      "ownerEntrantId": "entrant-1781180922295-a821c42f6395d"
+    },
+    {
+      "id": "new-zealand",
+      "ownerEntrantId": "entrant-1781180922295-7ec36860b28da"
+    },
+    {
+      "id": "spain",
+      "ownerEntrantId": "entrant-1781180922295-76f48644114188"
+    },
+    {
+      "id": "cape-verde",
+      "ownerEntrantId": "entrant-1781180922295-c7b272cd72775"
+    },
+    {
+      "id": "saudi-arabia",
+      "ownerEntrantId": "entrant-1781180922295-2a2d654ccd33d"
+    },
+    {
+      "id": "uruguay",
+      "ownerEntrantId": "entrant-1781180922295-a821c42f6395d"
+    },
+    {
+      "id": "france",
+      "ownerEntrantId": "entrant-1781180922295-19678c66e9d728"
+    },
+    {
+      "id": "senegal",
+      "ownerEntrantId": "entrant-1781180922295-7e9cf47e83557"
+    },
+    {
+      "id": "iraq",
+      "ownerEntrantId": "entrant-1781180922295-76f48644114188"
+    },
+    {
+      "id": "norway",
+      "ownerEntrantId": "entrant-1781180922295-c38d16ed02cef8"
+    },
+    {
+      "id": "argentina",
+      "ownerEntrantId": "entrant-1781180922295-bc9e2fe8f5b1b8"
+    },
+    {
+      "id": "algeria",
+      "ownerEntrantId": "entrant-1781180922295-3f49d70796154"
+    },
+    {
+      "id": "austria",
+      "ownerEntrantId": "entrant-1781180922295-2a2d654ccd33d"
+    },
+    {
+      "id": "jordan",
+      "ownerEntrantId": "entrant-1781180922295-76f48644114188"
+    },
+    {
+      "id": "portugal",
+      "ownerEntrantId": "entrant-1781180922295-58b477c96cb228"
+    },
+    {
+      "id": "dr-congo",
+      "ownerEntrantId": "entrant-1781180922295-83c14bdc018a18"
+    },
+    {
+      "id": "uzbekistan",
+      "ownerEntrantId": "entrant-1781180922295-a9bf7d470ba098"
+    },
+    {
+      "id": "colombia",
+      "ownerEntrantId": "entrant-1781180922295-58b477c96cb228"
+    },
+    {
+      "id": "england",
+      "ownerEntrantId": "entrant-1781180922295-19678c66e9d728"
+    },
+    {
+      "id": "croatia",
+      "ownerEntrantId": "entrant-1781180922295-110e0aaae75dc8"
+    },
+    {
+      "id": "ghana",
+      "ownerEntrantId": "entrant-1781180922295-395b5d696deaa8"
+    },
+    {
+      "id": "panama",
+      "ownerEntrantId": "entrant-1781180922295-c38d16ed02cef8"
+    }
+  ]
 }
