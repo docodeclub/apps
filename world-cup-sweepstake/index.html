@@ -148,6 +148,7 @@
               <div class="actions sweepstake-actions">
                 <button class="button" type="button" id="generate-draw">Generate</button>
                 <button class="button secondary" type="button" id="export-draw-json">Export Draw JSON</button>
+                <button class="button secondary" type="button" id="copy-draw-json">Copy Draw JSON</button>
                 <button class="button secondary" type="button" id="export-csv">Export CSV</button>
                 <button class="button secondary" type="button" id="export-json">Export JSON</button>
                 <button class="button danger" type="button" id="reset-sweepstake">Reset</button>
@@ -1053,8 +1054,8 @@
           staticStatus.textContent = `Shared draw loaded from ${drawFile}.`;
         } else if (state.generatedAt) {
           generateButton.disabled = true;
-          lockMessage.textContent = "Draw locked. Teams have been assigned for the tournament.";
-          staticStatus.textContent = `Export Draw JSON and paste it into ${drawFile} to make this draw visible to everyone.`;
+          lockMessage.textContent = "Local draw locked in this browser only. Incognito and other devices will not see it yet.";
+          staticStatus.textContent = `Copy or export the Draw JSON, paste it into ${drawFile}, then deploy to make this draw visible to everyone.`;
         } else {
           generateButton.disabled = false;
           lockMessage.textContent = "Once generated, this browser will remember the draw and Generate will lock.";
@@ -1084,8 +1085,8 @@
           },
           {
             done: canExport,
-            title: "Export Draw JSON",
-            detail: canExport ? "Export is ready. Use the exported file for draw.json." : "Export becomes available after the draw is generated."
+            title: "Copy or export Draw JSON",
+            detail: canExport ? "Copy or export is ready. Use this exact JSON for draw.json." : "Copy/export becomes available after the draw is generated."
           },
           {
             done: sharedDrawReady,
@@ -1363,6 +1364,19 @@
           return;
         }
         download("world-cup-sweepstake-draw.json", JSON.stringify(exportDrawPayload(), null, 2), "application/json");
+      });
+
+      document.querySelector("#copy-draw-json").addEventListener("click", async () => {
+        if (!state.generatedAt) {
+          document.querySelector("#draw-lock-message").textContent = "Run the draw before copying draw.json.";
+          return;
+        }
+        try {
+          await navigator.clipboard.writeText(JSON.stringify(exportDrawPayload(), null, 2));
+          document.querySelector("#draw-lock-message").textContent = `Draw JSON copied. Paste it into ${drawFile}, then commit and push.`;
+        } catch {
+          document.querySelector("#draw-lock-message").textContent = "Copy failed. Use Export Draw JSON instead.";
+        }
       });
 
       document.querySelector("#copy-deploy-instructions").addEventListener("click", async () => {
