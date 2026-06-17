@@ -259,7 +259,7 @@
               <div class="section-heading">
                 <p class="eyebrow">Worst Team</p>
                 <h2>Refund status</h2>
-                <p>Worst-performing team is decided from group-stage results: lowest points, then lowest goals scored.</p>
+                <p>Current worst team is decided from group-stage results: lowest points, then lowest goals scored, then most goals conceded.</p>
               </div>
               <div id="worst-team-panel" class="worst-team-panel"></div>
             </div>
@@ -763,6 +763,7 @@
         const stats = Object.fromEntries(state.teams.map(team => [team.id, {
           points: 0,
           goalsFor: 0,
+          goalsAgainst: 0,
           matchesPlayed: 0
         }]));
 
@@ -772,6 +773,8 @@
           if (!a || !b) return;
           a.goalsFor += match.teamAScore;
           b.goalsFor += match.teamBScore;
+          a.goalsAgainst += match.teamBScore;
+          b.goalsAgainst += match.teamAScore;
           a.matchesPlayed += 1;
           b.matchesPlayed += 1;
           if (match.teamAScore > match.teamBScore) {
@@ -805,6 +808,7 @@
         const stats = Object.fromEntries(state.teams.map(team => [team.id, {
           points: 0,
           goalsFor: 0,
+          goalsAgainst: 0,
           matchesPlayed: 0
         }]));
 
@@ -814,6 +818,8 @@
           if (!a || !b) return;
           a.goalsFor += match.teamAScore;
           b.goalsFor += match.teamBScore;
+          a.goalsAgainst += match.teamBScore;
+          b.goalsAgainst += match.teamAScore;
           a.matchesPlayed += 1;
           b.matchesPlayed += 1;
           if (match.teamAScore > match.teamBScore) {
@@ -831,13 +837,15 @@
         const sorted = [...eligibleTeams].sort((a, b) =>
           stats[a.id].points - stats[b.id].points ||
           stats[a.id].goalsFor - stats[b.id].goalsFor ||
+          stats[b.id].goalsAgainst - stats[a.id].goalsAgainst ||
           a.name.localeCompare(b.name)
         );
         const worst = sorted[0];
         if (!worst) return [];
         return sorted.filter(team =>
           stats[team.id].points === stats[worst.id].points &&
-          stats[team.id].goalsFor === stats[worst.id].goalsFor
+          stats[team.id].goalsFor === stats[worst.id].goalsFor &&
+          stats[team.id].goalsAgainst === stats[worst.id].goalsAgainst
         );
       }
 
@@ -901,7 +909,7 @@
         });
 
         lines.push("");
-        lines.push("Worst-team refund is decided from group-stage results at the end of the group stage.");
+        lines.push("Worst-team refund is decided from group-stage results: lowest points, then lowest goals scored, then most goals conceded.");
         return lines.join("\n");
       }
 
@@ -1039,7 +1047,7 @@
         const worst = summary.refundTeams;
         document.querySelector("#worst-team-panel").innerHTML = worst.length ? worst.map(team => {
           const owner = entrantById(team.ownerEntrantId);
-          return `<article class="worst-team-card"><strong>${team.flag} ${team.name}</strong><span>${stats[team.id].points} pts · ${stats[team.id].goalsFor} goals · ${owner ? escapeHtml(owner.name) : "No owner"} gets £${entryFee.toFixed(2)}</span></article>`;
+          return `<article class="worst-team-card"><strong>${flagBadge(team)} ${team.name}</strong><span>${stats[team.id].points} pts · ${stats[team.id].goalsFor} scored · ${stats[team.id].goalsAgainst} conceded · ${owner ? escapeHtml(owner.name) : "No owner"} currently gets £${entryFee.toFixed(2)}</span></article>`;
         }).join("") : `<p class="empty-state">Worst-team refund appears once match results have been entered.</p>`;
       }
 
