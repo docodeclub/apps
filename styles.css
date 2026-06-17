@@ -1487,6 +1487,57 @@ body.is-public-mode .team-grid {
   font-weight: 800;
 }
 
+.recent-results-panel {
+  display: grid;
+  gap: 0.65rem;
+  border-top: 1px solid rgba(48, 35, 131, 0.13);
+  padding-top: 0.85rem;
+}
+
+.recent-results-panel h3 {
+  color: #302383;
+  font-size: 1rem;
+}
+
+.recent-results-list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.recent-result-card {
+  display: grid;
+  gap: 0.22rem;
+  border: 1px solid rgba(48, 35, 131, 0.12);
+  border-radius: calc(var(--radius) - 2px);
+  padding: 0.65rem 0.7rem;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.recent-result-card strong {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.32rem;
+  color: #302383;
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+.recent-result-card strong span {
+  border-radius: 999px;
+  padding: 0.12rem 0.4rem;
+  background: rgba(0, 204, 51, 0.12);
+  color: #008f2d;
+  font-weight: 900;
+}
+
+.recent-result-card em {
+  color: #6b668f;
+  font-size: 0.82rem;
+  font-style: normal;
+  font-weight: 800;
+}
+
 .results-source-card {
   display: grid;
   gap: 0.25rem;

@@ -263,6 +263,7 @@
               </div>
               <div id="worst-team-panel" class="worst-team-panel"></div>
               <p id="worst-team-updated" class="worst-team-updated" aria-live="polite"></p>
+              <div id="recent-results-panel" class="recent-results-panel" aria-label="Recent group results"></div>
             </div>
           </div>
         </section>
@@ -594,6 +595,13 @@
             <span class="flag-code" aria-hidden="true">${escapeHtml(code)}</span>
           </span>
         `;
+      }
+
+      function formatMatchDate(value) {
+        if (!value) return "Date to confirm";
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return "Date to confirm";
+        return date.toLocaleDateString([], { day: "numeric", month: "short" });
       }
 
       function resetDrawState() {
@@ -1058,6 +1066,29 @@
         document.querySelector("#worst-team-updated").textContent = staticResults.error
           ? "Tournament updates are not available yet."
           : `Standings last updated: ${updated} · ${staticCount} ${staticCount === 1 ? "match" : "matches"} recorded${localCount ? ` · ${localCount} draft ${localCount === 1 ? "result" : "results"}` : ""}.`;
+        const recentResults = groupStageResults()
+          .filter(match => teamById(match.teamA) && teamById(match.teamB))
+          .sort((a, b) => {
+            const aTime = a.playedAt ? new Date(a.playedAt).getTime() : 0;
+            const bTime = b.playedAt ? new Date(b.playedAt).getTime() : 0;
+            return bTime - aTime || a.id.localeCompare(b.id);
+          })
+          .slice(0, 5);
+        document.querySelector("#recent-results-panel").innerHTML = recentResults.length ? `
+          <h3>Recent results</h3>
+          <div class="recent-results-list">
+            ${recentResults.map(match => {
+              const a = teamById(match.teamA);
+              const b = teamById(match.teamB);
+              return `
+                <article class="recent-result-card">
+                  <strong>${flagBadge(a)} ${escapeHtml(a.name)} <span>${match.teamAScore}-${match.teamBScore}</span> ${flagBadge(b)} ${escapeHtml(b.name)}</strong>
+                  <em>${formatMatchDate(match.playedAt)} · ${escapeHtml(match.stage)}</em>
+                </article>
+              `;
+            }).join("")}
+          </div>
+        ` : "";
       }
 
       function renderResultsSource() {
