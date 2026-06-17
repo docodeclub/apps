@@ -262,6 +262,7 @@
                 <p>Current worst team is decided from group-stage results: lowest points, then lowest goals scored, then most goals conceded.</p>
               </div>
               <div id="worst-team-panel" class="worst-team-panel"></div>
+              <p id="worst-team-updated" class="worst-team-updated" aria-live="polite"></p>
             </div>
           </div>
         </section>
@@ -1029,6 +1030,11 @@
 
       function renderPrizePanels() {
         const summary = prizeSummary();
+        const staticCount = staticResults.matches.length;
+        const localCount = state.matchResults.length;
+        const updated = staticResults.updatedAt
+          ? new Date(staticResults.updatedAt).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })
+          : "Not yet updated";
         document.querySelector("#entry-count").textContent = state.entrants.length;
         document.querySelector("#pot-total").textContent = `£${summary.totalPot.toFixed(0)}`;
         document.querySelector("#remaining-pot").textContent = `£${summary.remainingPot.toFixed(0)}`;
@@ -1049,6 +1055,9 @@
           const owner = entrantById(team.ownerEntrantId);
           return `<article class="worst-team-card"><strong>${flagBadge(team)} ${team.name}</strong><span>${stats[team.id].points} pts · ${stats[team.id].goalsFor} scored · ${stats[team.id].goalsAgainst} conceded · ${owner ? escapeHtml(owner.name) : "No owner"} currently gets £${entryFee.toFixed(2)}</span></article>`;
         }).join("") : `<p class="empty-state">Worst-team refund appears once match results have been entered.</p>`;
+        document.querySelector("#worst-team-updated").textContent = staticResults.error
+          ? "Tournament updates are not available yet."
+          : `Standings last updated: ${updated} · ${staticCount} ${staticCount === 1 ? "match" : "matches"} recorded${localCount ? ` · ${localCount} draft ${localCount === 1 ? "result" : "results"}` : ""}.`;
       }
 
       function renderResultsSource() {

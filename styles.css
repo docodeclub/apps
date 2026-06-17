@@ -1478,6 +1478,15 @@ body.is-public-mode .team-grid {
   font-weight: 700;
 }
 
+.worst-team-updated {
+  margin: 0.15rem 0 0;
+  border-top: 1px solid rgba(48, 35, 131, 0.13);
+  padding-top: 0.75rem;
+  color: #6b668f;
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
 .results-source-card {
   display: grid;
   gap: 0.25rem;
