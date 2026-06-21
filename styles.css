@@ -1538,6 +1538,83 @@ body.is-public-mode .team-grid {
   font-weight: 800;
 }
 
+.refund-race-panel {
+  display: grid;
+  gap: 0.6rem;
+  border-top: 1px solid rgba(48, 35, 131, 0.13);
+  padding-top: 0.85rem;
+}
+
+.refund-race-panel h3 {
+  color: #302383;
+  font-size: 1rem;
+}
+
+.refund-race-panel p {
+  margin: 0;
+  color: #6b668f;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.refund-race-table-wrap {
+  overflow-x: auto;
+  border: 1px solid rgba(48, 35, 131, 0.12);
+  border-radius: calc(var(--radius) - 2px);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.refund-race-table {
+  width: 100%;
+  min-width: 34rem;
+  border-collapse: collapse;
+  color: #302383;
+  font-size: 0.86rem;
+}
+
+.refund-race-table th,
+.refund-race-table td {
+  border-bottom: 1px solid rgba(48, 35, 131, 0.1);
+  padding: 0.48rem 0.5rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.refund-race-table th {
+  background: rgba(0, 204, 51, 0.08);
+  color: #514c79;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.refund-race-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.refund-race-table tr.is-current-worst td {
+  background: rgba(0, 204, 51, 0.1);
+  font-weight: 900;
+}
+
+.refund-race-table td:nth-child(1),
+.refund-race-table td:nth-child(4),
+.refund-race-table td:nth-child(5),
+.refund-race-table td:nth-child(6),
+.refund-race-table td:nth-child(7),
+.refund-race-table th:nth-child(1),
+.refund-race-table th:nth-child(4),
+.refund-race-table th:nth-child(5),
+.refund-race-table th:nth-child(6),
+.refund-race-table th:nth-child(7) {
+  text-align: center;
+}
+
+.refund-race-table .flag-badge {
+  margin-right: 0.25rem;
+}
+
 .results-source-card {
   display: grid;
   gap: 0.25rem;

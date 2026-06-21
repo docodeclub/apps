@@ -264,6 +264,7 @@
               <div id="worst-team-panel" class="worst-team-panel"></div>
               <p id="worst-team-updated" class="worst-team-updated" aria-live="polite"></p>
               <div id="recent-results-panel" class="recent-results-panel" aria-label="Recent group results"></div>
+              <div id="refund-race-panel" class="refund-race-panel" aria-label="Worst-team refund race"></div>
             </div>
           </div>
         </section>
@@ -858,6 +859,28 @@
         );
       }
 
+      function refundRaceRows(limit = 12) {
+        const stats = teamStats();
+        return state.teams
+          .filter(team => stats[team.id].matchesPlayed > 0)
+          .sort((a, b) =>
+            stats[a.id].points - stats[b.id].points ||
+            stats[a.id].goalsFor - stats[b.id].goalsFor ||
+            stats[b.id].goalsAgainst - stats[a.id].goalsAgainst ||
+            a.name.localeCompare(b.name)
+          )
+          .slice(0, limit)
+          .map((team, index) => {
+            const owner = entrantById(team.ownerEntrantId);
+            return {
+              team,
+              owner,
+              rank: index + 1,
+              stats: stats[team.id]
+            };
+          });
+      }
+
       function prizeSummary() {
         const totalPot = state.entrants.length * entryFee;
         const refundTeams = worstTeams();
@@ -1087,6 +1110,39 @@
                 </article>
               `;
             }).join("")}
+          </div>
+        ` : "";
+        const refundRows = refundRaceRows(12);
+        document.querySelector("#refund-race-panel").innerHTML = refundRows.length ? `
+          <h3>Refund race</h3>
+          <p>The table is sorted by the refund rule: lowest points, then least scored, then most conceded.</p>
+          <div class="refund-race-table-wrap">
+            <table class="refund-race-table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Team</th>
+                  <th scope="col">Owner</th>
+                  <th scope="col">P</th>
+                  <th scope="col">Pts</th>
+                  <th scope="col">For</th>
+                  <th scope="col">Against</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${refundRows.map(row => `
+                  <tr class="${row.rank === 1 ? "is-current-worst" : ""}">
+                    <td>${row.rank}</td>
+                    <td>${flagBadge(row.team)} ${escapeHtml(row.team.name)}</td>
+                    <td>${row.owner ? escapeHtml(row.owner.name) : "No owner"}</td>
+                    <td>${row.stats.matchesPlayed}</td>
+                    <td>${row.stats.points}</td>
+                    <td>${row.stats.goalsFor}</td>
+                    <td>${row.stats.goalsAgainst}</td>
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
           </div>
         ` : "";
       }
