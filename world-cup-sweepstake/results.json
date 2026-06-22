@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-06-21T09:56:30.425Z",
+  "updatedAt": "2026-06-22T21:59:46Z",
   "source": "Manual static update",
-  "notes": "Completed group-stage results added through Tunisia 0-4 Japan. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Completed group-stage results added through Argentina 2-0 Austria. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [],
@@ -329,6 +329,51 @@
       "teamBScore": 4,
       "stage": "Group stage",
       "playedAt": "2026-06-21"
+    },
+    {
+      "id": "group-g-belgium-iran",
+      "teamA": "belgium",
+      "teamB": "iran",
+      "teamAScore": 0,
+      "teamBScore": 0,
+      "stage": "Group stage",
+      "playedAt": "2026-06-21"
+    },
+    {
+      "id": "group-g-new-zealand-egypt",
+      "teamA": "new-zealand",
+      "teamB": "egypt",
+      "teamAScore": 1,
+      "teamBScore": 3,
+      "stage": "Group stage",
+      "playedAt": "2026-06-21"
+    },
+    {
+      "id": "group-h-spain-saudi-arabia",
+      "teamA": "spain",
+      "teamB": "saudi-arabia",
+      "teamAScore": 4,
+      "teamBScore": 0,
+      "stage": "Group stage",
+      "playedAt": "2026-06-21"
+    },
+    {
+      "id": "group-h-uruguay-cape-verde",
+      "teamA": "uruguay",
+      "teamB": "cape-verde",
+      "teamAScore": 2,
+      "teamBScore": 2,
+      "stage": "Group stage",
+      "playedAt": "2026-06-21"
+    },
+    {
+      "id": "group-j-argentina-austria",
+      "teamA": "argentina",
+      "teamB": "austria",
+      "teamAScore": 2,
+      "teamBScore": 0,
+      "stage": "Group stage",
+      "playedAt": "2026-06-22"
     }
   ]
 }
