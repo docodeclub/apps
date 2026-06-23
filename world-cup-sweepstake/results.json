@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-06-22T21:59:46Z",
+  "updatedAt": "2026-06-23T07:11:46Z",
   "source": "Manual static update",
-  "notes": "Completed group-stage results added through Argentina 2-0 Austria. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Completed group-stage results added through Jordan 1-2 Algeria. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [],
@@ -367,6 +367,24 @@
       "playedAt": "2026-06-21"
     },
     {
+      "id": "group-i-france-iraq",
+      "teamA": "france",
+      "teamB": "iraq",
+      "teamAScore": 3,
+      "teamBScore": 0,
+      "stage": "Group stage",
+      "playedAt": "2026-06-22"
+    },
+    {
+      "id": "group-i-norway-senegal",
+      "teamA": "norway",
+      "teamB": "senegal",
+      "teamAScore": 3,
+      "teamBScore": 2,
+      "stage": "Group stage",
+      "playedAt": "2026-06-22"
+    },
+    {
       "id": "group-j-argentina-austria",
       "teamA": "argentina",
       "teamB": "austria",
@@ -374,6 +392,15 @@
       "teamBScore": 0,
       "stage": "Group stage",
       "playedAt": "2026-06-22"
+    },
+    {
+      "id": "group-j-jordan-algeria",
+      "teamA": "jordan",
+      "teamB": "algeria",
+      "teamAScore": 1,
+      "teamBScore": 2,
+      "stage": "Group stage",
+      "playedAt": "2026-06-23"
     }
   ]
 }
