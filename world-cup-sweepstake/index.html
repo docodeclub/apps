@@ -104,7 +104,7 @@
           </div>
         </section>
 
-        <section class="section admin-only" aria-labelledby="admin-heading">
+        <section class="section admin-only draw-admin-section" aria-labelledby="admin-heading">
           <div class="wrap sweepstake-layout">
             <div class="sweepstake-panel draw-setup-control">
               <div class="section-heading">
@@ -164,7 +164,7 @@
           </div>
         </section>
 
-        <section class="section draw-animation-section admin-only" aria-labelledby="animation-heading">
+        <section class="section draw-animation-section admin-only draw-admin-section" aria-labelledby="animation-heading">
           <div class="wrap">
             <div class="section-heading">
               <p class="eyebrow">Animation</p>
@@ -195,7 +195,7 @@
           </div>
         </section>
 
-        <section class="section draw-summary-section admin-only" id="draw-summary-section" aria-labelledby="summary-heading" hidden>
+        <section class="section draw-summary-section admin-only draw-admin-section" id="draw-summary-section" aria-labelledby="summary-heading" hidden>
           <div class="wrap">
             <div class="section-heading">
               <p class="eyebrow">Share</p>
@@ -341,7 +341,10 @@
               </label>
               <button class="button" type="submit">Save Result</button>
             </form>
-            <div class="match-results" id="match-results"></div>
+            <details class="compact-details">
+              <summary>Show all match results</summary>
+              <div class="match-results" id="match-results"></div>
+            </details>
           </div>
         </section>
 
@@ -352,9 +355,14 @@
               <h2 id="teams-heading">All 48 teams</h2>
               <p>The sweepstake uses the full 2026 World Cup group-stage line-up.</p>
             </div>
-            <div class="team-grid" id="team-grid"></div>
+            <details class="compact-details">
+              <summary>Show all teams</summary>
+              <div class="team-grid" id="team-grid"></div>
+            </details>
           </div>
         </section>
+
+        <div id="admin-tools-anchor"></div>
 
         <section class="section admin-login-panel" id="admin-login-panel" aria-labelledby="admin-login-heading">
           <div class="wrap">
@@ -510,6 +518,14 @@
         "Imran", "Jess", "Kieran", "Lucy"
       ];
       const queryParams = new URLSearchParams(window.location.search);
+
+      function moveAdminToolsToBottom() {
+        const anchor = document.querySelector("#admin-tools-anchor");
+        if (!anchor) return;
+        document.querySelectorAll(".draw-admin-section").forEach(section => {
+          anchor.before(section);
+        });
+      }
 
       if (queryParams.get("reset") === "1") {
         localStorage.removeItem(stateKey);
@@ -1787,6 +1803,7 @@
         }
       });
 
+      moveAdminToolsToBottom();
       renderTeamSelects();
       renderTeamIds();
       renderAll();

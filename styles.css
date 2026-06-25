@@ -319,6 +319,54 @@ body.home-page .lede {
   padding-bottom: 4.5rem;
 }
 
+.compact-details {
+  border: 1px solid rgba(48, 35, 131, 0.14);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 18px 44px rgba(48, 35, 131, 0.08);
+}
+
+.compact-details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem 1rem;
+  color: #302383;
+  font-weight: 900;
+  cursor: pointer;
+  list-style: none;
+}
+
+.compact-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.compact-details summary::after {
+  content: "+";
+  display: inline-grid;
+  width: 1.65rem;
+  height: 1.65rem;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(0, 204, 51, 0.12);
+  color: #008f2d;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.compact-details[open] summary {
+  border-bottom: 1px solid rgba(48, 35, 131, 0.12);
+}
+
+.compact-details[open] summary::after {
+  content: "-";
+}
+
+.compact-details > :not(summary) {
+  margin: 1rem;
+}
+
 .grid {
   display: grid;
   gap: 1rem;
