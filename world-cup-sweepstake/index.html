@@ -48,33 +48,43 @@
             <div>
               <p class="eyebrow">Family Draw</p>
               <h1>World Cup Sweepstake</h1>
-              <p class="subtitle">Follow the family draw, see who has each team, and track who is still in the tournament.</p>
-              <p class="lede">First prize goes to the owner of the World Cup winners. Second prize goes to the owner of the losing finalists. The worst group-stage team gets their owner a refund.</p>
+              <p class="subtitle">Follow the live family sweepstake, see who owns each team, and keep an eye on the refund race.</p>
+              <p class="lede">First prize goes to the World Cup winner’s owner. Second prize goes to the losing finalist’s owner. The owner of the worst group-stage team gets their entry fee back.</p>
               <div class="hero-proof">
                 <span>£10 entry</span>
-                <span>Animated draw</span>
+                <span>Live team status</span>
                 <span>48 teams</span>
                 <span>Prize tracker</span>
-                <span>Team updates</span>
+                <span>Refund race</span>
               </div>
-              <div class="actions public-mode-actions">
+              <div class="actions hero-actions public-mode-actions">
+                <a class="button" href="#table-heading">View teams</a>
+                <a class="button secondary" href="#refund-heading">Refund race</a>
                 <button class="button secondary" type="button" id="public-mode-toggle">Share View</button>
               </div>
             </div>
-            <aside class="sweepstake-status" aria-label="Sweepstake status">
-              <div>
-                <span class="stat-number" id="entry-count">0</span>
-                <span class="stat-label">entrants</span>
-              </div>
-              <div>
-                <span class="stat-number" id="pot-total">£0</span>
-                <span class="stat-label">total pot</span>
-              </div>
-              <div>
-                <span class="stat-number" id="remaining-pot">£0</span>
-                <span class="stat-label">after refunds</span>
-              </div>
-            </aside>
+            <div class="sweepstake-hero-side">
+              <aside class="sweepstake-status" aria-label="Sweepstake status">
+                <div>
+                  <span class="stat-number" id="entry-count">0</span>
+                  <span class="stat-label">entrants</span>
+                </div>
+                <div>
+                  <span class="stat-number" id="pot-total">£0</span>
+                  <span class="stat-label">total pot</span>
+                </div>
+                <div>
+                  <span class="stat-number" id="remaining-pot">£0</span>
+                  <span class="stat-label">after refunds</span>
+                </div>
+              </aside>
+              <aside class="hero-live-card" aria-label="Current sweepstake picture">
+                <span>Current picture</span>
+                <strong id="hero-live-title">Loading updates...</strong>
+                <p id="hero-live-detail">The latest table will appear shortly.</p>
+                <em id="hero-live-updated">Checking tournament status.</em>
+              </aside>
+            </div>
           </div>
         </section>
 
@@ -261,7 +271,7 @@
             <div class="sweepstake-panel">
               <div class="section-heading">
                 <p class="eyebrow">Worst Team</p>
-                <h2>Refund status</h2>
+                <h2 id="refund-heading">Refund status</h2>
                 <p>Current worst team is decided from group-stage results: lowest points, then lowest goals scored, then most goals conceded.</p>
               </div>
               <div id="worst-team-panel" class="worst-team-panel"></div>
@@ -1187,6 +1197,41 @@
         `;
       }
 
+      function renderHeroLiveCard() {
+        const title = document.querySelector("#hero-live-title");
+        const detail = document.querySelector("#hero-live-detail");
+        const updatedLine = document.querySelector("#hero-live-updated");
+        const summary = prizeSummary();
+        const stats = teamStats();
+        const matchCount = currentMatchResults().length;
+        const updated = staticResults.updatedAt
+          ? new Date(staticResults.updatedAt).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })
+          : "Not yet updated";
+
+        if (staticResults.error) {
+          title.textContent = "Updates temporarily unavailable";
+          detail.textContent = "The draw is still visible while tournament updates are checked.";
+          updatedLine.textContent = "Please check back shortly.";
+          return;
+        }
+
+        if (summary.refundTeams.length) {
+          const names = summary.refundTeams.map(team => {
+            const owner = entrantById(team.ownerEntrantId);
+            return `${team.name}${owner ? ` (${owner.name})` : ""}`;
+          }).join(", ");
+          const leadTeam = summary.refundTeams[0];
+          const leadStats = stats[leadTeam.id];
+          title.textContent = `Refund leader: ${names}`;
+          detail.textContent = `${leadStats.points} pts, ${leadStats.goalsFor} scored, ${leadStats.goalsAgainst} conceded.`;
+        } else {
+          title.textContent = "Refund race waiting for results";
+          detail.textContent = "Once group matches are added, the worst-team table will update here.";
+        }
+
+        updatedLine.textContent = `${matchCount} ${matchCount === 1 ? "match" : "matches"} recorded · ${staticResults.eliminated.length} ${staticResults.eliminated.length === 1 ? "team" : "teams"} out · Updated ${updated}.`;
+      }
+
       function renderScreenSummary() {
         const grid = document.querySelector("#screen-summary-grid");
         if (!publicMode) {
@@ -1302,6 +1347,7 @@
         renderDrawTable();
         renderPrizePanels();
         renderResultsSource();
+        renderHeroLiveCard();
         renderTeams();
         renderMatches();
         renderFinalDrawChecklist();

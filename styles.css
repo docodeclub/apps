@@ -530,6 +530,7 @@ body.home-page .studio-section {
 }
 
 .sweepstake-status,
+.hero-live-card,
 .sweepstake-panel,
 .draw-panel,
 .team-card,
@@ -547,6 +548,55 @@ body.home-page .studio-section {
   display: grid;
   gap: 0.85rem;
   padding: 1.2rem;
+}
+
+.sweepstake-hero-side {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.hero-actions {
+  flex-wrap: wrap;
+}
+
+.hero-live-card {
+  padding: 1rem;
+}
+
+.hero-live-card span,
+.hero-live-card strong,
+.hero-live-card p,
+.hero-live-card em {
+  display: block;
+}
+
+.hero-live-card span {
+  color: #00a936;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-live-card strong {
+  margin-top: 0.35rem;
+  color: #302383;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1.15;
+}
+
+.hero-live-card p {
+  margin: 0.45rem 0 0;
+  color: #514c79;
+  font-weight: 750;
+}
+
+.hero-live-card em {
+  margin-top: 0.65rem;
+  color: #6a6490;
+  font-size: 0.86rem;
+  font-style: normal;
+  font-weight: 750;
 }
 
 .sweepstake-status div {
@@ -2896,6 +2946,19 @@ body.home-page .footer-meta strong {
 
   .button {
     width: 100%;
+  }
+
+  .sweepstake-hero .hero-actions {
+    flex-direction: row;
+    gap: 0.45rem;
+  }
+
+  .sweepstake-hero .hero-actions .button {
+    width: auto;
+    min-height: 2.35rem;
+    flex: 1 1 6.9rem;
+    padding: 0.55rem 0.45rem;
+    font-size: 0.88rem;
   }
 
   .entry-row {
