@@ -1051,7 +1051,7 @@
             <td><strong>${escapeHtml(row.name)}</strong></td>
             <td>
               <div class="table-team-list">
-                ${row.ownedTeams.map(team => `<span class="${isEliminated(team) ? "is-eliminated" : ""}">${flagBadge(team)} ${team.name}<em>${isEliminated(team) ? "Out" : "In"}</em></span>`).join("")}
+                ${row.ownedTeams.map(team => `<span class="${isEliminated(team) ? "is-eliminated" : ""}">${flagBadge(team)} <span class="team-pill-name">${team.name}</span><em>${isEliminated(team) ? "Out" : "In"}</em></span>`).join("")}
               </div>
             </td>
             <td>${prizeStatus(row)}</td>

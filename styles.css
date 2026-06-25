@@ -1341,15 +1341,23 @@ body.is-public-mode .team-grid {
 
 .allocation-team.is-eliminated,
 .table-team-list span.is-eliminated {
-  border-color: rgba(48, 35, 131, 0.14);
-  background: rgba(48, 35, 131, 0.06);
+  border-color: rgba(202, 53, 53, 0.34);
+  background: rgba(202, 53, 53, 0.08);
   color: #6b668f;
+}
+
+.allocation-team.is-eliminated > span:not(.flag-badge):not(.flag-code),
+.table-team-list span.is-eliminated .team-pill-name {
+  text-decoration-line: line-through;
+  text-decoration-color: #ca3535;
+  text-decoration-thickness: 0.16em;
+  text-decoration-skip-ink: none;
 }
 
 .allocation-team.is-eliminated em,
 .table-team-list span.is-eliminated em {
-  background: rgba(48, 35, 131, 0.11);
-  color: #6b668f;
+  background: rgba(202, 53, 53, 0.12);
+  color: #a83232;
 }
 
 .allocation-card p {

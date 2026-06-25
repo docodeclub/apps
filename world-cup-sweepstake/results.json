@@ -1,10 +1,14 @@
 {
   "updatedAt": "2026-06-25T08:20:00Z",
   "source": "Manual static update",
-  "notes": "Completed group-stage results added through Brazil 3-0 Scotland and Morocco 4-2 Haiti. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Completed group-stage results added through Brazil 3-0 Scotland and Morocco 4-2 Haiti. Eliminated teams currently marked from completed groups. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
-  "eliminated": [],
+  "eliminated": [
+    "czechia",
+    "qatar",
+    "haiti"
+  ],
   "matches": [
     {
       "id": "group-a-mexico-south-africa",
