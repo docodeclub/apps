@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-06-23T07:11:46Z",
+  "updatedAt": "2026-06-25T08:20:00Z",
   "source": "Manual static update",
-  "notes": "Completed group-stage results added through Jordan 1-2 Algeria. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Completed group-stage results added through Brazil 3-0 Scotland and Morocco 4-2 Haiti. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [],
@@ -401,6 +401,96 @@
       "teamBScore": 2,
       "stage": "Group stage",
       "playedAt": "2026-06-23"
+    },
+    {
+      "id": "group-k-portugal-uzbekistan",
+      "teamA": "portugal",
+      "teamB": "uzbekistan",
+      "teamAScore": 5,
+      "teamBScore": 0,
+      "stage": "Group stage",
+      "playedAt": "2026-06-23"
+    },
+    {
+      "id": "group-l-england-ghana",
+      "teamA": "england",
+      "teamB": "ghana",
+      "teamAScore": 0,
+      "teamBScore": 0,
+      "stage": "Group stage",
+      "playedAt": "2026-06-23"
+    },
+    {
+      "id": "group-a-czechia-mexico",
+      "teamA": "czechia",
+      "teamB": "mexico",
+      "teamAScore": 0,
+      "teamBScore": 3,
+      "stage": "Group stage",
+      "playedAt": "2026-06-24"
+    },
+    {
+      "id": "group-a-south-africa-south-korea",
+      "teamA": "south-africa",
+      "teamB": "south-korea",
+      "teamAScore": 1,
+      "teamBScore": 0,
+      "stage": "Group stage",
+      "playedAt": "2026-06-24"
+    },
+    {
+      "id": "group-b-bosnia-herzegovina-qatar",
+      "teamA": "bosnia-herzegovina",
+      "teamB": "qatar",
+      "teamAScore": 3,
+      "teamBScore": 1,
+      "stage": "Group stage",
+      "playedAt": "2026-06-24"
+    },
+    {
+      "id": "group-b-switzerland-canada",
+      "teamA": "switzerland",
+      "teamB": "canada",
+      "teamAScore": 2,
+      "teamBScore": 1,
+      "stage": "Group stage",
+      "playedAt": "2026-06-24"
+    },
+    {
+      "id": "group-c-morocco-haiti",
+      "teamA": "morocco",
+      "teamB": "haiti",
+      "teamAScore": 4,
+      "teamBScore": 2,
+      "stage": "Group stage",
+      "playedAt": "2026-06-24"
+    },
+    {
+      "id": "group-c-scotland-brazil",
+      "teamA": "scotland",
+      "teamB": "brazil",
+      "teamAScore": 0,
+      "teamBScore": 3,
+      "stage": "Group stage",
+      "playedAt": "2026-06-24"
+    },
+    {
+      "id": "group-k-colombia-dr-congo",
+      "teamA": "colombia",
+      "teamB": "dr-congo",
+      "teamAScore": 1,
+      "teamBScore": 0,
+      "stage": "Group stage",
+      "playedAt": "2026-06-24"
+    },
+    {
+      "id": "group-l-panama-croatia",
+      "teamA": "panama",
+      "teamB": "croatia",
+      "teamAScore": 0,
+      "teamBScore": 1,
+      "stage": "Group stage",
+      "playedAt": "2026-06-24"
     }
   ]
 }
