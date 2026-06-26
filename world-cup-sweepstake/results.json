@@ -1,13 +1,16 @@
 {
-  "updatedAt": "2026-06-25T08:20:00Z",
+  "updatedAt": "2026-06-26T05:55:00Z",
   "source": "Manual static update",
-  "notes": "Completed group-stage results added through Brazil 3-0 Scotland and Morocco 4-2 Haiti. Eliminated teams currently marked from completed groups. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Completed group-stage results added through the Group D, E and F finales on 25 June. Eliminated teams currently marked from completed groups. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [
     "czechia",
     "qatar",
-    "haiti"
+    "haiti",
+    "turkiye",
+    "curacao",
+    "tunisia"
   ],
   "matches": [
     {
@@ -495,6 +498,60 @@
       "teamBScore": 1,
       "stage": "Group stage",
       "playedAt": "2026-06-24"
+    },
+    {
+      "id": "group-e-ecuador-germany",
+      "teamA": "ecuador",
+      "teamB": "germany",
+      "teamAScore": 2,
+      "teamBScore": 1,
+      "stage": "Group stage",
+      "playedAt": "2026-06-25"
+    },
+    {
+      "id": "group-e-curacao-ivory-coast",
+      "teamA": "curacao",
+      "teamB": "ivory-coast",
+      "teamAScore": 0,
+      "teamBScore": 2,
+      "stage": "Group stage",
+      "playedAt": "2026-06-25"
+    },
+    {
+      "id": "group-f-japan-sweden",
+      "teamA": "japan",
+      "teamB": "sweden",
+      "teamAScore": 1,
+      "teamBScore": 1,
+      "stage": "Group stage",
+      "playedAt": "2026-06-25"
+    },
+    {
+      "id": "group-f-tunisia-netherlands",
+      "teamA": "tunisia",
+      "teamB": "netherlands",
+      "teamAScore": 1,
+      "teamBScore": 3,
+      "stage": "Group stage",
+      "playedAt": "2026-06-25"
+    },
+    {
+      "id": "group-d-turkiye-united-states",
+      "teamA": "turkiye",
+      "teamB": "united-states",
+      "teamAScore": 3,
+      "teamBScore": 2,
+      "stage": "Group stage",
+      "playedAt": "2026-06-25"
+    },
+    {
+      "id": "group-d-paraguay-australia",
+      "teamA": "paraguay",
+      "teamB": "australia",
+      "teamAScore": 0,
+      "teamBScore": 0,
+      "stage": "Group stage",
+      "playedAt": "2026-06-25"
     }
   ]
 }
