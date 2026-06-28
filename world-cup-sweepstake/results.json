@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-06-26T05:55:00Z",
+  "updatedAt": "2026-06-28T06:40:00Z",
   "source": "Manual static update",
-  "notes": "Completed group-stage results added through the Group D, E and F finales on 25 June. Eliminated teams currently marked from completed groups. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Completed group-stage results added through all group finales on 27 June. Eliminated teams marked from the confirmed final group-stage out list. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [
@@ -10,7 +10,17 @@
     "haiti",
     "turkiye",
     "curacao",
-    "tunisia"
+    "tunisia",
+    "new-zealand",
+    "uruguay",
+    "saudi-arabia",
+    "iraq",
+    "iran",
+    "scotland",
+    "uzbekistan",
+    "south-korea",
+    "jordan",
+    "panama"
   ],
   "matches": [
     {
@@ -552,6 +562,114 @@
       "teamBScore": 0,
       "stage": "Group stage",
       "playedAt": "2026-06-25"
+    },
+    {
+      "id": "group-i-norway-france",
+      "teamA": "norway",
+      "teamB": "france",
+      "teamAScore": 1,
+      "teamBScore": 4,
+      "stage": "Group stage",
+      "playedAt": "2026-06-26"
+    },
+    {
+      "id": "group-i-senegal-iraq",
+      "teamA": "senegal",
+      "teamB": "iraq",
+      "teamAScore": 5,
+      "teamBScore": 0,
+      "stage": "Group stage",
+      "playedAt": "2026-06-26"
+    },
+    {
+      "id": "group-h-cape-verde-saudi-arabia",
+      "teamA": "cape-verde",
+      "teamB": "saudi-arabia",
+      "teamAScore": 0,
+      "teamBScore": 0,
+      "stage": "Group stage",
+      "playedAt": "2026-06-26"
+    },
+    {
+      "id": "group-h-uruguay-spain",
+      "teamA": "uruguay",
+      "teamB": "spain",
+      "teamAScore": 0,
+      "teamBScore": 1,
+      "stage": "Group stage",
+      "playedAt": "2026-06-26"
+    },
+    {
+      "id": "group-g-egypt-iran",
+      "teamA": "egypt",
+      "teamB": "iran",
+      "teamAScore": 1,
+      "teamBScore": 1,
+      "stage": "Group stage",
+      "playedAt": "2026-06-26"
+    },
+    {
+      "id": "group-g-new-zealand-belgium",
+      "teamA": "new-zealand",
+      "teamB": "belgium",
+      "teamAScore": 1,
+      "teamBScore": 5,
+      "stage": "Group stage",
+      "playedAt": "2026-06-26"
+    },
+    {
+      "id": "group-j-algeria-austria",
+      "teamA": "algeria",
+      "teamB": "austria",
+      "teamAScore": 3,
+      "teamBScore": 3,
+      "stage": "Group stage",
+      "playedAt": "2026-06-27"
+    },
+    {
+      "id": "group-j-jordan-argentina",
+      "teamA": "jordan",
+      "teamB": "argentina",
+      "teamAScore": 1,
+      "teamBScore": 3,
+      "stage": "Group stage",
+      "playedAt": "2026-06-27"
+    },
+    {
+      "id": "group-k-colombia-portugal",
+      "teamA": "colombia",
+      "teamB": "portugal",
+      "teamAScore": 0,
+      "teamBScore": 0,
+      "stage": "Group stage",
+      "playedAt": "2026-06-27"
+    },
+    {
+      "id": "group-k-dr-congo-uzbekistan",
+      "teamA": "dr-congo",
+      "teamB": "uzbekistan",
+      "teamAScore": 3,
+      "teamBScore": 1,
+      "stage": "Group stage",
+      "playedAt": "2026-06-27"
+    },
+    {
+      "id": "group-l-croatia-ghana",
+      "teamA": "croatia",
+      "teamB": "ghana",
+      "teamAScore": 2,
+      "teamBScore": 1,
+      "stage": "Group stage",
+      "playedAt": "2026-06-27"
+    },
+    {
+      "id": "group-l-england-panama",
+      "teamA": "england",
+      "teamB": "panama",
+      "teamAScore": 2,
+      "teamBScore": 0,
+      "stage": "Group stage",
+      "playedAt": "2026-06-27"
     }
   ]
 }
