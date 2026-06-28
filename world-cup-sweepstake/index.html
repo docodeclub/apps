@@ -48,18 +48,18 @@
             <div>
               <p class="eyebrow">Family Draw</p>
               <h1>World Cup Sweepstake</h1>
-              <p class="subtitle">Follow the live family sweepstake, see who owns each team, and keep an eye on the refund race.</p>
-              <p class="lede">First prize goes to the World Cup winner’s owner. Second prize goes to the losing finalist’s owner. The owner of the worst group-stage team gets their entry fee back.</p>
+              <p class="subtitle">Follow the live family sweepstake, see who owns each team, and track the knockout prizes.</p>
+              <p class="lede">The group-stage refund is now confirmed. First prize still goes to the World Cup winner’s owner, and second prize goes to the losing finalist’s owner.</p>
               <div class="hero-proof">
                 <span>£10 entry</span>
                 <span>Live team status</span>
                 <span>48 teams</span>
                 <span>Prize tracker</span>
-                <span>Refund race</span>
+                <span>Refund confirmed</span>
               </div>
               <div class="actions hero-actions public-mode-actions">
                 <a class="button" href="#table-heading">View teams</a>
-                <a class="button secondary" href="#refund-heading">Refund race</a>
+                <a class="button secondary" href="#refund-heading">Confirmed refund</a>
                 <button class="button secondary" type="button" id="public-mode-toggle">Share View</button>
               </div>
             </div>
@@ -78,8 +78,8 @@
                   <span class="stat-label">after refunds</span>
                 </div>
               </aside>
-              <aside class="hero-live-card" aria-label="Current sweepstake picture">
-                <span>Current picture</span>
+              <aside class="hero-live-card" aria-label="Sweepstake picture">
+                <span>Group stage complete</span>
                 <strong id="hero-live-title">Loading updates...</strong>
                 <p id="hero-live-detail">The latest table will appear shortly.</p>
                 <em id="hero-live-updated">Checking tournament status.</em>
@@ -264,20 +264,20 @@
               <div class="section-heading">
                 <p class="eyebrow">Prizes</p>
                 <h2 id="prizes-heading">Prize calculation</h2>
-                <p>The champion owner wins first prize. The losing finalist owner wins second prize. Worst group-stage team owner gets their entry fee back.</p>
+                <p>The champion owner wins first prize. The losing finalist owner wins second prize. The worst group-stage team owner gets their entry fee back.</p>
               </div>
               <dl class="prize-list" id="prize-list"></dl>
             </div>
             <div class="sweepstake-panel">
               <div class="section-heading">
                 <p class="eyebrow">Worst Team</p>
-                <h2 id="refund-heading">Refund status</h2>
-                <p>Current worst team is decided from group-stage results: lowest points, then lowest goals scored, then most goals conceded.</p>
+                <h2 id="refund-heading">Refund confirmed</h2>
+                <p>The worst group-stage team is confirmed using the sweepstake rule: lowest points, then lowest goals scored, then most goals conceded.</p>
               </div>
               <div id="worst-team-panel" class="worst-team-panel"></div>
               <p id="worst-team-updated" class="worst-team-updated" aria-live="polite"></p>
               <div id="recent-results-panel" class="recent-results-panel" aria-label="Recent group results"></div>
-              <div id="refund-race-panel" class="refund-race-panel" aria-label="Worst-team refund race"></div>
+              <div id="refund-race-panel" class="refund-race-panel" aria-label="Final worst-team refund table"></div>
             </div>
           </div>
         </section>
@@ -287,7 +287,7 @@
             <div class="section-heading">
               <p class="eyebrow">Scoring</p>
               <h2 id="results-heading">Match results</h2>
-              <p>We’ll update this page as results come in, including which teams are still in the competition.</p>
+              <p>Group-stage results are complete. We’ll update the knockout prizes as the tournament continues.</p>
             </div>
             <div class="results-source-card" id="results-source-card" role="status" aria-live="polite">
               Loading tournament updates...
@@ -833,6 +833,10 @@
         return currentMatchResults().filter(match => match.stage.toLowerCase().includes("group"));
       }
 
+      function isGroupStageComplete() {
+        return groupStageResults().length >= 72;
+      }
+
       function entrantRows() {
         return state.entrants.map(entrant => {
           const ownedTeams = state.teams.filter(team => team.ownerEntrantId === entrant.id);
@@ -1111,13 +1115,14 @@
 
         const stats = teamStats();
         const worst = summary.refundTeams;
+        const groupComplete = isGroupStageComplete();
         document.querySelector("#worst-team-panel").innerHTML = worst.length ? worst.map(team => {
           const owner = entrantById(team.ownerEntrantId);
-          return `<article class="worst-team-card"><strong>${flagBadge(team)} ${team.name}</strong><span>${stats[team.id].points} pts · ${stats[team.id].goalsFor} scored · ${stats[team.id].goalsAgainst} conceded · ${owner ? escapeHtml(owner.name) : "No owner"} currently gets £${entryFee.toFixed(2)}</span></article>`;
-        }).join("") : `<p class="empty-state">Worst-team refund appears once match results have been entered.</p>`;
+          return `<article class="worst-team-card"><strong>${flagBadge(team)} ${team.name}</strong><span>${stats[team.id].points} pts · ${stats[team.id].goalsFor} scored · ${stats[team.id].goalsAgainst} conceded · ${owner ? escapeHtml(owner.name) : "No owner"} ${groupComplete ? "gets" : "currently gets"} £${entryFee.toFixed(2)}</span></article>`;
+        }).join("") : `<p class="empty-state">Worst-team refund appears once group results have been entered.</p>`;
         document.querySelector("#worst-team-updated").textContent = staticResults.error
           ? "Tournament updates are not available yet."
-          : `Standings last updated: ${updated} · ${staticCount} ${staticCount === 1 ? "match" : "matches"} recorded${localCount ? ` · ${localCount} draft ${localCount === 1 ? "result" : "results"}` : ""}.`;
+          : `${groupComplete ? "Group-stage refund confirmed" : "Standings last updated"}: ${updated} · ${staticCount} ${staticCount === 1 ? "match" : "matches"} recorded${localCount ? ` · ${localCount} draft ${localCount === 1 ? "result" : "results"}` : ""}.`;
         const recentResults = groupStageResults()
           .filter(match => teamById(match.teamA) && teamById(match.teamB))
           .sort((a, b) => {
@@ -1143,7 +1148,7 @@
         ` : "";
         const refundRows = refundRaceRows(12);
         document.querySelector("#refund-race-panel").innerHTML = refundRows.length ? `
-          <h3>Refund race</h3>
+          <h3>${groupComplete ? "Final refund table" : "Refund race"}</h3>
           <p>The table is sorted by the refund rule: lowest points, then least scored, then most conceded.</p>
           <div class="refund-race-table-wrap">
             <table class="refund-race-table">
@@ -1216,13 +1221,14 @@
         }
 
         if (summary.refundTeams.length) {
+          const groupComplete = isGroupStageComplete();
           const names = summary.refundTeams.map(team => {
             const owner = entrantById(team.ownerEntrantId);
             return `${team.name}${owner ? ` (${owner.name})` : ""}`;
           }).join(", ");
           const leadTeam = summary.refundTeams[0];
           const leadStats = stats[leadTeam.id];
-          title.textContent = `Refund leader: ${names}`;
+          title.textContent = `${groupComplete ? "Refund confirmed" : "Refund leader"}: ${names}`;
           detail.textContent = `${leadStats.points} pts, ${leadStats.goalsFor} scored, ${leadStats.goalsAgainst} conceded.`;
         } else {
           title.textContent = "Refund race waiting for results";
