@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-06-30T03:55:41Z",
+  "updatedAt": "2026-06-30T04:12:00Z",
   "source": "Manual static update",
-  "notes": "Completed group-stage results added through all group finales on 27 June. Netherlands marked out after losing on penalties in the knockouts. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Completed group-stage results added through all group finales on 27 June. Knockout updates added for Canada v South Africa, Brazil v Japan, Paraguay v Germany and Morocco v Netherlands. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [
@@ -21,6 +21,9 @@
     "south-korea",
     "jordan",
     "panama",
+    "south-africa",
+    "japan",
+    "germany",
     "netherlands"
   ],
   "matches": [
@@ -671,6 +674,42 @@
       "teamBScore": 0,
       "stage": "Group stage",
       "playedAt": "2026-06-27"
+    },
+    {
+      "id": "round-32-canada-south-africa",
+      "teamA": "canada",
+      "teamB": "south-africa",
+      "teamAScore": 1,
+      "teamBScore": 0,
+      "stage": "Round of 32",
+      "playedAt": "2026-06-28"
+    },
+    {
+      "id": "round-32-brazil-japan",
+      "teamA": "brazil",
+      "teamB": "japan",
+      "teamAScore": 2,
+      "teamBScore": 1,
+      "stage": "Round of 32",
+      "playedAt": "2026-06-28"
+    },
+    {
+      "id": "round-32-paraguay-germany",
+      "teamA": "paraguay",
+      "teamB": "germany",
+      "teamAScore": 1,
+      "teamBScore": 1,
+      "stage": "Round of 32 · Paraguay win 4-3 on penalties",
+      "playedAt": "2026-06-29"
+    },
+    {
+      "id": "round-32-morocco-netherlands",
+      "teamA": "morocco",
+      "teamB": "netherlands",
+      "teamAScore": 1,
+      "teamBScore": 1,
+      "stage": "Round of 32 · Morocco win 3-2 on penalties",
+      "playedAt": "2026-06-29"
     }
   ]
 }
