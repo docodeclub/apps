@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-06-28T06:40:00Z",
+  "updatedAt": "2026-06-30T03:55:41Z",
   "source": "Manual static update",
-  "notes": "Completed group-stage results added through all group finales on 27 June. Eliminated teams marked from the confirmed final group-stage out list. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Completed group-stage results added through all group finales on 27 June. Netherlands marked out after losing on penalties in the knockouts. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [
@@ -20,7 +20,8 @@
     "uzbekistan",
     "south-korea",
     "jordan",
-    "panama"
+    "panama",
+    "netherlands"
   ],
   "matches": [
     {
