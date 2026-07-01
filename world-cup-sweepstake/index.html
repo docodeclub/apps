@@ -15,7 +15,7 @@
     <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
     <link rel="manifest" href="../site.webmanifest">
     <title>World Cup Sweepstake — Docode Apps</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../styles.css?v=20260701-pdf">
   </head>
   <body class="home-page sweepstake-page">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -227,12 +227,16 @@
           </div>
         </section>
 
-        <section class="section" aria-labelledby="table-heading">
+        <section class="section pdf-capture-section" aria-labelledby="table-heading">
           <div class="wrap">
             <div class="section-heading">
               <p class="eyebrow">Public View</p>
               <h2 id="table-heading">Who has which teams</h2>
               <p>Each person’s teams are shown below. We’ll update team status as the tournament moves on.</p>
+              <p class="teams-pdf-meta" id="teams-pdf-meta">Loading latest update...</p>
+              <div class="actions sweepstake-actions pdf-actions">
+                <button class="button secondary" type="button" id="download-teams-pdf">Download PDF</button>
+              </div>
             </div>
             <div class="allocation-board" id="allocation-board" aria-live="polite"></div>
             <details class="compact-details alternate-table-details">
@@ -1200,6 +1204,7 @@
           <strong>${staticCount ? `${staticCount} ${staticCount === 1 ? "match" : "matches"} updated` : "No match results added yet"}</strong>
           <span>Last updated: ${escapeHtml(updated)}${staticResults.eliminated.length ? ` · ${staticResults.eliminated.length} ${staticResults.eliminated.length === 1 ? "team is" : "teams are"} out` : ""}${localCount ? ` · ${localCount} draft ${localCount === 1 ? "result" : "results"}` : ""}</span>
         `;
+        document.querySelector("#teams-pdf-meta").textContent = `${staticCount} ${staticCount === 1 ? "match" : "matches"} updated · ${staticResults.eliminated.length} ${staticResults.eliminated.length === 1 ? "team is" : "teams are"} out · ${updated}`;
       }
 
       function renderHeroLiveCard() {
@@ -1729,6 +1734,14 @@
         publicMode = !publicMode;
         localStorage.setItem(publicModeKey, publicMode ? "1" : "0");
         renderAll();
+      });
+
+      document.querySelector("#download-teams-pdf").addEventListener("click", () => {
+        document.body.classList.add("is-printing-teams");
+        window.print();
+        window.setTimeout(() => {
+          document.body.classList.remove("is-printing-teams");
+        }, 600);
       });
 
       document.querySelector("#reset-sweepstake").addEventListener("click", () => {

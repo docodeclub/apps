@@ -806,6 +806,17 @@ body.is-public-mode .team-grid {
   grid-template-columns: repeat(6, 1fr);
 }
 
+.teams-pdf-meta {
+  margin-top: 0.7rem;
+  color: #514c79;
+  font-size: 0.95rem;
+  font-weight: 850;
+}
+
+.pdf-actions {
+  margin-top: 0.9rem;
+}
+
 .stat-number,
 .stat-label {
   display: block;
@@ -1324,6 +1335,7 @@ body.is-public-mode .team-grid {
 
 .flag-badge {
   display: inline-flex;
+  flex: 0 0 auto;
   width: 2.65rem;
   height: 1.8rem;
   align-items: center;
@@ -1411,6 +1423,7 @@ body.is-public-mode .team-grid {
 
 .allocation-team {
   display: inline-flex;
+  max-width: 100%;
   min-width: 0;
   align-items: center;
   gap: 0.38rem;
@@ -1422,6 +1435,16 @@ body.is-public-mode .team-grid {
   font-size: 0.92rem;
   font-weight: 850;
   line-height: 1.1;
+}
+
+.allocation-team > span:not(.flag-badge):not(.flag-code) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.allocation-team em {
+  flex: 0 0 auto;
+  margin-left: auto;
 }
 
 .allocation-team em,
@@ -2837,6 +2860,20 @@ body.home-page .footer-meta strong {
   }
 }
 
+@media (max-width: 640px) {
+  .allocation-board,
+  body.is-public-mode .allocation-board {
+    grid-template-columns: 1fr;
+  }
+
+  .allocation-team,
+  body.is-public-mode .allocation-team {
+    display: flex;
+    width: 100%;
+    border-radius: 1rem;
+  }
+}
+
 @media (max-width: 420px) {
   .wrap {
     width: min(100% - 1.25rem, var(--content));
@@ -3042,6 +3079,11 @@ body.home-page .footer-meta strong {
 }
 
 @media print {
+  @page {
+    margin: 10mm;
+    size: A4 portrait;
+  }
+
   html,
   body {
     background: #ffffff;
@@ -3074,5 +3116,97 @@ body.home-page .footer-meta strong {
 
   a {
     color: #000000;
+  }
+
+  body.sweepstake-page .breadcrumbs,
+  body.sweepstake-page .hero,
+  body.sweepstake-page main > section:not(.pdf-capture-section),
+  body.sweepstake-page .alternate-table-details {
+    display: none !important;
+  }
+
+  body.sweepstake-page .pdf-capture-section {
+    display: block !important;
+    padding: 0;
+  }
+
+  body.sweepstake-page .pdf-capture-section .wrap {
+    width: 100%;
+  }
+
+  body.sweepstake-page .pdf-capture-section .section-heading {
+    margin-bottom: 0.35rem;
+  }
+
+  body.sweepstake-page .pdf-capture-section .eyebrow {
+    color: #008f2d;
+    font-size: 8pt;
+  }
+
+  body.sweepstake-page .pdf-capture-section h2 {
+    color: #302383;
+    font-size: 22pt;
+  }
+
+  body.sweepstake-page .pdf-capture-section p {
+    color: #302383;
+  }
+
+  body.sweepstake-page .teams-pdf-meta {
+    margin-top: 0.25rem;
+    font-size: 9pt;
+  }
+
+  body.sweepstake-page .allocation-board {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.35rem;
+    margin: 0.45rem 0 0;
+  }
+
+  body.sweepstake-page .allocation-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    gap: 0.32rem;
+    border-color: #d9d9e8;
+    padding: 0.42rem;
+    box-shadow: none;
+  }
+
+  body.sweepstake-page .allocation-number {
+    color: #008f2d;
+    font-size: 7pt;
+  }
+
+  body.sweepstake-page .allocation-card strong {
+    color: #302383;
+    font-size: 10pt;
+  }
+
+  body.sweepstake-page .allocation-team-list {
+    display: grid;
+    gap: 0.22rem;
+  }
+
+  body.sweepstake-page .allocation-team {
+    width: 100%;
+    border-radius: 999px;
+    padding: 0.16rem 0.24rem;
+    color: #302383;
+    font-size: 8pt;
+  }
+
+  body.sweepstake-page .allocation-team em {
+    font-size: 6pt;
+  }
+
+  body.sweepstake-page .flag-badge {
+    width: 1.35rem;
+    height: 0.9rem;
+    padding: 0.05rem;
+  }
+
+  body.sweepstake-page .allocation-card p {
+    color: #514c79;
+    font-size: 7pt;
   }
 }
