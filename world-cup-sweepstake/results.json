@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-07-01T08:35:00Z",
+  "updatedAt": "2026-07-02T07:50:00Z",
   "source": "Manual static update",
-  "notes": "Completed group-stage results added through all group finales on 27 June. Knockout updates added through Norway v Ivory Coast, France v Sweden and Mexico v Ecuador. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Completed group-stage results added through all group finales on 27 June. Knockout updates added through England v DR Congo, Belgium v Senegal and United States v Bosnia and Herzegovina. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [
@@ -27,7 +27,10 @@
     "netherlands",
     "ivory-coast",
     "sweden",
-    "ecuador"
+    "ecuador",
+    "dr-congo",
+    "senegal",
+    "bosnia-herzegovina"
   ],
   "matches": [
     {
@@ -740,6 +743,33 @@
       "teamBScore": 0,
       "stage": "Round of 32",
       "playedAt": "2026-06-30"
+    },
+    {
+      "id": "round-32-england-dr-congo",
+      "teamA": "england",
+      "teamB": "dr-congo",
+      "teamAScore": 2,
+      "teamBScore": 1,
+      "stage": "Round of 32",
+      "playedAt": "2026-07-01"
+    },
+    {
+      "id": "round-32-belgium-senegal",
+      "teamA": "belgium",
+      "teamB": "senegal",
+      "teamAScore": 3,
+      "teamBScore": 2,
+      "stage": "Round of 32 · Belgium win after extra time",
+      "playedAt": "2026-07-01"
+    },
+    {
+      "id": "round-32-united-states-bosnia-herzegovina",
+      "teamA": "united-states",
+      "teamB": "bosnia-herzegovina",
+      "teamAScore": 2,
+      "teamBScore": 0,
+      "stage": "Round of 32",
+      "playedAt": "2026-07-01"
     }
   ]
 }
