@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-07-02T07:50:00Z",
+  "updatedAt": "2026-07-03T07:27:58Z",
   "source": "Manual static update",
-  "notes": "Completed group-stage results added through all group finales on 27 June. Knockout updates added through England v DR Congo, Belgium v Senegal and United States v Bosnia and Herzegovina. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Completed group-stage results added through Spain v Austria, Portugal v Croatia and Switzerland v Algeria. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [
@@ -30,7 +30,10 @@
     "ecuador",
     "dr-congo",
     "senegal",
-    "bosnia-herzegovina"
+    "bosnia-herzegovina",
+    "austria",
+    "croatia",
+    "algeria"
   ],
   "matches": [
     {
@@ -770,6 +773,33 @@
       "teamBScore": 0,
       "stage": "Round of 32",
       "playedAt": "2026-07-01"
+    },
+    {
+      "id": "round-32-spain-austria",
+      "teamA": "spain",
+      "teamB": "austria",
+      "teamAScore": 3,
+      "teamBScore": 0,
+      "stage": "Round of 32",
+      "playedAt": "2026-07-02"
+    },
+    {
+      "id": "round-32-portugal-croatia",
+      "teamA": "portugal",
+      "teamB": "croatia",
+      "teamAScore": 2,
+      "teamBScore": 1,
+      "stage": "Round of 32",
+      "playedAt": "2026-07-02"
+    },
+    {
+      "id": "round-32-switzerland-algeria",
+      "teamA": "switzerland",
+      "teamB": "algeria",
+      "teamAScore": 2,
+      "teamBScore": 0,
+      "stage": "Round of 32",
+      "playedAt": "2026-07-02"
     }
   ]
 }
