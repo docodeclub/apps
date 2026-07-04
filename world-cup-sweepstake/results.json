@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-07-03T07:27:58Z",
+  "updatedAt": "2026-07-04T06:21:22Z",
   "source": "Manual static update",
-  "notes": "Completed group-stage results added through Spain v Austria, Portugal v Croatia and Switzerland v Algeria. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Round of 32 complete. Knockout updates added through Egypt v Australia, Argentina v Cape Verde and Colombia v Ghana. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [
@@ -33,7 +33,10 @@
     "bosnia-herzegovina",
     "austria",
     "croatia",
-    "algeria"
+    "algeria",
+    "australia",
+    "cape-verde",
+    "ghana"
   ],
   "matches": [
     {
@@ -800,6 +803,33 @@
       "teamBScore": 0,
       "stage": "Round of 32",
       "playedAt": "2026-07-02"
+    },
+    {
+      "id": "round-32-australia-egypt",
+      "teamA": "australia",
+      "teamB": "egypt",
+      "teamAScore": 1,
+      "teamBScore": 1,
+      "stage": "Round of 32 · Egypt win 4-2 on penalties",
+      "playedAt": "2026-07-03"
+    },
+    {
+      "id": "round-32-argentina-cape-verde",
+      "teamA": "argentina",
+      "teamB": "cape-verde",
+      "teamAScore": 3,
+      "teamBScore": 2,
+      "stage": "Round of 32 · Argentina win after extra time",
+      "playedAt": "2026-07-03"
+    },
+    {
+      "id": "round-32-colombia-ghana",
+      "teamA": "colombia",
+      "teamB": "ghana",
+      "teamAScore": 1,
+      "teamBScore": 0,
+      "stage": "Round of 32",
+      "playedAt": "2026-07-03"
     }
   ]
 }
