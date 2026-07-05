@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-07-04T06:21:22Z",
+  "updatedAt": "2026-07-05T04:35:28Z",
   "source": "Manual static update",
-  "notes": "Round of 32 complete. Knockout updates added through Egypt v Australia, Argentina v Cape Verde and Colombia v Ghana. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Round of 16 updates added through Morocco v Canada and France v Paraguay. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [
@@ -36,7 +36,9 @@
     "algeria",
     "australia",
     "cape-verde",
-    "ghana"
+    "ghana",
+    "canada",
+    "paraguay"
   ],
   "matches": [
     {
@@ -830,6 +832,24 @@
       "teamBScore": 0,
       "stage": "Round of 32",
       "playedAt": "2026-07-03"
+    },
+    {
+      "id": "round-16-morocco-canada",
+      "teamA": "morocco",
+      "teamB": "canada",
+      "teamAScore": 3,
+      "teamBScore": 0,
+      "stage": "Round of 16",
+      "playedAt": "2026-07-04"
+    },
+    {
+      "id": "round-16-france-paraguay",
+      "teamA": "france",
+      "teamB": "paraguay",
+      "teamAScore": 1,
+      "teamBScore": 0,
+      "stage": "Round of 16",
+      "playedAt": "2026-07-04"
     }
   ]
 }
