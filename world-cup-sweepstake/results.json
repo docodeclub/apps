@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-07-05T04:35:28Z",
+  "updatedAt": "2026-07-06T10:48:27Z",
   "source": "Manual static update",
-  "notes": "Round of 16 updates added through Morocco v Canada and France v Paraguay. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Round of 16 updates added through Norway v Brazil and England v Mexico. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [
@@ -38,7 +38,9 @@
     "cape-verde",
     "ghana",
     "canada",
-    "paraguay"
+    "paraguay",
+    "brazil",
+    "mexico"
   ],
   "matches": [
     {
@@ -850,6 +852,24 @@
       "teamBScore": 0,
       "stage": "Round of 16",
       "playedAt": "2026-07-04"
+    },
+    {
+      "id": "round-16-brazil-norway",
+      "teamA": "brazil",
+      "teamB": "norway",
+      "teamAScore": 1,
+      "teamBScore": 2,
+      "stage": "Round of 16",
+      "playedAt": "2026-07-05"
+    },
+    {
+      "id": "round-16-mexico-england",
+      "teamA": "mexico",
+      "teamB": "england",
+      "teamAScore": 2,
+      "teamBScore": 3,
+      "stage": "Round of 16",
+      "playedAt": "2026-07-05"
     }
   ]
 }
