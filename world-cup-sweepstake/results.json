@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-07-07T05:55:11Z",
+  "updatedAt": "2026-07-08T06:29:23Z",
   "source": "Manual static update",
-  "notes": "Round of 16 updates added through Spain v Portugal and Belgium v United States. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Round of 16 complete. Updates added through Argentina v Egypt and Switzerland v Colombia. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [
@@ -42,7 +42,9 @@
     "brazil",
     "mexico",
     "portugal",
-    "united-states"
+    "united-states",
+    "egypt",
+    "colombia"
   ],
   "matches": [
     {
@@ -890,6 +892,24 @@
       "teamBScore": 4,
       "stage": "Round of 16",
       "playedAt": "2026-07-06"
+    },
+    {
+      "id": "round-16-argentina-egypt",
+      "teamA": "argentina",
+      "teamB": "egypt",
+      "teamAScore": 3,
+      "teamBScore": 2,
+      "stage": "Round of 16",
+      "playedAt": "2026-07-07"
+    },
+    {
+      "id": "round-16-switzerland-colombia",
+      "teamA": "switzerland",
+      "teamB": "colombia",
+      "teamAScore": 0,
+      "teamBScore": 0,
+      "stage": "Round of 16 · Switzerland win 4-3 on penalties",
+      "playedAt": "2026-07-07"
     }
   ]
 }
