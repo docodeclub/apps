@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-07-08T06:29:23Z",
+  "updatedAt": "2026-07-10T08:50:08Z",
   "source": "Manual static update",
-  "notes": "Round of 16 complete. Updates added through Argentina v Egypt and Switzerland v Colombia. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Quarter-final updates added through France v Morocco. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [
@@ -44,7 +44,8 @@
     "portugal",
     "united-states",
     "egypt",
-    "colombia"
+    "colombia",
+    "morocco"
   ],
   "matches": [
     {
@@ -910,6 +911,15 @@
       "teamBScore": 0,
       "stage": "Round of 16 · Switzerland win 4-3 on penalties",
       "playedAt": "2026-07-07"
+    },
+    {
+      "id": "quarter-final-france-morocco",
+      "teamA": "france",
+      "teamB": "morocco",
+      "teamAScore": 2,
+      "teamBScore": 0,
+      "stage": "Quarter-final",
+      "playedAt": "2026-07-09"
     }
   ]
 }
