@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-07-10T08:50:08Z",
+  "updatedAt": "2026-07-10T22:38:35Z",
   "source": "Manual static update",
-  "notes": "Quarter-final updates added through France v Morocco. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Quarter-final updates added through Spain v Belgium. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [
@@ -45,7 +45,8 @@
     "united-states",
     "egypt",
     "colombia",
-    "morocco"
+    "morocco",
+    "belgium"
   ],
   "matches": [
     {
@@ -920,6 +921,15 @@
       "teamBScore": 0,
       "stage": "Quarter-final",
       "playedAt": "2026-07-09"
+    },
+    {
+      "id": "quarter-final-spain-belgium",
+      "teamA": "spain",
+      "teamB": "belgium",
+      "teamAScore": 2,
+      "teamBScore": 1,
+      "stage": "Quarter-final",
+      "playedAt": "2026-07-10"
     }
   ]
 }
