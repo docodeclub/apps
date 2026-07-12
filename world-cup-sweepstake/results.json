@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-07-10T22:38:35Z",
+  "updatedAt": "2026-07-12T09:08:30Z",
   "source": "Manual static update",
-  "notes": "Quarter-final updates added through Spain v Belgium. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "Quarter-finals complete. Updates added through England v Norway and Argentina v Switzerland. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [
@@ -46,7 +46,9 @@
     "egypt",
     "colombia",
     "morocco",
-    "belgium"
+    "belgium",
+    "norway",
+    "switzerland"
   ],
   "matches": [
     {
@@ -930,6 +932,24 @@
       "teamBScore": 1,
       "stage": "Quarter-final",
       "playedAt": "2026-07-10"
+    },
+    {
+      "id": "quarter-final-norway-england",
+      "teamA": "norway",
+      "teamB": "england",
+      "teamAScore": 1,
+      "teamBScore": 2,
+      "stage": "Quarter-final · England win after extra time",
+      "playedAt": "2026-07-11"
+    },
+    {
+      "id": "quarter-final-argentina-switzerland",
+      "teamA": "argentina",
+      "teamB": "switzerland",
+      "teamAScore": 3,
+      "teamBScore": 1,
+      "stage": "Quarter-final · Argentina win after extra time",
+      "playedAt": "2026-07-11"
     }
   ]
 }
