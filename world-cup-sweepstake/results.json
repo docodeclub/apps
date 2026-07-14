@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-07-12T09:08:30Z",
+  "updatedAt": "2026-07-14T22:18:00Z",
   "source": "Manual static update",
-  "notes": "Quarter-finals complete. Updates added through England v Norway and Argentina v Switzerland. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
+  "notes": "First semi-final complete. Spain beat France 2-0 to reach the final. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
   "champion": null,
   "runnerUp": null,
   "eliminated": [
@@ -48,7 +48,8 @@
     "morocco",
     "belgium",
     "norway",
-    "switzerland"
+    "switzerland",
+    "france"
   ],
   "matches": [
     {
@@ -950,6 +951,15 @@
       "teamBScore": 1,
       "stage": "Quarter-final · Argentina win after extra time",
       "playedAt": "2026-07-11"
+    },
+    {
+      "id": "semi-final-spain-france",
+      "teamA": "spain",
+      "teamB": "france",
+      "teamAScore": 2,
+      "teamBScore": 0,
+      "stage": "Semi-final",
+      "playedAt": "2026-07-14"
     }
   ]
 }
