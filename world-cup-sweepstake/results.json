@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-07-16T09:20:00Z",
+  "updatedAt": "2026-07-22T09:30:00Z",
   "source": "Manual static update",
-  "notes": "Semi-finals complete. Spain and Argentina are through to the final. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded. Set champion and runnerUp to team IDs after the final.",
-  "champion": null,
-  "runnerUp": null,
+  "notes": "Tournament complete. Spain beat Argentina 1-0 after extra time to win the World Cup. Worst-team refund uses lowest points, then lowest goals scored, then most goals conceded.",
+  "champion": "spain",
+  "runnerUp": "argentina",
   "eliminated": [
     "czechia",
     "qatar",
@@ -50,7 +50,8 @@
     "norway",
     "switzerland",
     "france",
-    "england"
+    "england",
+    "argentina"
   ],
   "matches": [
     {
@@ -970,6 +971,15 @@
       "teamBScore": 2,
       "stage": "Semi-final",
       "playedAt": "2026-07-15"
+    },
+    {
+      "id": "final-spain-argentina",
+      "teamA": "spain",
+      "teamB": "argentina",
+      "teamAScore": 1,
+      "teamBScore": 0,
+      "stage": "Final · Spain win after extra time",
+      "playedAt": "2026-07-19"
     }
   ]
 }
