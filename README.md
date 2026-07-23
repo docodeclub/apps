@@ -67,6 +67,8 @@ Required live URLs:
 
 ## World Cup Sweepstake Results
 
+Archived private page. It is no longer linked from the public site navigation and is marked `noindex` so it can be reused later as a standalone sweepstake project.
+
 The sweepstake page is intentionally static. Group-stage scores and final tournament outcomes are stored in:
 
 ```text
