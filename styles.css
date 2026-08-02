@@ -2722,10 +2722,27 @@ body.home-page .footer-meta strong {
 }
 
 .footer-links {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
   justify-content: flex-end;
-  gap: 0.85rem 1rem;
+  gap: 1rem 2rem;
+}
+
+.footer-link-group {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.footer-link-group span {
+  color: var(--text);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body.home-page .footer-link-group span {
+  color: #302383;
 }
 
 @media (max-width: 760px) {
@@ -2738,6 +2755,11 @@ body.home-page .footer-meta strong {
   .nav-links,
   .footer-links {
     justify-content: flex-start;
+  }
+
+  .footer-links {
+    grid-template-columns: 1fr;
+    width: 100%;
   }
 
   .split {
