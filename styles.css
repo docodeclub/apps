@@ -3210,3 +3210,94 @@ body.home-page .footer-meta strong {
     font-size: 7pt;
   }
 }
+
+.cookie-notice {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.cookie-notice-inner {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  width: min(100%, 58rem);
+  padding: 1rem;
+  color: #f8fff9;
+  background: rgba(9, 24, 18, 0.96);
+  border: 1px solid rgba(205, 176, 83, 0.38);
+  border-radius: 0.75rem;
+  box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.24);
+  pointer-events: auto;
+}
+
+.cookie-notice p {
+  margin: 0;
+  max-width: 42rem;
+  color: rgba(248, 255, 249, 0.86);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.cookie-notice strong {
+  color: #ffffff;
+}
+
+.cookie-notice-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.cookie-notice a {
+  color: #e7c766;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.cookie-notice a:hover,
+.cookie-notice a:focus-visible {
+  text-decoration: underline;
+}
+
+.cookie-notice button {
+  min-height: 2.5rem;
+  padding: 0 1rem;
+  color: #08100d;
+  font: inherit;
+  font-weight: 800;
+  background: #e7c766;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.cookie-notice button:hover,
+.cookie-notice button:focus-visible {
+  background: #f3d980;
+}
+
+@media (max-width: 680px) {
+  .cookie-notice {
+    right: 0.75rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+  }
+
+  .cookie-notice-inner {
+    display: grid;
+    gap: 0.85rem;
+    padding: 0.9rem;
+  }
+
+  .cookie-notice-actions {
+    justify-content: space-between;
+  }
+}
