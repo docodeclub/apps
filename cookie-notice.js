@@ -20,7 +20,7 @@
     <div class="cookie-notice-inner">
       <p><strong>Privacy notice:</strong> Docode.app does not use analytics, advertising cookies or tracking cookies. We only use essential browser storage to remember that you have seen this message.</p>
       <div class="cookie-notice-actions">
-        <a href="${rootPath}framescore/privacy/index.html">Privacy</a>
+        <a href="${rootPath}privacy/index.html">Privacy</a>
         <button type="button">Got it</button>
       </div>
     </div>
