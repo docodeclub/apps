@@ -5,7 +5,7 @@
     <lastmod>2026-05-28</lastmod>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://docode.app/assets/docode-logo.png</image:loc>
+      <image:loc>https://docode.app/assets/docode-primary.svg</image:loc>
       <image:title>Docode Apps logo</image:title>
     </image:image>
   </url>
@@ -51,7 +51,7 @@
     <lastmod>2026-08-02</lastmod>
     <priority>0.6</priority>
     <image:image>
-      <image:loc>https://docode.app/assets/docode-logo.png</image:loc>
+      <image:loc>https://docode.app/assets/docode-primary.svg</image:loc>
       <image:title>Docode Apps logo</image:title>
     </image:image>
   </url>
@@ -117,5 +117,20 @@
       <image:loc>https://docode.app/assets/web-apres-booking.jpg</image:loc>
       <image:title>Après School booking section screenshot</image:title>
     </image:image>
+  </url>
+  <url>
+    <loc>https://docode.app/our-app/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docode.app/our-app/support/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://docode.app/our-app/privacy/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <priority>0.6</priority>
   </url>
 </urlset>
